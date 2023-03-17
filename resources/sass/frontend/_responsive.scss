@@ -1,0 +1,354 @@
+/* header */
+@media (max-width: 991.98px) {
+  .front__site {
+    header.site-header .auth-link-wrap .login-btn {
+      margin-right: 10px;
+    }
+    header.site-header .auth-link-wrap {
+      margin-right: 30px;
+    }
+    header.site-header .main-menu-wrap {
+      display: none;
+    }
+    .mobile-menu {
+      right: 18px;
+      z-index: 999;
+      position: absolute;
+      display: block !important;
+    }
+  }
+}
+
+/* home page */
+@media (max-width: 899.98px) {
+  .front__site {
+    .section-head {
+      margin-bottom: 10px;
+      .section-title span {
+        margin: 0 0 2px;
+      }
+    }
+    .main-directions {
+      padding: 50px 0;
+      .card{
+        width: 33.33%;
+        float: left;
+        padding: 0 5px;
+        &.main-card {
+          width: 99%;
+          padding-right: 0px;
+          a {
+            width: 100%;
+            padding: 30px 15% 52px;
+          }
+        }
+        a {
+          text-align: center;
+          padding: 22px 25px;
+          .card-name {
+            margin: 15px 0 5px;
+          }
+          .icon {
+            width: 92px;
+            height: 72px;
+            display: block;
+            margin: 0 auto;
+            position: relative;
+          }
+        }
+      }
+    }
+    .featured-project {
+      padding: 50px 0;
+      .project-card.main-card a .card-image {
+        height: 270px;
+      }
+    }
+  }
+  
+}
+
+@media (max-width: 599.98px) {
+  .front__site {
+    .main-directions {
+      .card {
+        width: 100%;
+      }
+      .MuiGrid-grid-md-7 {
+        width: 100%;
+      }
+    }
+    .featured-project {
+      .project-card.main-card {
+        padding-right: 0px;
+      }
+      .MuiGrid-grid-md-7, .MuiGrid-grid-md-5 {
+        width: 100%;
+      }
+    }
+    
+  }
+}
+
+@media (max-width: 379.98px) {
+  .front__site {
+    .main-directions .card.main-card .card-name {
+      font-size: 22px;
+    }
+    .featured-project {
+      .theme-btn {
+        width: 100%;
+        float: left;  
+      }
+      .project-card a{
+        .card-image {
+          width: 100%;
+        }
+        .card-text {
+          width: 100%;
+          float: left;
+          padding-left: 0;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}
+
+/* footer */
+@media (max-width: 899.98px) {
+  .site-footer .ft-col {
+    width: 100%;
+  }
+}
+
+/* list page */
+@media (max-width: 1099.98px) {
+  .front__site {
+    .add-org-link a.theme-btn {
+      width: 145px;
+      display: block;
+      text-align: center;
+      margin-top: 2px;
+      padding: 10px 25px !important;
+    }
+    .topic-title-section h1 {
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+@media (max-width: 899.98px) {
+  .front__site {
+    .add-org-link {
+      display: block;
+    }
+    .list-wrap {
+      padding-left: 0;
+    }
+  }
+}
+
+@media (max-width: 599.98px) {
+  .front__site {
+    .add-org-link a.theme-btn {
+      width: 145px;
+      display: block;
+      text-align: center;
+      margin-top: 2px;
+      padding: 10px 25px !important;
+    }
+    .filter-sidebar {
+      width: 100%;
+    }
+    .list-wrap {
+      width: 100%;
+      .search_bar {
+        display: block;
+        width: 100% !important;
+      }
+      .item-count {
+        float: left;
+        margin-right: 20px;
+      }
+    }
+    .topic-menu .topic-menu-tab li {
+      display: block;
+      margin: 0 0px;
+    }
+  }
+}
+
+
+/* org profile */
+@media (max-width: 599.98px) {
+  .front__site {
+    .profile-navigation {
+      width: 100%;
+    }
+    .profile-body {
+      width: 100%;
+      .organization_card {
+        flex-basis: 50%;
+        max-width: 50%;
+      }
+    }
+    .org-sub-menu li {
+      margin-right: 0;
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 399.98px) {
+  .front__site .profile-body .organization_card {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+
+/* topics page */
+@media (max-width: 899.98px) {
+  .front__site {
+    .topic-sub-section {
+      .organization_card {
+        flex-basis: 33%;
+        max-width: 33%;
+      }
+      .data_card.card-row {
+        flex-basis: 32%;
+        max-width: 32%;
+        margin-left: 15px;
+        display: inline-block;
+      }
+      .learning-card .card_content .card-head .cso-name {
+        text-align: center;
+      }
+      .resource-card {
+        .card-logo {
+          float: none;
+        }
+        .card-content {
+          padding-left: 0;
+          text-align: center;
+          .modified-date {
+            width: 100%;
+            text-align: center;
+            margin-top: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 599.98px) {
+  .front__site {
+    .topic-sub-section {
+      .organization_card {
+        flex-basis: 50%;
+        max-width: 50%;
+      }
+      .data_card.card-row {
+        flex-basis: 45%;
+        max-width: 45%;
+      }
+    }
+  }
+}
+
+@media (max-width: 399.98px) {
+  .front__site {
+    .topic-sub-section {
+      .organization_card {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+      .data_card.card-row {
+        width: 100%;
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 599.98px) {
+  .front__site {
+    .elearning-list .MuiGrid-spacing-xs-2 .organization_card {
+      width: 50%;
+      flex-basis: 50%;
+      max-width: 50%;
+    }
+  }
+}
+
+@media (max-width: 399.98px) {
+  .front__site {
+    .elearning-list .MuiGrid-spacing-xs-2 .organization_card {
+      width: 100%;
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+/* about page */
+@media (max-width: 1099.98px) {
+  .front__site {
+    .statics-section .top-text {
+      font-size: 28px;
+    }
+  }
+}
+
+@media (max-width: 899.98px) {
+  .front__site {
+    .about_feo-section .banner-image {
+      margin-top: 25px;
+      padding-left: 0;
+    }
+    .about-intro {
+      padding: 15px 0 20px;
+    }
+    .statics-section {
+      padding: 50px 0 50px;
+    }
+    .about_feo-section {
+      padding: 38px 0;
+    }
+    .our_projects-section {
+      padding-top: 40px;
+      .featured-project {
+        width: 100%;
+      }
+      .fea-project_wrap {
+        display: block;
+      }
+    }
+    .our_members-section .member_card {
+      width: 50%;
+      flex-basis: 50%;
+    }
+  }
+}
+
+@media (max-width: 599.98px) {
+  .front__site .statics-section .text-wrap ul li {
+    width: 50%;
+  }
+}
+
+@media (max-width: 399.98px) {
+  .front__site {
+    .our_members-section .member_card {
+      width: 100%;
+      flex-basis: 100%;
+    }
+    .statics-section .text-wrap ul li {
+      width: 100%;
+    }
+  }
+}

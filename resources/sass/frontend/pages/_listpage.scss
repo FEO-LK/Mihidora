@@ -1,0 +1,63 @@
+.front__site {
+  .promo-banner img {
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  .list-wrap {
+    padding-left: 20px;
+    margin-bottom: 50px;
+    .item-count {
+      width: 100%;
+      color: #878787;
+      font-size: 13px;
+      font-weight: 500;
+      margin: 12px 0;
+    }
+  }
+  .grid-switch {
+    display: flex;
+    a {
+      color: #b8b8b8;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 15px;
+      background: #f4f4f4;
+      margin-left: 5px;
+      border-radius: 2px;
+      border: 1px solid #eaeaea;
+    }
+  }
+  .elearning-list {
+    margin-top: 20px;
+  }
+  .data_card {
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #e2e2e2;
+    .last_update {
+      font-size: 12px;
+      margin: 5px 0;
+    }
+    .card_title {
+      color: #000000;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 10px 0;
+    }
+    .card_tags {
+      padding: 0;
+      margin: 10px 0 5px;
+      list-style: none;
+      li {
+        margin-right: 25px;
+        display: inline-block;
+        a {
+          color: $lightText;
+          font-size: 12px;
+          font-weight: 400;
+        }
+      }
+    }
+  } 
+}

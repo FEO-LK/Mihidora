@@ -1,0 +1,29 @@
+.user__dashboard {
+  .menu--tab{
+    .tab-title {
+      color: $fontDarkColor;
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0 0 15px;
+    }
+    .menu-tab {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 25px;
+      border-bottom: 1px solid #ebebeb;
+      li {
+        display: inline-block;
+        a {
+          color: $fontLightColor;
+          font-size: 13px;
+          font-weight: 500;
+          display: block;
+          padding: 10px 30px 12px;
+        }
+        &:nth-child(1) a {
+          padding-left: 0;
+        }
+      }
+    }
+  }  
+}

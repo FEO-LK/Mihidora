@@ -1,0 +1,25 @@
+.sup__dashboard {
+  display: block !important;
+  .sup_header {
+    background: #93aa40 !important;
+  }
+  nav.top-menu-wrap ul {
+    display: flex;
+    margin-left: 35px;
+    li {
+      width: auto;
+      display: block;
+      .menuitem_result {
+        font-size: 0.75rem;
+        line-height: 1;
+        padding: 4px 6.5px;
+        border-radius: 100px;
+        background: #d32f2f;
+        bottom: 5px;
+        right: 0;
+        position: absolute;
+      }
+    }
+  }
+
+}

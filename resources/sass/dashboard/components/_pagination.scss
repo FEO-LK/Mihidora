@@ -1,0 +1,33 @@
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-weight: 500;
+  font-size: 15px;
+}
+ 
+.pagination-container a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  height: 40px;
+  width: 40px;
+  text-decoration: none;
+  transition: background-color .2s;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  &.active {
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #ddd;
+  }
+  &.disabled { 
+    opacity: 0.2;
+  }
+  &:hover:not(.active) {
+    background-color: rgb(238, 238, 238);
+  }
+}
+

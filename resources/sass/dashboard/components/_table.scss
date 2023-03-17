@@ -1,0 +1,22 @@
+table {
+  .MuiTableRow-head {
+    background: #f6f8fa;
+    th {
+      color: $fontLightColor;
+      font-size: 12px;
+      padding: 8px 10px;
+    }
+  }
+  tbody {
+    td.MuiTableCell-body {
+      font-size: 13px;
+      padding: 10px 12px; 
+      button {
+        font-size: 12px;
+      }
+      a {
+        color: #5bb318;
+      }
+    }
+  }
+}

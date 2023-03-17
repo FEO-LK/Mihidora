@@ -1,0 +1,176 @@
+.front__site {
+  .topic-title-section {
+    padding: 35px 0;
+    border-top: 1px solid #ababab;
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  .topic-sub-section {
+    padding: 42px 0;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 15px;
+    text-transform: uppercase;
+  }
+  .organization_card .card_content {
+    padding: 0 15px 20px;
+    .main-tag {
+      color: #8b8b8b;
+      font-size: 10px;
+      margin: 10px 0 2px;
+      display: block;
+      text-transform: uppercase;
+    }
+    .org_title {
+      margin: 0px 0 15px;
+    }
+  }
+  .card_tags {
+    padding: 0;
+    margin: 10px 0 5px;
+    list-style: none;
+    li {
+      margin-right: 25px;
+      display: inline-block;
+      a {
+        color: $lightText;
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+  }
+  .related-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      margin-right: 5px;
+      a {
+        color: #343434;
+        font-size: 12px;
+      }
+    }
+  }
+  .card-logo {
+    width: 115px;
+    height: 115px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  .cso-name {
+    color: #000;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+    margin: 5px auto 0;
+    text-transform: uppercase;
+  }
+  a.cso-link {
+    color: $primaryColor;
+    font-size: 10px;
+    text-align: center;
+    display: block;
+  }
+  .data_card.card-row {
+    .card_title {
+      font-size: 12px;
+      text-transform: uppercase;    
+      margin-bottom: 0;
+      span {
+        font-size: 10px;
+        font-weight: 500;
+        float: right;
+      }
+    }
+    .description {
+      margin-bottom: 15px;
+    }
+    .location {
+      color: #a9a9a9;
+      font-size: 12px;
+      font-weight: 500;
+      margin: 4px 0 10px;
+      display: block;
+      svg {
+        margin: 0px 5px 0px 0px !important;
+      }
+    }
+    .modified-date {
+      font-size: 12px;
+      float: right;
+      margin: -2px 0 0;
+    }
+  }
+  .learning-card {
+    .card_content {
+      padding: 0px;
+      border-radius: 10px;
+      .card-head {
+        padding: 5px 0;
+        border-bottom: 1px solid #ececec;
+        .card-logo {
+          width: 58px;
+          height: 58px;
+        }
+        .cso-name {
+          text-align: left;
+        } 
+      }
+      .card-body {
+        float: left;
+        padding: 12px 15px 15px;
+        .card_title {
+          font-size: 13px;
+          font-weight: 600;
+          line-height: 1.25;
+          margin: 5px 0 10px;
+        }
+        p {
+          font-size: 13px;
+          margin-bottom: 10px;
+        }
+        .post-duration {
+          font-size: 10px;
+          float: left;
+        }
+        .post-date {
+          font-size: 10px;
+          float: right;
+        }
+      }
+    }
+  }
+  .resource-card {
+    .card-logo {
+      width: 85px;
+      height: 85px;
+      float: left;
+    }
+    .card-content {
+      padding-left: 25px;
+      p {
+        font-size: 12px;
+        margin-top: 5px;
+      }
+      .modified-date {
+        text-align: right;
+        margin-top: -15px;
+        span {
+          display: block;
+        }
+      }
+    }
+  }
+  // }
+}

@@ -1,0 +1,44 @@
+.user__dashboard {
+  .drawer-header {
+    .brand {
+      height: 38px;
+      display: block;
+      margin: 0 auto;
+      padding-left: 20px;
+    }
+  }
+  nav.css-1mcnwpj-MuiList-root {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    .css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      .css-cveggr-MuiListItemIcon-root {
+        min-width: 35px;
+      }
+      .css-1tfeiaa-MuiTypography-root {
+        font-size: 14px;
+      }
+    }
+  }
+  .css-13eg511-MuiButtonBase-root-MuiListItemButton-root {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 44px;
+    background: #f2f2f2;
+    span {
+      font-size: 14px;
+    }
+  }
+  .css-1m5i5w0-MuiButtonBase-root-MuiListItemButton-root {
+    padding: 5px 10px;
+    .css-wa5fuu-MuiListItemIcon-root {
+      margin-right: 10px;
+    }
+    .css-1tfeiaa-MuiTypography-root {
+      font-size: 14px;
+    }
+  }
+}

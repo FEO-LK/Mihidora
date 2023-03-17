@@ -1,0 +1,106 @@
+a, a:hover {
+  text-decoration: none !important;
+}
+.front__site {
+  .mobile-menu {
+    display: none;
+  }
+  header.site-header {
+    padding: 10px 0 2px;
+    background: transparent;
+    box-shadow: none;
+    z-index: 999;
+    position: relative;
+    .brand {
+      height: 45px;
+      margin-top: -2px;
+    }
+    .auth-link-wrap {
+      float: right;
+      .signup-btn {
+        float: right;
+        text-transform: uppercase;
+        padding: 10px 35px;
+      }
+      .login-btn {
+        color: #93aa40 !important;
+        font-size: 13px;
+        float: right;
+        background: transparent;
+        padding: 8px 35px;
+        margin-right: 10px;
+        text-transform: uppercase;
+        border: 2px solid #93aa40;
+      }
+    }
+    .main-menu-wrap {
+      float: right;
+      margin-top: 8px;
+      ul {
+        padding: 0;
+        li {
+          width: auto;
+          margin: 0 22px;
+          display: inline-block;
+          a {
+            color: $textColor;
+            padding: 0 8px;
+            span {
+              font-size: 13px;
+              font-weight: 700;
+              text-transform: uppercase;
+            }
+            &:hover {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Main Menu */
+.explore-submenu .MuiMenu-paper {
+  width: 100%;
+  max-width: inherit;
+  top: 72px !important;
+  left: 0 !important;
+  .mega-menu {
+    .nav-links {
+      border-right: 2px solid #ddd;
+      ul li {
+        margin: 2px 0;
+        a {
+          padding: 5px 0;
+          span {
+            font-size: 14px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    .nav-content {
+      padding-left: 35px;
+      img {
+        border-radius: 10px;
+      }
+      ul {
+        padding: 0px;
+        margin: 0px;
+        li {
+          list-style: none;
+          a {
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            display: block;
+            padding: 8px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+

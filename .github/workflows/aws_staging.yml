@@ -1,0 +1,52 @@
+name: AWS Workflow 1
+on:
+  push:
+    branches: [ master ]
+jobs:
+  master_deploy: 
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps: 
+    - uses: actions/checkout@v2
+    - name: Set current_timestamp
+      run: |
+          echo "current_timestamp=`date '+%y%m%d%H%M%S'`" >> $GITHUB_ENV
+    - name: Install dependencies
+      uses: php-actions/composer@v6
+      with:
+        php_version: 8.1
+        version: 2
+    - name: Laravel mix
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14
+        registry-url: https://registry.npmjs.org/
+    - run: |
+          npm i
+          npm run prod
+    - name: Deploy to Server
+      uses: appleboy/scp-action@master
+      with:
+        host: mihidora.ecotechnology.io
+        username: ubuntu
+        key: ${{secrets.DO_SSH}}
+        port: 22
+        source: "."
+        target: "/var/www/mihidora.ecotechnology.io/releases/${{ env.current_timestamp }}"
+    - name: Creating symlink
+      uses: appleboy/ssh-action@master
+      with: 
+        host: mihidora.ecotechnology.io
+        username: ubuntu
+        key: ${{secrets.DO_SSH}}
+        port: 22
+        script: |
+          ln -sfn /var/www/mihidora.ecotechnology.io/releases/${{ env.current_timestamp }} /var/www/mihidora.ecotechnology.io/public_html
+          ln -sfn /var/www/mihidora.ecotechnology.io/.env /var/www/mihidora.ecotechnology.io/public_html/.env
+          
+          rm -r /var/www/mihidora.ecotechnology.io/releases/${{ env.current_timestamp }}/storage
+          ln -sfn /var/www/mihidora.ecotechnology.io/storage /var/www/mihidora.ecotechnology.io/releases/${{ env.current_timestamp }}/storage
+          cd /var/www/mihidora.ecotechnology.io/releases/${{ env.current_timestamp }} && php artisan storage:link
+          chmod -R 777 /var/www/mihidora.ecotechnology.io/public_html/bootstrap/cache
+          
+         # chmod -R 777 /var/www/mihidora.ecotechnology.io/public_html/storage

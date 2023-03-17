@@ -1,0 +1,43 @@
+@import 'variables';
+
+/* Base */
+img {
+  max-width: 100%;
+}
+.home_slider .slide .css-1f8sh1y {
+  min-height: 50vh;
+}
+.required {
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
+  display: block;
+  margin: -7px 0 10px !important;
+}
+
+/* Components */
+@import './components/siteHeader';
+@import './components/siteFooter';
+@import './components/heading';
+@import './components/button';
+@import './components/map';
+@import './components/organizationCard';
+@import './components/menuTab';
+@import './components/filterWidget';
+@import './components/searchBar';
+@import './components/homeCarousal';
+@import './components/topicmenu';
+
+/* Pages */
+@import './pages/authpages';
+@import './pages/innerpages';
+@import './pages/homepage';
+@import './pages/aboutpage';
+@import './pages/listpage';
+@import './pages/orgProfilePage';
+@import './pages/projectDetail';
+@import './pages/topics';
+@import './pages/projectOrganizationList';
+@import './pages/projectSingle';
+
+@import './responsive';

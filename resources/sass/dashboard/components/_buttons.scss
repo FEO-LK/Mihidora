@@ -1,0 +1,37 @@
+.user__dashboard {
+  .user__theme-btn {
+    width: 158px;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    padding: 8px 0px;
+    border: 2px solid $primaryColor;
+    background-color: $primaryColor;
+    &:hover {
+      color: $primaryColor;
+      border: 2px solid;
+      background-color: #fff;
+    }
+    &.deactivate-btn {
+      margin-top: 10px;
+      border-color: #d10000 !important;
+      background: #d10000 !important;
+      &:hover {
+        color: #fff !important;
+      }
+    }
+  }
+  .table-btn {
+    width: 85px;
+    color: #93aa40;
+    font-size: 11px;
+    font-weight: 600;
+    float: right;
+    text-align: center;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    padding: 4px 0px;
+    border: 2px solid #93aa40;
+  }
+}

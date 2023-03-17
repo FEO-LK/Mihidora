@@ -1,0 +1,134 @@
+.front__site {
+  .main-directions {
+    padding: 80px 0 68px;
+    background: #f8f8f8;
+    .data_main_card .icon {
+    }
+    .card {
+      a {
+        color: $textColor;
+        text-decoration: none;
+        display: block;
+        position: relative;
+        padding: 22px 25px 28px 130px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+        .icon {
+          width: 115px;
+          height: 100%;
+          display: inline-block;
+          top: 0;
+          left: 0;
+          position: absolute;
+          background-size: 75px;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+        .card-name {
+          font-size: 16px;
+          font-weight: 700;
+          margin: 0 0 5px;
+        }
+        p {
+          font-size: 15px;
+          font-weight: 300;
+        }
+      }
+      &.main-card {
+        height: 100%;
+        display: flex;
+        padding-right: 22px;
+        a {
+          padding: 12% 20% 0;
+          background: #0b0706;
+        }
+        .icon {
+          width: 115px;
+          height: 115px;
+          display: block;
+          margin: 0 auto;
+          background-size: cover;
+          position: relative;
+        }
+        .card-name {
+          font-size: 34px;
+          color: #fff;
+          text-align: center;
+        }
+        p {
+          color: #fff;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .featured-project {
+    padding: 80px 0 100px;
+    .project-card {
+      padding: 20px 0 18px;
+      border-top: 2px solid #d9d9d9;
+      a {
+      color: $textColor;
+      .card-image {
+        width: 180px;
+        overflow: hidden;
+        border-radius: 10px;
+        display: inline-block;
+        img {
+          display: block;
+        }
+      }
+      .card-text {
+        width: calc(100% - 185px);
+        float: right;
+        padding-left: 20px;
+        .proj-name {
+          font-size: 16px;
+          line-height: 1.3;
+          font-weight: 700;
+          margin: 0 0 5px;
+        }
+        p {
+          font-size: 15px;
+          font-weight: 300;
+        }
+      }
+    }
+    &.main-card {
+      height: 100%;
+      border: 0px;
+      padding: 0px;
+      position: relative;
+      padding-right: 22px;
+        a {
+          height: 100%;
+          display: block;
+          .card-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-size: cover;
+            background-position: bottom;
+          }
+          .proj-name {
+            color: #fff;
+            font-size: 15px;
+            width: calc(100% - 22px);
+            bottom: 0;
+            left: 0;
+            padding: 15px 15px 17px;
+            position: absolute;
+            background: #00000070;
+            border-radius: 0 0 10px 10px;
+          }
+        }
+      }
+    }
+    .theme-btn {
+      display: block;
+      text-align: center;
+    }
+  }
+}

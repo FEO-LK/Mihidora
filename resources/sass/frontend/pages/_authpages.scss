@@ -1,0 +1,96 @@
+.auth_layout_wrap {
+  min-height: 100vh;
+  background-size: cover;
+  .brand {
+    height: 50px;
+    display: block;
+    margin: 0 auto 10px;
+  }
+  .description-txt {
+    color: #313131;
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0 35px;
+    padding: 0 5px;
+  }
+  .theme-btn {
+    width: 100%;
+    display: block;
+    margin: 30px auto 0;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 10px 0;
+    background: $primaryColor;
+    border: 2px solid $primaryColor;
+  }
+  .other_option-link {
+    color: $textColor;
+    font-size: 13px;
+    text-align: center;
+    margin: 15px 0 0;
+    a {
+      color: $primaryColor;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+  .icon-button {
+    width: 130px;
+    height: 110px;
+    float: left;
+    margin: 0 15px;
+    padding: 12px 0;
+    text-align: center;
+    border-radius: 10px;
+    border: 3px solid $primaryColor;
+    .icon {
+      width: 62px;
+      height: 62px;
+      display: block;
+      background-size: cover;
+      background-position: center;
+      margin: 0 auto;
+    }
+    span {
+      color: $primaryColor;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@media (max-width: 899.98px) {
+  .login-form-left {
+    display: none;
+  }
+  .login-form {
+    width: 100%;
+    .form_wrap {
+      max-width: 500px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 5px;
+      padding: 15px 25px !important;
+      background: #fff;
+    }
+  }
+}
+
+@media (max-width: 419.98px) {
+  .auth_layout_wrap .icon-button {
+    width: 110px;
+    height: 105px;
+    float: left;
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 324.98px) {
+  .login-form .form_wrap {
+    padding: 15px 10px !important;
+  }
+}

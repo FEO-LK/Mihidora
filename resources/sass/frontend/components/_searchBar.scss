@@ -1,0 +1,25 @@
+.front__site {
+  .search_bar {
+    .MuiTextField-root {
+      width: calc(100% - 220px);
+      margin-right: 10px;
+      input {
+        font-size: 13px;
+        padding: 14px 14px;
+      }
+    }
+    button {
+      color: #000 !important;
+      width: 200px;
+      text-transform: capitalize;
+      background: #fff;
+      padding: 11px 0;
+      border-color: #000;
+    }
+    .add_event-btn {
+      display: block;
+      text-align: center;
+      padding: 15px 0 12px;
+    }
+  }
+}

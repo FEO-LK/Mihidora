@@ -1,0 +1,27 @@
+.front__site {
+  .section-head {
+    margin-bottom: 42px;
+    .section-title {
+      font-size: 22px;
+      line-height: 1.35;
+      padding-left: 72px;
+      position: relative;
+      span {
+        font-size: 14px;
+        font-weight: 500;  
+        display: block;
+        margin: 0 0 10px;
+        &::before {
+          content: '';
+          width: 58px;
+          height: 2.5px;
+          display: block;
+          background: $primaryColor;
+          top: 8px;
+          left: 0;
+          position: absolute;
+        }
+      }
+    }
+  }
+}

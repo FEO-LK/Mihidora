@@ -1,0 +1,76 @@
+.front__site {
+  .project-head {
+    padding: 15px 0 25px;
+    .project-title {
+      display: inline-block;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+  }
+  .request_status {
+    color: #000 !important;
+    float: right;
+    padding: 4px 25px !important;
+    margin: 8px 0 0 !important;
+    background-color: #93aa40 !important;
+    border: 2px solid #668300 !important;
+  }
+  .random-org-card {
+    .card-content {
+      display: flex;
+      align-items: center;
+      .card_title {
+        font-size: 14px;
+      }
+      .theme-btn {
+        float: right;
+        padding: 12px 20px;
+        margin-top: 12px;
+      }
+    }
+  }
+  .body-content {
+    margin-bottom: 35px;
+    .sub-title {
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+    img {
+      border-radius: 10px;
+    }
+  }
+  .related-box {
+    padding: 20px 15px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    .box-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin: 0 0 12px;
+    }
+    ul {
+      padding-left: 17px;
+      li {
+        a {
+          color: $primaryColor;
+        }
+      }
+    }
+  }
+  .tag-box {
+    margin-bottom: 50px;
+    a {
+      color: $primaryColor;
+      margin-right: 10px;
+      display: inline-block;
+    }
+  }
+  .post-carousal .slide .css-1f8sh1y {
+    min-height: 50vh;
+    div {
+      box-shadow: none;
+    }
+  }
+}
