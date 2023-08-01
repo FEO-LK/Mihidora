@@ -30,7 +30,7 @@ class RegisterController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'user_role' => $request->user_role,
-                    'status' => 1
+                    'status' => 3
                 ]);
 
                 $organizationUser1 = OrganizationUser::create([

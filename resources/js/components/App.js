@@ -108,6 +108,9 @@ import WhatsonVolunteerOpportunitiesProfile from "./Frontend/Whatson/WhatsonVolu
 import WhatsonMediaAndAdvocacyProfile from "./Frontend/Whatson/WhatsonMediaAndAdvocacyProfile";
 
 
+import RegisterThankYou from './Frontend/Pages/RegisterThankYou';
+
+
 /** Axios configuration  */
 axios.defaults.baseURL = baseUrl;
 axios.defaults.headers.post['Content-Type'] = "application/json";
@@ -234,7 +237,14 @@ function App() {
                     <Route path={"/admin/members-list"} element={<SuperUserRoute component={MembersList} />} />
                     <Route path={"/admin/add-new-member"} element={<SuperUserRoute component={AddNewMember} />} />
                     <Route path={"/edit-member/:slug"} element={<SuperUserRoute component={EditMember} />} />
+                    
+                    {/* =================== ENC001 =================== */}
 
+                    {/* General Routes */}
+                    <Route exact path={"/thank-you"} element={<RegisterThankYou />} />
+                    {/* test */}
+                    {/* =================== ENC001 =================== */}
+                    
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

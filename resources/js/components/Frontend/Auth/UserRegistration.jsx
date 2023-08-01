@@ -41,10 +41,14 @@ function UserRegistration() {
         axios.get('sanctum/csrf-cookie').then(response => {
             axios.post('/api/register', data).then(res => {
                 if (res.data.status === 200) {
-                    localStorage.setItem('auth_token', res.data.token);
-                    localStorage.setItem('auth_name', res.data.username);
-                    // swal("Success", res.data.message,"success");
-                    navigate('/login');
+                    /**
+                     * CR2
+                     * Login verification is required, 
+                     * Hence disabling setting the user information to localstorage
+                        localStorage.setItem('auth_token', res.data.token);
+                        localStorage.setItem('auth_name', res.data.username);
+                     */
+                    navigate('/thank-you');
                 }
                 else {
                     setRegister({ ...registerInput, error_list: res.data.validation_errors });
