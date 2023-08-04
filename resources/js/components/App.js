@@ -88,6 +88,8 @@ import MembersList from "./Superuser/Members/MembersList";
 import AddNewMember from "./Superuser/Members/AddNewMember";
 import EditMember from "./Superuser/Members/EditMember";
 
+import Datatable from "./Superuser/Datatable";
+
 /**
  * Kaveesh
  */
@@ -242,7 +244,8 @@ function App() {
 
                     {/* General Routes */}
                     <Route exact path={"/thank-you"} element={<RegisterThankYou />} />
-                    {/* test */}
+                    {/* Super admin routes */}
+                    <Route path={"/en-admin/dashboard"} element={<Datatable />} />
                     {/* =================== ENC001 =================== */}
                     
                 </Routes>
