@@ -99,7 +99,7 @@ function HomePage() {
 							<Box variant="div" className="card">
 								<Link href="#">
 									<Typography variant="i" className="icon" style={styles.ResourceCard}></Typography>
-									<Typography variant="h5" className="card-name">Resource Pool</Typography>
+									<Typography variant="h5" className="card-name">Resource Pool 2 qqqq</Typography>
 									<Typography variant="body2">{resourceDescription}</Typography>
 								</Link>
 							</Box>
