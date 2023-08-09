@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import logo from '../../../../images/logo.jpg';
 
 const Menuebar = () => {
 	return (
 		<div>
-			This is Menu Bar
+			<img src={logo} />
 		</div>
 	)
 }
