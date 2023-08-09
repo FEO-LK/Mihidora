@@ -177,6 +177,7 @@ Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
     /** Super User APIs */
     Route::get('view-users', [UserController::class, 'index']);
     Route::get('new-request', [UserController::class, 'newRequest']);
+    Route::get('pending-users', [UserController::class, 'pendingUsers']);
     Route::put('activate-account/{id}', [UserController::class, 'activateAccount']);
     Route::put('deactivate-account/{id}', [UserController::class, 'deactivateAccount']);
     Route::put('update-usercredentials/{id}', [UserController::class, 'updateAccount']);
