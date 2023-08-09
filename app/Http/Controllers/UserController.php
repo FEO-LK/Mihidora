@@ -119,5 +119,15 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function pendingUsers(){
+        $users = DB::table('users')->where([
+            ['status', '=', '3'],
+        ])->get();
+        return response()->json([
+            'status'=>200,
+            'users'=>$users
+        ]);
+    }
     
 }

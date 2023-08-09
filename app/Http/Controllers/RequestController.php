@@ -77,6 +77,7 @@ class RequestController extends Controller
         $OrganizationUser = OrgMember::create([
             'user_id' => Auth::id(),
             'organization_id' => $request->organization_id,
+            'status' => 2
         ]);
     }
 

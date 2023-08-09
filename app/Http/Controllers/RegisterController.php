@@ -45,7 +45,7 @@ class RegisterController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'user_role' => 2, //$request->user_role,
-                    'status' => 1
+                    'status' => 3
                 ]);
 
                 $organization = Organizations::create([

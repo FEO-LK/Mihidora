@@ -83,7 +83,7 @@ function OrganizationProfile(props) {
 		const data= {
 			organization_id: id,
 		}
-		console.log(id);
+		console.log(data);
 		e.currentTarget.innerText = 'Request Sent';
 		e.currentTarget.disabled = true;
 		//axios.get('sanctum/csrf-cookie').then(response => {
