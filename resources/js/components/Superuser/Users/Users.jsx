@@ -10,6 +10,7 @@ import UserMenu from "../components/submenus/UserMenu";
 import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
+import AllUsers from './AllUsers';
 
 // function Users() {  
 //   const [UserList, setUserList] = useState([]);
@@ -105,7 +106,7 @@ function Users() {
 
   const [value, setValue] = useState('1');
 
-  const handleChange = (event,newValue) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -114,17 +115,19 @@ function Users() {
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example" TabIndicatorProps={{
-    style: {
-      backgroundColor: "#93AA40"
-    }
-  }}>
+            <TabList onChange={handleChange} aria-label="lab API tabs example"
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: "#93AA40"
+                }
+              }}
+            >
               <Tab label="All Users" value="1" />
               <Tab label="Pending Requests" value="2" />
               <Tab label="Rejected" value="3" />
             </TabList>
           </Box>
-          <TabPanel value="1">Item One x</TabPanel>
+          <TabPanel value="1"><AllUsers /></TabPanel>
           <TabPanel value="2">Item Two r</TabPanel>
           <TabPanel value="3">Item Three e</TabPanel>
         </TabContext>
