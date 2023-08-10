@@ -155,10 +155,14 @@ const BaseLayout = ({ children, title }) => {
         <Box component="main" 
         sx={{ flexGrow: 1, p: 3, 
         // width: { sm: `calc(100% - ${drawerWidth}px)` }
+        height: '100%',
         ml: { sm: `${drawerWidth}px` },
-         }}>
+         }} className='content-div'>
           <Toolbar />
-          {children}
+
+          <div className='inner-content-div'>
+            {children}
+          </div>
         </Box>
       </Box>
     </div>

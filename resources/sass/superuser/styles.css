@@ -51,3 +51,15 @@
   text-transform: uppercase;
   border: 2px solid #e5e5e5;
 }/*# sourceMappingURL=styles.css.map */
+
+
+/* -------------------- super admin ----------------------------- */
+.content-div {
+  background-color: #EBF0F9;
+  min-height: 100vh;
+}
+
+.inner-content-div {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+}
