@@ -13,7 +13,36 @@ class UserController extends Controller
     public function index() {
         $users = DB::table('users')->where([
             ['status', '=', '1'],
-        ])->get();
+        ])->orderByRaw('created_at DESC')->get();
+        return response()->json([
+            'status'=>200,
+            'users'=>$users
+        ]);
+    }
+
+    /**
+     * Returns user profile with organization information
+     */
+    public function getOrgUsers() {
+        $users = DB::table('users')
+            ->join('organizations', 'users.id', '=', 'organizations.user_id')
+        ->where([
+            ['users.status', '=', '1'],
+        ])->orderByRaw('users.created_at DESC')->get();
+        
+        return response()->json([
+            'status'=>200,
+            'users'=>$users
+        ]);
+    }
+
+    public function getPendingOrganizations(){
+        $users = DB::table('users')
+            ->join('organizations', 'users.id', '=', 'organizations.user_id')
+        ->where([
+            ['users.status', '=', '3'],
+        ])->orderByRaw('users.created_at DESC')->get();
+        
         return response()->json([
             'status'=>200,
             'users'=>$users
@@ -90,7 +119,7 @@ class UserController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message' => 'User account deactivated.!'
+                'message' => 'User account activated.!'
             ]);
         }
         else {

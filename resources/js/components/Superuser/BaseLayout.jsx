@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useLocation } from 'react-router-dom'
 
 import Header from './components/Header';
 import Menubar from './components/Menubar';
@@ -19,6 +20,13 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Drawer from '@mui/material/Drawer';
+import SendIcon from '@mui/icons-material/Send';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import WebIcon from '@mui/icons-material/Web';
+import InsightsIcon from '@mui/icons-material/Insights';
 
 import Logo from "../../../images/logo.jpg";
 // import LogoutButton from './components/LogoutButton';
@@ -33,10 +41,18 @@ const BaseLayout = ({ children, title }) => {
 
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const { hash, pathname, search } = location;
+  
+  useEffect(() => {
+    console.log(location);
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  
 
   const drawer = (
     <div>
@@ -44,43 +60,75 @@ const BaseLayout = ({ children, title }) => {
       {/* <Divider /> */}
       <List sx={{ px: '2rem' }}>
         <ListItem key='Organizations' disablePadding sx={{ mb: '2rem' }}>
-          <ListItemButton component="a" href="/admin/users">
+          <ListItemButton 
+          className={location.pathname == '/admin/dashboard' ? 'sideBarButtonHighlight' : ''} 
+          component="a" href="/admin/dashboard">
            <img src={Logo} />
           </ListItemButton>
         </ListItem>
 
         <ListItem key='Organizations' disablePadding>
-          <ListItemButton component="a" href="/admin/users">
+          <ListItemButton 
+          className={location.pathname == '/admin/dashboard' ? 'sideBarButtonHighlight' : ''} 
+          component="a" href="/admin/dashboard">
+          <ListItemIcon>
+            <MapsHomeWorkIcon fontSize="small" />
+          </ListItemIcon>
           <ListItemText primary='Organizations' />
           </ListItemButton>
         </ListItem>
 
         <ListItem key='Projects' disablePadding>
-          <ListItemButton component="a" href="/admin/users">
+          <ListItemButton 
+          className={location.pathname == '/admin/projects' ? 'sideBarButtonHighlight' : ''} 
+          component="a" href="/admin/projects">
+          <ListItemIcon>
+            <LocalLibraryIcon fontSize="small" />
+          </ListItemIcon>
           <ListItemText primary='Projects' />
           </ListItemButton>
         </ListItem>
 
         <ListItem key='Users' disablePadding>
-          <ListItemButton component="a" href="/admin/users">
+          <ListItemButton 
+          className={location.pathname == '/admin/users' ? 'sideBarButtonHighlight' : ''} 
+          component="a" href="/admin/users">
+          <ListItemIcon>
+            <PeopleAltIcon fontSize="small" />
+          </ListItemIcon>
           <ListItemText primary='Users' />
           </ListItemButton>
         </ListItem>
 
         <ListItem key='Tags' disablePadding>
-          <ListItemButton component="a" href="/admin/users">
+          <ListItemButton 
+          className={location.pathname == '/admin/tags' ? 'sideBarButtonHighlight' : ''} 
+          component="a" href="/admin/tags">
+          <ListItemIcon>
+            <LocalOfferIcon fontSize="small" />
+          </ListItemIcon>            
           <ListItemText primary='Tags' />
           </ListItemButton>
         </ListItem>
 
         <ListItem key='Pages' disablePadding>
-          <ListItemButton component="a" href="/admin/users">
+          <ListItemButton 
+          className={location.pathname == '/admin/pages' ? 'sideBarButtonHighlight' : ''} 
+          component="a" href="/admin/pages">
+          <ListItemIcon>
+            <WebIcon fontSize="small" />
+          </ListItemIcon>   
           <ListItemText primary='Pages' />
           </ListItemButton>
         </ListItem>
 
         <ListItem key='Analytics' disablePadding>
-          <ListItemButton component="a" href="/admin/users">
+          <ListItemButton 
+          className={location.pathname == '/admin/analytics' ? 'sideBarButtonHighlight' : ''} 
+          component="a" href="/admin/analytics">
+          <ListItemIcon>
+            <InsightsIcon fontSize="small" />
+          </ListItemIcon>   
           <ListItemText primary='Analytics' />
           </ListItemButton>
         </ListItem>
@@ -99,6 +147,7 @@ const BaseLayout = ({ children, title }) => {
           sx={{
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             ml: { sm: `${drawerWidth}px` },
+            boxShadow: 'none',
           }}
           style={{ background: '#ffffff' }}
         >

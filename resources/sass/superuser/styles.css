@@ -63,3 +63,24 @@
   background-color: #ffffff;
   border-radius: 0.5rem;
 }
+
+
+.admin-button-generic {
+  border-radius: 50px !important;
+  padding: 5px 20px 5px 20px !important;
+  font-weight: 600 !important;
+}
+
+.admin-button-green {
+  background-color: #93aa40 !important;
+}
+
+.card-on-modal {
+  box-shadow: none !important;
+}
+
+.sideBarButtonHighlight {
+  background-color: #edf7c9 !important;
+  border-radius: 29px !important;
+  font-weight: 600 !important;
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { Grid, Box, FormGroup, TextField, FormControl, Typography, InputLabel, Select, MenuItem, FormLabel,  Alert, Button } from "@mui/material";
+import { Grid, Box, FormGroup, TextField, FormControl, Typography, InputLabel, Select, MenuItem, FormLabel,  Alert, Button, Divider } from "@mui/material";
 import MainLayout from "../BaseLayout";
 import ImageUploader from '../components/ImageUploader';
 import Editor from "../../Dashboard/LexicalEditor/Editor";
@@ -196,9 +196,10 @@ function UpdateAbout() {
     <MainLayout>
       <Grid>
         <Grid item>
-          <Typography variant={"h5"}>
+          <Typography variant={"h6"} style={{ padding:20 }}>
             Update About page
           </Typography>
+          <Divider />
           <Box component={"form"} encType={"multipart/form-data"} onSubmit={updatePage} className="su_form">
             <Grid container>
               <Grid item md={12} lg={3}></Grid>
