@@ -6,8 +6,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Organizations;
 use App\Models\OrganizationUser;
+use App\Mail\OrgRegistered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -58,7 +60,8 @@ class RegisterController extends Controller
                     'email' => $request->email,
                     'description' => $request->description,
                     'org_logo' => '',
-                    'status' => 1
+                    'status' => 3,
+                    'contact_number' => $request->contact_number,
                 ]);
 
                 $organizationUser = OrganizationUser::create([
@@ -66,6 +69,8 @@ class RegisterController extends Controller
                     'organization_id' => $organization->id,
                     'status' => 1
                 ]);
+
+                Mail::to($request->email)->send(new OrgRegistered($user));
             }
             
             $token = $user->createToken($user->email.'_token')->plainTextToken;

@@ -23,6 +23,7 @@ function OrganisationRegistration() {
         user_role: 2,
         reg_number: '',
         description: '',
+        contact_number: '',
         error_list: [],
     });
     const [orgTypeList, setOrgTypeList] = useState([]);
@@ -69,6 +70,7 @@ function OrganisationRegistration() {
             org_size: orgSize,
             reg_number: registerInput.reg_number,
             description: registerInput.description,
+            contact_number: registerInput.phone,
         }
         axios.get('sanctum/csrf-cookie').then(response => {
             axios.post('/api/register', data).then(res => {
@@ -112,7 +114,7 @@ function OrganisationRegistration() {
                                         />
                                         <Typography variant="span" className="required">{registerInput.error_list.name}</Typography>
                                     </FormControl>
-                                    <FormControl fullWidth style={{marginBottom: '10px'}}>
+                                    <FormControl fullWidth style={{ marginBottom: '10px' }}>
                                         <InputLabel id="organisation-type-label">Organisation Type</InputLabel>
                                         <Select
                                             labelId="organisation-type-label"
@@ -162,15 +164,35 @@ function OrganisationRegistration() {
                                         <Typography variant="span" className="required">{registerInput.error_list.description}</Typography>
                                     </FormControl>
                                     <FormControl fullWidth>
-                                        <TextField
-                                            type='email'
-                                            margin="normal"
-                                            label="Email"
-                                            name="email"
-                                            onChange={handleInput}
-                                            value={registerInput.email}
-                                        />
-                                        <Typography variant="span" className="required">{registerInput.error_list.email}</Typography>
+
+                                    </FormControl>
+                                    <FormControl fullWidth>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12} md={6}>
+                                                <TextField
+                                                    type='tel'
+                                                    margin="normal"
+                                                    label="Phone"
+                                                    name="phone"
+                                                    onChange={handleInput}
+                                                    value={registerInput.phone}
+                                                    fullWidth
+                                                />
+                                                <Typography variant="span" className="required">{registerInput.error_list.phone}</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} md={6}>
+                                                <TextField
+                                                    type='email'
+                                                    margin="normal"
+                                                    label="Email"
+                                                    name="email"
+                                                    onChange={handleInput}
+                                                    value={registerInput.email}
+                                                    fullWidth
+                                                />
+                                                <Typography variant="span" className="required">{registerInput.error_list.email}</Typography>
+                                            </Grid>
+                                        </Grid>
                                     </FormControl>
                                     <FormControl fullWidth>
                                         <TextField
@@ -188,7 +210,7 @@ function OrganisationRegistration() {
                                         variant={"outlined"}
                                         type={"submit"}
                                         sx={{ mt: 3, mb: 2 }}
-                                        style={{margin: '20px auto 10px'}}
+                                        style={{ margin: '20px auto 10px' }}
                                         className="theme-btn"
                                     >
                                         Register
@@ -197,6 +219,9 @@ function OrganisationRegistration() {
                                         <NavLink to="/login">
                                             <span style={{ color: '#93aa40', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginLeft: "4px" }}>Login</span>
                                         </NavLink>
+                                    </Typography>
+                                    <Typography style={{marginTop: '20px'}} >    
+                                    Mihidora supports a culture of open data and collaboration. Researchers who possess or have generated valuable data and information that they are willing to share publicly may be eligible for an individual profile. For more information, please contact mihidorafeo@gmail.com.
                                     </Typography>
                                 </Box>
                             </div>

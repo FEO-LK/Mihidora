@@ -17,7 +17,7 @@ const isLogin = () => {
 			return <div className="auth-link-wrap"><Link to="/logout" className="theme-btn login-btn">Logout</Link></div>
 		}
 	}else {
-		return <div className="auth-link-wrap"><Link to="/register-as" className="theme-btn signup-btn">Sign Up</Link>
+		return <div className="auth-link-wrap"><Link to="/organisation-registration" className="theme-btn signup-btn">Sign Up</Link>
 			<Link to="/login" className="theme-btn login-btn">Login</Link></div>
 	}
 }

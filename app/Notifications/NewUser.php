@@ -44,7 +44,7 @@ class NewUser extends Notification
     {
         return (new MailMessage)
                     ->view('email_new_user')
-                    ->subject("New reigstration request")
+                    ->subject("New User Registration Request")
                     ->greeting("New registration request from the user {$this->user->name}")
                     ->line(Str::limit($this->user->email, 50))
                     ->action('Review the account', url('/login'))
