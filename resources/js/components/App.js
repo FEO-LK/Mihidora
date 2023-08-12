@@ -115,7 +115,7 @@ import SingleUser from './Superuser/Users/SingleUser';
 
 // Temp imports Remove on production
 import PendingUsers from './Superuser/Users/PendingUsers';
-
+import OrgReg from './Frontend/Auth/OrgReg';
 
 /** Axios configuration  */
 axios.defaults.baseURL = baseUrl;
@@ -255,6 +255,7 @@ function App() {
                     
                     {/* Temp Routes, Remove on production */}
                     <Route path={"/pending-users"} element={<SuperUserRoute component={PendingUsers} />} />
+                    <Route path={"/reg-org"} element={<OrgReg />} />
 
                 </Routes>
             </BrowserRouter>

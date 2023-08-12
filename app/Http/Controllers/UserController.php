@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\UserApproved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -116,7 +118,7 @@ class UserController extends Controller
         if($user) {
             $user->status = 1;
             $user->save();
-
+            Mail::to($user->email)->send(new UserApproved($user));
             return response()->json([
                 'status' => 200,
                 'message' => 'User account activated.!'

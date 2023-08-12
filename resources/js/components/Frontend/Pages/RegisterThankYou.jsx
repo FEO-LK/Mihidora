@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Grid, Typography, Box, Link} from "@mui/material";
+import { Container, Grid, Typography, Box, Link } from "@mui/material";
 import BaseLayout from "../BaseLayout";
 import PageBanner from "../components/PageBanner";
 
@@ -14,29 +14,39 @@ const styles = {
 };
 
 function RegisterThankYou() {
-    return (
-        <BaseLayout title={"Thank You"}>	
+	return (
+		<BaseLayout title={"Thank You"}>
 
-					{/* <PageBanner image={bannerImage} /> */}
+			{/* <PageBanner image={bannerImage} /> */}
 
-					<Grid container className="about-intro">
-						<Container>
-							<Grid container>
-								<Grid item sm={12} md={7} className="section-head" mb={5}>
-									<Typography variant="h3" className="section-title"><Typography variant="span">Thank You!</Typography>
-									Thank you for registering with Mihidora!</Typography> 
-								</Grid>
-								<Grid item sm={12} md={8} className="main-content" mb={5}>
-									<Typography variant="body1">We're an international movement of ordinary people working to end the age of fossil fuels 
-									and build a world of community-led renewable energy for all Here's how we get there:
-									</Typography>
-								</Grid>    
-							</Grid>	
-						</Container>
+			<Grid container className="about-intro">
+				<Container>
+					<Grid container>
+						<Grid item sm={12} md={7} className="section-head" mb={5}>
+							<Typography variant="h3" className="section-title"><Typography variant="span">Thank You!</Typography>
+								Thank you for joining Mihidora!</Typography>
+						</Grid>
+						<Grid item sm={12} md={8} className="main-content" mb={5}>
+							<Typography variant="body1" gutterBottom>
+								Thank you for registering with Mihidora. We're excited to have you join our community! Your registration has been received, and we're in the process of verifying your information.
+							</Typography>
+							<Typography variant="body1" gutterBottom>
+								A Mihidora representative will contact you regarding your registration.
+								If you have any questions or need further assistance, feel free to reach out to our support team at mihidorafeo@gmail.com.
+							</Typography>
+							<Typography variant="body1" gutterBottom>
+								If you have any questions or need further assistance, feel free to reach out to our support team at mihidorafeo@gmail.com.
+							</Typography>
+							<Typography variant="body1" gutterBottom>
+								- Mihidora Team
+							</Typography>
+						</Grid>
 					</Grid>
-			
-        </BaseLayout>
-    )
+				</Container>
+			</Grid>
+
+		</BaseLayout>
+	)
 }
 
 export default RegisterThankYou
