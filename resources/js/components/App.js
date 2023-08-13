@@ -113,9 +113,13 @@ import WhatsonMediaAndAdvocacyProfile from "./Frontend/Whatson/WhatsonMediaAndAd
 import RegisterThankYou from './Frontend/Pages/RegisterThankYou';
 import SingleUser from './Superuser/Users/SingleUser';
 
+import OrgReg from './Frontend/Auth/OrgReg';
+import ForgotPassword from './Frontend/Auth/ForgotPassword';
+import ResetPassword from './Frontend/Auth/ResetPassword';
+
 // Temp imports Remove on production
 import PendingUsers from './Superuser/Users/PendingUsers';
-import OrgReg from './Frontend/Auth/OrgReg';
+
 
 /** Axios configuration  */
 axios.defaults.baseURL = baseUrl;
@@ -256,6 +260,8 @@ function App() {
                     {/* Temp Routes, Remove on production */}
                     <Route path={"/pending-users"} element={<SuperUserRoute component={PendingUsers} />} />
                     <Route path={"/reg-org"} element={<OrgReg />} />
+                    <Route path={"/forgot-password"} element={<ForgotPassword />} />
+                    <Route path={"/reset-password"} element={<ResetPassword />} />
 
                 </Routes>
             </BrowserRouter>

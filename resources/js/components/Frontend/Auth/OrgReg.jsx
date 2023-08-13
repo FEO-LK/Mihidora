@@ -17,9 +17,9 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
     },
-    resize:{
-        fontSize:'10px'
-      },
+    resize: {
+        fontSize: '10px'
+    },
 };
 
 function OrgReg() {
@@ -101,52 +101,62 @@ function OrgReg() {
         <div className="auth_layout_wrap">
             <React.Fragment>
                 <CssBaseline />
-                <Container className="orgRegContainer" maxWidth="false" sx={{ minHeight:'100%', paddingLeft:'0px', paddingRight:'0px' }}>
-                    <Grid container sx={{ minHeight:'100%' }}>
+                <Container className="orgRegContainer" maxWidth="false" sx={{ minHeight: '100%', paddingLeft: '0px', paddingRight: '0px' }}>
+                    <Grid container sx={{ minHeight: '100%' }}>
                         <Grid xs={12} md={6} className="login-form-left" style={styles.AuthBackground}>
-                        <Box 
-                            component="div"
-                            className="logoBox" 
-                            sx={{ 
-                                p: 2,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'flex-start',
+                            <Box
+                                component="div"
+                                className="logoBox"
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'flex-start',
                                 }}>
-                            <Typography variant="h6">
-                            Join
-                            </Typography>
-                            
-                            <Link href="/">
-                                <img src={Logo} className="brand" /></Link>
-                            <Typography variant="subtitle2" gutterBottom>
-                                Mihidora supports a culture of open data and collaboration. Researchers who possess or have generated valuable data and information that they are willing to share publicly may be eligible for an individual profile. For more information, please contact mihidorafeo@gmail.com.
-                            </Typography>
-                        </Box>
-                            
+                                <Typography variant="h6">
+                                    Join
+                                </Typography>
+
+                                <Link href="/">
+                                    <img src={Logo} className="brand" /></Link>
+                                <Typography variant="subtitle2" gutterBottom>
+                                    Mihidora supports a culture of open data and collaboration. Researchers who possess or have generated valuable data and information that they are willing to share publicly may be eligible for an individual profile. For more information, please contact mihidorafeo@gmail.com.
+                                </Typography>
+                            </Box>
+
                         </Grid>
                         <Grid item xs={12} md={6} className="login-form">
-                            <div className="form_wrap" style={{ margin: '80px auto', padding: "0 25px", maxWidth:'600px' }}>
-                                
+                            <div className="form_wrap" style={{ margin: '80px auto', padding: "0 25px", maxWidth: '600px' }}>
+
                                 <Box component={"form"} onSubmit={registerSubmit}>
-                                    <FormControl fullWidth sx={{ marginBottom: '20px'}}>
+                                    <FormControl fullWidth sx={{ marginBottom: '20px' }}>
                                         <TextField
                                             type='text'
                                             margin="normal"
                                             small
                                             label="Organisation Name"
                                             InputLabelProps={{
-                                                style: { fontSize: 14 } 
-                                              }}
+                                                style: { fontSize: 14 }
+                                            }}
                                             name="name"
                                             onChange={handleInput}
                                             value={registerInput.name}
                                             variant="standard"
+                                            // sx={{
+                                            //     '& .MuiInputLabel-root': {
+                                            //         '&.Mui-focused': {
+                                            //             color: '#93aa40'
+                                            //         }
+                                            //     }
+                                            // }}
                                         />
                                         <Typography variant="span" className="required">{registerInput.error_list.name}</Typography>
                                     </FormControl>
                                     <FormControl fullWidth style={{ marginBottom: '10px' }}>
-                                        <InputLabel sx={{ left: '-15px', fontSize:'14px' }} id="organisation-type-label">Organisation Type</InputLabel>
+                                        <InputLabel sx={{
+                                            left: '-15px',
+                                            fontSize: '14px',
+                                        }} id="organisation-type-label">Organisation Type</InputLabel>
                                         <Select
                                             labelId="organisation-type-label"
                                             id="organisation-type"
@@ -155,7 +165,7 @@ function OrgReg() {
                                             label="Organisation Type"
                                             InputLabelProps={{
                                                 style: { fontSize: 14 }
-                                              }}
+                                            }}
                                             onChange={selectOrgType}
                                             variant="standard"
                                         >
@@ -163,7 +173,7 @@ function OrgReg() {
                                         </Select>
                                     </FormControl>
                                     <FormControl fullWidth>
-                                        <FormLabel sx={{fontSize:'14px' }} id="size-of-organization">Size of Organization</FormLabel>
+                                        <FormLabel sx={{ fontSize: '14px' }} id="size-of-organization">Size of Organization</FormLabel>
                                         <RadioGroup
                                             row
                                             onChange={selectOrgSize}
@@ -182,7 +192,7 @@ function OrgReg() {
                                             label="Registration No"
                                             InputLabelProps={{
                                                 style: { fontSize: 14 }
-                                              }}
+                                            }}
                                             name="reg_number"
                                             onChange={handleInput}
                                             value={registerInput.reg_number}
@@ -198,7 +208,7 @@ function OrgReg() {
                                             label="Description"
                                             InputLabelProps={{
                                                 style: { fontSize: 14 }
-                                              }}
+                                            }}
                                             name="description"
                                             onChange={handleInput}
                                             value={registerInput.description}
@@ -218,7 +228,7 @@ function OrgReg() {
                                                     label="Phone"
                                                     InputLabelProps={{
                                                         style: { fontSize: 14 }
-                                                      }}
+                                                    }}
                                                     name="phone"
                                                     onChange={handleInput}
                                                     value={registerInput.phone}
@@ -234,7 +244,7 @@ function OrgReg() {
                                                     label="Email"
                                                     InputLabelProps={{
                                                         style: { fontSize: 14 }
-                                                      }}
+                                                    }}
                                                     name="email"
                                                     onChange={handleInput}
                                                     value={registerInput.email}
@@ -252,7 +262,7 @@ function OrgReg() {
                                             label="Password"
                                             InputLabelProps={{
                                                 style: { fontSize: 14 }
-                                              }}
+                                            }}
                                             name="password"
                                             onChange={handleInput}
                                             value={registerInput.password}
@@ -260,11 +270,11 @@ function OrgReg() {
                                         />
                                         <Typography variant="span" className="required">{registerInput.error_list.password}</Typography>
                                     </FormControl>
-                                    <Typography variant="subtitle2" style={{marginTop: '20px'}} >    
-                                    By registering with Mihidora Environmental Portal, you are agreeing to our
-                                    <NavLink to="/terms">
+                                    <Typography variant="subtitle2" style={{ marginTop: '20px' }} >
+                                        By registering with Mihidora Environmental Portal, you are agreeing to our
+                                        <NavLink to="/terms">
                                             <span style={{ color: '#93aa40', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginLeft: "4px" }}>Terms & Conditions</span>.
-                                    </NavLink>
+                                        </NavLink>
                                     </Typography>
                                     <Button
                                         fullWidth
@@ -273,7 +283,7 @@ function OrgReg() {
                                         sx={{ mt: 3, mb: 2 }}
                                         style={{ margin: '20px auto 10px' }}
                                         className="theme-btn"
-                                        
+
                                     >
                                         Register
                                     </Button>
@@ -282,7 +292,7 @@ function OrgReg() {
                                             <span style={{ color: '#93aa40', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginLeft: "4px" }}>Login</span>
                                         </NavLink>
                                     </Typography>
-                                    
+
                                 </Box>
                             </div>
                         </Grid>

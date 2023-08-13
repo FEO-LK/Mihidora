@@ -92,6 +92,17 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+            'custom' => [
+                'provider' => 'users',
+                'table' => 'password_resets',
+                'expire' => 60,
+            ],
+        ],
+        'custom' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
         ],
     ],
 

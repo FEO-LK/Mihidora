@@ -34,6 +34,8 @@ use App\Http\Controllers\OrganizationTypeController;
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [LoginController::class, 'authenticate']);
+Route::post('forgot-password', [RegisterController::class, 'sendResetPasswordLink']);
+Route::post('reset-password', [RegisterController::class, 'resetPassword']);
 
 Route::get('organisation-types', [OrganizationTypeController::class, 'index']);
 Route::get('organisations', [OrganizationController::class, 'index']);

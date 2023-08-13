@@ -417,6 +417,11 @@ a, a:hover {
   background: #93aa40;
   border: 2px solid #93aa40;
 }
+
+.auth_layout_wrap .theme-btn:hover {
+  background: black;
+  border: 2px solid black;
+}
 .auth_layout_wrap .other_option-link {
   color: #131313;
   font-size: 13px;
