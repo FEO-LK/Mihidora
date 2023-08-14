@@ -118,7 +118,8 @@ function OrgReg() {
                                 </Typography>
 
                                 <Link href="/">
-                                    <img src={Logo} className="brand" /></Link>
+                                    <img src={Logo} className="brand" />
+                                </Link>
                                 <Typography variant="subtitle2" gutterBottom>
                                     Mihidora supports a culture of open data and collaboration. Researchers who possess or have generated valuable data and information that they are willing to share publicly may be eligible for an individual profile. For more information, please contact mihidorafeo@gmail.com.
                                 </Typography>
@@ -127,7 +128,22 @@ function OrgReg() {
                         </Grid>
                         <Grid item xs={12} md={6} className="login-form">
                             <div className="form_wrap" style={{ margin: '80px auto', padding: "0 25px", maxWidth: '600px' }}>
+                                <Box
+                                    component="div"
+                                    className="logoBox login-right-header"
+                                    sx={{
+                                        p: 2,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'flex-start',
+                                    }}>
+                                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                                        Join
+                                    </Typography>
 
+                                    <Link href="/">
+                                        <img src={Logo} className="brand" /></Link>
+                                </Box>
                                 <Box component={"form"} onSubmit={registerSubmit}>
                                     <FormControl fullWidth sx={{ marginBottom: '20px' }}>
                                         <TextField
@@ -142,13 +158,13 @@ function OrgReg() {
                                             onChange={handleInput}
                                             value={registerInput.name}
                                             variant="standard"
-                                            // sx={{
-                                            //     '& .MuiInputLabel-root': {
-                                            //         '&.Mui-focused': {
-                                            //             color: '#93aa40'
-                                            //         }
-                                            //     }
-                                            // }}
+                                        // sx={{
+                                        //     '& .MuiInputLabel-root': {
+                                        //         '&.Mui-focused': {
+                                        //             color: '#93aa40'
+                                        //         }
+                                        //     }
+                                        // }}
                                         />
                                         <Typography variant="span" className="required">{registerInput.error_list.name}</Typography>
                                     </FormControl>
@@ -292,7 +308,9 @@ function OrgReg() {
                                             <span style={{ color: '#93aa40', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginLeft: "4px" }}>Login</span>
                                         </NavLink>
                                     </Typography>
-
+                                    <Typography className="login-right-header" variant="subtitle2" gutterBottom sx={{ marginTop: "20px" }}>
+                                        Mihidora supports a culture of open data and collaboration. Researchers who possess or have generated valuable data and information that they are willing to share publicly may be eligible for an individual profile. For more information, please contact mihidorafeo@gmail.com.
+                                    </Typography>
                                 </Box>
                             </div>
                         </Grid>
