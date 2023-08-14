@@ -63,3 +63,7 @@
   background-color: #ffffff;
   border-radius: 0.5rem;
 }
+
+.basic-table.css-16fl5n6-MuiDataGrid-root {
+  border-color: #ffffff !important;
+}

@@ -38,6 +38,7 @@ function Datatable() {
                     },
                 }}
                 pageSizeOptions={[5, 10]}
+                className="basic-table"
             />
         </Box>
     )

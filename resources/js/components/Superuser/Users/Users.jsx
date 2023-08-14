@@ -11,6 +11,7 @@ import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import AllUsers from './AllUsers';
+import { fontWeight } from "@mui/joy/styles/styleFunctionSx";
 
 // function Users() {  
 //   const [UserList, setUserList] = useState([]);
@@ -118,7 +119,7 @@ function Users() {
             <TabList onChange={handleChange} aria-label="lab API tabs example"
               TabIndicatorProps={{
                 style: {
-                  backgroundColor: "#93AA40"
+                  backgroundColor: "#93AA40",
                 }
               }}
             >
