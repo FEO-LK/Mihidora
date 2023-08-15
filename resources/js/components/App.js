@@ -119,6 +119,7 @@ import ResetPassword from './Frontend/Auth/ResetPassword';
 
 // Temp imports Remove on production
 import PendingUsers from './Superuser/Users/PendingUsers';
+import NewLogin from './Frontend/Auth/NewLogin';
 
 
 /** Axios configuration  */
@@ -153,8 +154,8 @@ function App() {
                     <Route path={"/user-registration"} element={<UserRegistration />} />
                     <Route path={"/organisation-registration"} element={<OrganisationRegistration />} />
 
-                    <Route path={"/login"} element={<Login />} />
-                    <Route path={"/register-as"} element={<RegisterAs />} />
+                    <Route path={"/login-old"} element={<Login />} />
+                    <Route path={"/register-as"} element={<OrgReg />} />
                     {/* <Route path="/login" element={localStorage.getItem('auth_token') ? <Navigate to="/dashboard" /> : <Login />} />
                     <Route path="/register-as" element={localStorage.getItem('auth_token') ? <Navigate to="/dashboard" /> : <RegisterAs />} /> */}
 
@@ -259,10 +260,10 @@ function App() {
                     
                     {/* Temp Routes, Remove on production */}
                     <Route path={"/pending-users"} element={<SuperUserRoute component={PendingUsers} />} />
-                    <Route path={"/reg-org"} element={<OrgReg />} />
+                    <Route path={"/reg-select"} element={<RegisterAs />} />
                     <Route path={"/forgot-password"} element={<ForgotPassword />} />
                     <Route path={"/reset-password"} element={<ResetPassword />} />
-
+                    <Route path={"/login"} element={<NewLogin />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

@@ -434,6 +434,14 @@ a, a:hover {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+.generic-link {
+  font-size: 12px;
+}
+.generic-link a:link, a:visited{
+  color: #93aa40 !important;
+}
+
 .auth_layout_wrap .icon-button {
   width: 130px;
   height: 110px;
@@ -460,9 +468,25 @@ a, a:hover {
   text-transform: uppercase;
 }
 
+.login-right-header{
+  display: none !important;
+}
+
 @media (max-width: 899.98px) {
+  .logoBox {
+    width: 100%;
+    background-color: white;
+    border-radius: 0px;
+    padding: 0px !important;
+  }
+  .logoBox .brand{
+    margin: 10px 0 10px !important
+  }
+  .login-right-header {
+    display: block !important;
+  }
   .login-form-left {
-    display: none;
+    display: none !important;
   }
   .login-form {
     width: 100%;
