@@ -34,6 +34,8 @@ use App\Http\Controllers\OrganizationTypeController;
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [LoginController::class, 'authenticate']);
+Route::post('forgot-password', [RegisterController::class, 'sendResetPasswordLink']);
+Route::post('reset-password', [RegisterController::class, 'resetPassword']);
 
 Route::get('organisation-types', [OrganizationTypeController::class, 'index']);
 Route::get('organisations', [OrganizationController::class, 'index']);
@@ -176,6 +178,8 @@ Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
 
     /** Super User APIs */
     Route::get('view-users', [UserController::class, 'index']);
+    Route::get('view-org-users', [UserController::class, 'getOrgUsers']);
+    Route::get('view-pending-users', [UserController::class, 'getPendingOrganizations']);
     Route::get('new-request', [UserController::class, 'newRequest']);
     Route::get('pending-users', [UserController::class, 'pendingUsers']);
     Route::put('activate-account/{id}', [UserController::class, 'activateAccount']);

@@ -19,7 +19,7 @@ class FileuploadController extends Controller
             ->select('id', 'file_path', 'file_name')
             ->where('user_id', $user_id)
             ->get();
-
+        $mediafiles = [];
         foreach($getMediafiles as $mediafile) {
             $fileType = explode('.', $mediafile->file_name);
             if( $fileType[1] === 'jpg' || $fileType[1] === 'jpeg' || $fileType[1] === 'png' ) {

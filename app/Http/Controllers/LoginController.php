@@ -65,7 +65,7 @@ class LoginController extends Controller
                     'status' => 200,
                     'username' => $user->name,
                     'profileid' => $user->id,
-                    'org_id' => $organizationId->id,
+                    'org_id' => $organizationId->organization_id,
                     'token' => $token,
                     'usertype' => $user->user_role,
                     'message' => 'Done. Logged in successfully.',

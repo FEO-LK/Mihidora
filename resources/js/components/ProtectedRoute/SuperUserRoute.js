@@ -5,7 +5,7 @@ import { useNavigate, Navigate } from 'react-router-dom';
 export const SuperUserRoute = ({ component: Component, ...rest }) => {
     const navigate = useNavigate();
     const [Authenticated, setAuthenticated] = useState(false);
-    const [Loading, setLoading] = useState(true);
+    const [Loading, setLoading] = useState(false);
     
     useEffect(() => {
         axios.get('/api/user').then( res => {

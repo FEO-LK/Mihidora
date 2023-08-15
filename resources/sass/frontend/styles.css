@@ -392,6 +392,7 @@ a, a:hover {
 .auth_layout_wrap {
   min-height: 100vh;
   background-size: cover;
+  display: flex;
 }
 .auth_layout_wrap .brand {
   height: 50px;
@@ -415,6 +416,11 @@ a, a:hover {
   padding: 10px 0;
   background: #93aa40;
   border: 2px solid #93aa40;
+}
+
+.auth_layout_wrap .theme-btn:hover {
+  background: black;
+  border: 2px solid black;
 }
 .auth_layout_wrap .other_option-link {
   color: #131313;
@@ -1256,6 +1262,19 @@ a, a:hover {
   box-shadow: none;
 }
 
+/* New Registration Page */
+.orgRegContainer{
+  padding: 0 !important;
+}
+.logoBox {
+  width: 75%;
+  background-color: white;
+  border-radius: 10px;
+}
+
+
+
+
 /* header */
 @media (max-width: 991.98px) {
   .front__site header.site-header .auth-link-wrap .login-btn {
@@ -1317,6 +1336,11 @@ a, a:hover {
   }
   .front__site .featured-project .project-card.main-card a .card-image {
     height: 270px;
+  }
+  .logoBox {
+    width: 100%;
+    background-color: white;
+    border-radius: 0px;
   }
 }
 @media (max-width: 599.98px) {
@@ -1541,3 +1565,5 @@ a, a:hover {
     width: 100%;
   }
 }/*# sourceMappingURL=styles.css.map */
+
+

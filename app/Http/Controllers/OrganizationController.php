@@ -159,8 +159,8 @@ class OrganizationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Organizations $organization, $org_id) {
-        $profileData = Organizations::where('id', '=', $org_id)->firstOrFail();
+    public function edit($id) {
+        $profileData = Organizations::where('id', '=', $id)->firstOrFail();
         $array1 = $profileData->tags->pluck('name');
         foreach($array1 as $key => $arg) {
             $results[] = $arg;

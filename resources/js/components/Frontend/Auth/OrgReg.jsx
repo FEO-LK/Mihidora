@@ -10,11 +10,19 @@ import Logo from "../../../../images/logo.jpg";
 
 const styles = {
     AuthBackground: {
-        backgroundImage: `url(${"../../../images/auth_bg.jpg"})`
-    }
+        backgroundImage: `url(${"../../../images/org_back_3.jpg"})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    resize: {
+        fontSize: '10px'
+    },
 };
 
-function OrganisationRegistration() {
+function OrgReg() {
     const navigate = useNavigate();
     const [registerInput, setRegister] = useState({
         name: '',
@@ -90,45 +98,82 @@ function OrganisationRegistration() {
     }
 
     return (
-        <div className="auth_layout_wrap" style={styles.AuthBackground}>
+        <div className="auth_layout_wrap">
             <React.Fragment>
                 <CssBaseline />
-                <Container>
-                    <Grid container>
-                        <Grid item xs={6} className="login-form-left">
+                <Container className="orgRegContainer" maxWidth="false" sx={{ minHeight: '100%', paddingLeft: '0px', paddingRight: '0px' }}>
+                    <Grid container sx={{ minHeight: '100%' }}>
+                        <Grid xs={12} md={6} className="login-form-left" style={styles.AuthBackground}>
+                            <Box
+                                component="div"
+                                className="logoBox"
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'flex-start',
+                                }}>
+                                <Typography variant="h6">
+                                    Join
+                                </Typography>
+
+                                <Link href="/">
+                                    <img src={Logo} className="brand" /></Link>
+                                <Typography variant="subtitle2" gutterBottom>
+                                    Mihidora supports a culture of open data and collaboration. Researchers who possess or have generated valuable data and information that they are willing to share publicly may be eligible for an individual profile. For more information, please contact mihidorafeo@gmail.com.
+                                </Typography>
+                            </Box>
 
                         </Grid>
                         <Grid item xs={12} md={6} className="login-form">
-                            <div className="form_wrap" style={{ margin: '80px auto', padding: "0 25px" }}>
-                                <Link href="/"><img src={Logo} className="brand" /></Link>
+                            <div className="form_wrap" style={{ margin: '80px auto', padding: "0 25px", maxWidth: '600px' }}>
+
                                 <Box component={"form"} onSubmit={registerSubmit}>
-                                    <FormControl fullWidth>
+                                    <FormControl fullWidth sx={{ marginBottom: '20px' }}>
                                         <TextField
                                             type='text'
                                             margin="normal"
                                             small
                                             label="Organisation Name"
+                                            InputLabelProps={{
+                                                style: { fontSize: 14 }
+                                            }}
                                             name="name"
                                             onChange={handleInput}
                                             value={registerInput.name}
+                                            variant="standard"
+                                            // sx={{
+                                            //     '& .MuiInputLabel-root': {
+                                            //         '&.Mui-focused': {
+                                            //             color: '#93aa40'
+                                            //         }
+                                            //     }
+                                            // }}
                                         />
                                         <Typography variant="span" className="required">{registerInput.error_list.name}</Typography>
                                     </FormControl>
                                     <FormControl fullWidth style={{ marginBottom: '10px' }}>
-                                        <InputLabel id="organisation-type-label">Organisation Type</InputLabel>
+                                        <InputLabel sx={{
+                                            left: '-15px',
+                                            fontSize: '14px',
+                                        }} id="organisation-type-label">Organisation Type</InputLabel>
                                         <Select
                                             labelId="organisation-type-label"
                                             id="organisation-type"
                                             small
                                             value={orgType}
                                             label="Organisation Type"
+                                            InputLabelProps={{
+                                                style: { fontSize: 14 }
+                                            }}
                                             onChange={selectOrgType}
+                                            variant="standard"
                                         >
                                             {orgTypeList.map(row => <MenuItem key={row.id} value={row.id}>{row.type}</MenuItem>)}
                                         </Select>
                                     </FormControl>
                                     <FormControl fullWidth>
-                                        <FormLabel id="size-of-organization">Size of Organization</FormLabel>
+                                        <FormLabel sx={{ fontSize: '14px' }} id="size-of-organization">Size of Organization</FormLabel>
                                         <RadioGroup
                                             row
                                             onChange={selectOrgSize}
@@ -145,9 +190,13 @@ function OrganisationRegistration() {
                                             type='text'
                                             margin="normal"
                                             label="Registration No"
+                                            InputLabelProps={{
+                                                style: { fontSize: 14 }
+                                            }}
                                             name="reg_number"
                                             onChange={handleInput}
                                             value={registerInput.reg_number}
+                                            variant="standard"
                                         />
                                         <Typography variant="span" className="required">{registerInput.error_list.reg_number}</Typography>
                                     </FormControl>
@@ -157,9 +206,13 @@ function OrganisationRegistration() {
                                             multiline
                                             rows={4}
                                             label="Description"
+                                            InputLabelProps={{
+                                                style: { fontSize: 14 }
+                                            }}
                                             name="description"
                                             onChange={handleInput}
                                             value={registerInput.description}
+                                            variant="standard"
                                         />
                                         <Typography variant="span" className="required">{registerInput.error_list.description}</Typography>
                                     </FormControl>
@@ -173,10 +226,14 @@ function OrganisationRegistration() {
                                                     type='tel'
                                                     margin="normal"
                                                     label="Phone"
+                                                    InputLabelProps={{
+                                                        style: { fontSize: 14 }
+                                                    }}
                                                     name="phone"
                                                     onChange={handleInput}
                                                     value={registerInput.phone}
                                                     fullWidth
+                                                    variant="standard"
                                                 />
                                                 <Typography variant="span" className="required">{registerInput.error_list.phone}</Typography>
                                             </Grid>
@@ -185,10 +242,14 @@ function OrganisationRegistration() {
                                                     type='email'
                                                     margin="normal"
                                                     label="Email"
+                                                    InputLabelProps={{
+                                                        style: { fontSize: 14 }
+                                                    }}
                                                     name="email"
                                                     onChange={handleInput}
                                                     value={registerInput.email}
                                                     fullWidth
+                                                    variant="standard"
                                                 />
                                                 <Typography variant="span" className="required">{registerInput.error_list.email}</Typography>
                                             </Grid>
@@ -199,12 +260,22 @@ function OrganisationRegistration() {
                                             type='password'
                                             margin="normal"
                                             label="Password"
+                                            InputLabelProps={{
+                                                style: { fontSize: 14 }
+                                            }}
                                             name="password"
                                             onChange={handleInput}
                                             value={registerInput.password}
+                                            variant="standard"
                                         />
                                         <Typography variant="span" className="required">{registerInput.error_list.password}</Typography>
                                     </FormControl>
+                                    <Typography variant="subtitle2" style={{ marginTop: '20px' }} >
+                                        By registering with Mihidora Environmental Portal, you are agreeing to our
+                                        <NavLink to="/terms">
+                                            <span style={{ color: '#93aa40', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginLeft: "4px" }}>Terms & Conditions</span>.
+                                        </NavLink>
+                                    </Typography>
                                     <Button
                                         fullWidth
                                         variant={"outlined"}
@@ -212,17 +283,16 @@ function OrganisationRegistration() {
                                         sx={{ mt: 3, mb: 2 }}
                                         style={{ margin: '20px auto 10px' }}
                                         className="theme-btn"
+
                                     >
                                         Register
                                     </Button>
-                                    <Typography>Have an account already?
+                                    <Typography variant="subtitle2">Have an account already?
                                         <NavLink to="/login">
                                             <span style={{ color: '#93aa40', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginLeft: "4px" }}>Login</span>
                                         </NavLink>
                                     </Typography>
-                                    <Typography style={{marginTop: '20px'}} >    
-                                    Mihidora supports a culture of open data and collaboration. Researchers who possess or have generated valuable data and information that they are willing to share publicly may be eligible for an individual profile. For more information, please contact mihidorafeo@gmail.com.
-                                    </Typography>
+
                                 </Box>
                             </div>
                         </Grid>
@@ -233,4 +303,4 @@ function OrganisationRegistration() {
     );
 }
 
-export default OrganisationRegistration;
+export default OrgReg;

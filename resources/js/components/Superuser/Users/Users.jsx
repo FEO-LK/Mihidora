@@ -12,6 +12,8 @@ import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import AllUsers from './AllUsers';
 import { fontWeight } from "@mui/joy/styles/styleFunctionSx";
+import OrganizationUsers from './OrganizationUsers';
+import PendingUsers from './PendingUsers';
 
 // function Users() {  
 //   const [UserList, setUserList] = useState([]);
@@ -123,14 +125,16 @@ function Users() {
                 }
               }}
             >
-              <Tab label="All Users" value="1" />
-              <Tab label="Pending Requests" value="2" />
-              <Tab label="Rejected" value="3" />
+              <Tab label="Org Users" value="1" />
+              <Tab label="All Users" value="2" />
+              <Tab label="Pending Requests" value="3" />
+              <Tab label="Rejected" value="4" />
             </TabList>
           </Box>
-          <TabPanel value="1"><AllUsers /></TabPanel>
-          <TabPanel value="2">Item Two r</TabPanel>
-          <TabPanel value="3">Item Three e</TabPanel>
+          <TabPanel value="1"><OrganizationUsers /></TabPanel>
+          <TabPanel value="2"><AllUsers /></TabPanel>
+          <TabPanel value="3"><PendingUsers /></TabPanel>
+          <TabPanel value="4">Item Three e</TabPanel>
         </TabContext>
       </Box>
     </MainLayout>

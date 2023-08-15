@@ -5,7 +5,7 @@ import BaseLayout from "../BaseLayout";
 import ProjectOrganizationNavbar from "./ProjectOrganizationNavbar";
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import SellOutlinedIcon from '@mui/icons-material/SellOutlined';
-import ProfileNavbar from "./ProfileNavbar";
+// import ProfileNavbar from "./ProfileNavbar";
 //import { Button } from "bootstrap";
 
 function OrganizationProfile(props) {

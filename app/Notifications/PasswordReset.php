@@ -2,14 +2,12 @@
 
 namespace App\Notifications;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Str;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewUser extends Notification
+class PasswordReset extends Notification
 {
     use Queueable;
 
@@ -18,7 +16,7 @@ class NewUser extends Notification
      *
      * @return void
      */
-    public function __construct(public User $user)
+    public function __construct()
     {
         //
     }
@@ -43,12 +41,9 @@ class NewUser extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->view('email_new_user')
-                    ->subject("New User Registration Request")
-                    ->greeting("New registration request from the user {$this->user->name}")
-                    ->line(Str::limit($this->user->email, 50))
-                    ->action('Review the account', url('/login'))
-                    ->line('Mihidora Bot!');
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

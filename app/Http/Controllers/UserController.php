@@ -3,17 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\UserApproved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
     public function index() {
         $users = DB::table('users')->where([
             ['status', '=', '1'],
-        ])->get();
+        ])->orderByRaw('created_at DESC')->get();
+        return response()->json([
+            'status'=>200,
+            'users'=>$users
+        ]);
+    }
+
+    /**
+     * Returns user profile with organization information
+     */
+    public function getOrgUsers() {
+        $users = DB::table('users')
+            ->join('organizations', 'users.id', '=', 'organizations.user_id')
+        ->where([
+            ['users.status', '=', '1'],
+        ])->orderByRaw('users.created_at DESC')->get();
+        
+        return response()->json([
+            'status'=>200,
+            'users'=>$users
+        ]);
+    }
+
+    public function getPendingOrganizations(){
+        $users = DB::table('users')
+            ->join('organizations', 'users.id', '=', 'organizations.user_id')
+        ->where([
+            ['users.status', '=', '3'],
+        ])->orderByRaw('users.created_at DESC')->get();
+        
         return response()->json([
             'status'=>200,
             'users'=>$users
@@ -87,10 +118,10 @@ class UserController extends Controller
         if($user) {
             $user->status = 1;
             $user->save();
-
+            Mail::to($user->email)->send(new UserApproved($user));
             return response()->json([
                 'status' => 200,
-                'message' => 'User account deactivated.!'
+                'message' => 'User account activated.!'
             ]);
         }
         else {

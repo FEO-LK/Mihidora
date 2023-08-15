@@ -151,12 +151,19 @@
   </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="748125e9-edca-42c4-8e68-95e09643b664" data-mc-module-version="2019-10-22">
     <tbody>
       <tr>
-        <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit">Dear Admin,</div>
+        <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content">
+        
+        <div><div style="font-family: inherit; text-align: inherit">Dear User,</div>
 <div style="font-family: inherit; text-align: inherit"><br></div>
-<div style="font-family: inherit; text-align: inherit"><span style="color: #000000; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space-collapse: preserve; text-wrap: wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline; font-family: arial, helvetica, sans-serif">We have received a new User Registration Request via the portal.<br>
-Please login to the portal and navigate to mihidora.io/admin/dashboard/users/pending to view pending registrations requests.<br>
-</span></div>
-<div style="font-family: inherit; text-align: inherit"><span style="color: #000000; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space-collapse: preserve; text-wrap: wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline; font-family: arial, helvetica, sans-serif"> </br> Thanks,</span></div>
+<div style="font-family: inherit; text-align: inherit">
+<span style="color: #000000; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space-collapse: preserve; text-wrap: wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline; font-family: arial, helvetica, sans-serif">
+It seems you've forgotten your password for your Mihidora account. No worries, we're here to assist you in regaining access.<br>
+To reset your password, kindly follow the link below and adhere to the provided instructions:</br>
+<a href="{{ env('APP_URL') }}/reset-password?token={{ $token }}&email={{ $email }}" > {{ env('APP_URL') }}/reset-password?token={{ $token }}&email={{ $email }} </a>
+<br>If you did not initiate this request, kindly disregard this email. For further assistance or inquiries, please contact our support team at mihidorafeo@gmail.com. 
+</span>
+</div>
+<div style="font-family: inherit; text-align: inherit"><span style="color: #000000; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space-collapse: preserve; text-wrap: wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline; font-family: arial, helvetica, sans-serif"> </br>Best regards,</span></div>
 <div style="font-family: inherit; text-align: inherit"><span style="color: #000000; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space-collapse: preserve; text-wrap: wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline; font-family: arial, helvetica, sans-serif">Mihidora Portal Bot</span></div><div></div></div></td>
       </tr>
     </tbody>

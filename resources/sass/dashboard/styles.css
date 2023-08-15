@@ -327,3 +327,24 @@ table tbody td.MuiTableCell-body button {
 table tbody td.MuiTableCell-body a {
   color: #5bb318;
 }/*# sourceMappingURL=styles.css.map */
+
+/* Super Admin style overrides  */
+.css-1e6eih1-MuiButtonBase-root-MuiButton-root {
+  color: #93aa40 !important;
+}
+
+.css-1xkzkij-MuiButtonBase-root-MuiTab-root {
+  text-transform: capitalize !important;
+}
+
+.css-t89xny-MuiDataGrid-columnHeaderTitle {
+  font-weight: 600 !important;
+}
+
+.css-1ri6ub7-MuiPaper-root-MuiCard-root {
+  max-width: none !important;
+}
+
+.css-1t6e9jv-MuiCardActions-root {
+  justify-content: space-between !important;
+}
