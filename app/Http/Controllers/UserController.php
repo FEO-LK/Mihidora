@@ -227,4 +227,12 @@ class UserController extends Controller
             'users' => $users,
         ]);
     }
+
+    public function getRejectedAccounts(){
+        $rejected = RejectedUsers::all();
+        return response()->json([
+            'status' => 200,
+            'accounts' => $rejected,
+        ]);
+    }
 }

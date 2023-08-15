@@ -13,6 +13,7 @@ import TabPanel from '@material-ui/lab/TabPanel';
 import AllUsers from './AllUsers';
 import OrganizationUsers from './OrganizationUsers';
 import PendingUsers from './PendingUsers';
+import RejectedUsers from './RejectedUsers';
 
 // function Users() {  
 //   const [UserList, setUserList] = useState([]);
@@ -133,7 +134,7 @@ function Users() {
           <TabPanel value="1"><OrganizationUsers /></TabPanel>
           <TabPanel value="2"><AllUsers /></TabPanel>
           <TabPanel value="3"><PendingUsers /></TabPanel>
-          <TabPanel value="4">Item Three e</TabPanel>
+          <TabPanel value="4"><RejectedUsers /></TabPanel>
         </TabContext>
       </Box>
     </MainLayout>
