@@ -59,6 +59,7 @@ function PendingUsers() {
     const [selected, setSelected] = useState({});
     const [actionLoader, setActionLoader] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
 
@@ -114,6 +115,7 @@ function PendingUsers() {
             if (res.data.status === 200) {
                 setActionLoader(false);
                 setOpen(false);
+                setSuccessMessage('User Approved!')
                 setSuccess(true);
                 getAllUsers();
             }
@@ -131,10 +133,27 @@ function PendingUsers() {
     const handleReject = (organization) => {
         console.log(selected);
         setActionLoader(true);
-        setTimeout(() => {
-            setActionLoader(false);
-            setOpen(false);
-        }, 2000)
+        const data = {
+            user_id: selected.user_id,
+            organization_id : selected.id,
+        };
+        axios.post(`/api/remove-account`, data).then(res => {
+            if (res.data.status === 200) {
+                setActionLoader(false);
+                setOpen(false);
+                setSuccessMessage('User Removed!')
+                setSuccess(true);
+                getAllUsers();
+            }
+            else if (res.data.status === 422) {
+                setErrorMessage(res.data.message);
+                setError(true);
+            }
+            else {
+                setErrorMessage(res.data.message);
+                setError(true);
+            }
+        });
     }
 
     const handleNotificationClose = (event, reason) => {
@@ -260,10 +279,10 @@ function PendingUsers() {
                 TransitionComponent={SlideTransition}
                 key="Slide">
                 <Alert onClose={handleNotificationClose} severity="success" sx={{ width: '100%' }}>
-                    User Approved!
+                    { successMessage }
                 </Alert>
             </Snackbar>
-
+            
             <Snackbar 
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }} 
                 open={error} autoHideDuration={5000} 

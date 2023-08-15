@@ -51,7 +51,7 @@ function NewLogin() {
                     localStorage.setItem('auth_name', res.data.username);
                     localStorage.setItem('user_role', res.data.usertype);
                     if (res.data.usertype == 0) {
-                        navigate('/admin/dashboard');
+                        navigate('/admin/users');
                     }
                     else if (res.data.usertype == 1) {
                         navigate('/');

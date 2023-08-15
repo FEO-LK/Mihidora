@@ -185,6 +185,7 @@ Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
     Route::put('activate-account/{id}', [UserController::class, 'activateAccount']);
     Route::put('deactivate-account/{id}', [UserController::class, 'deactivateAccount']);
     Route::put('update-usercredentials/{id}', [UserController::class, 'updateAccount']);
+    Route::post('remove-account', [UserController::class, 'removeUserAccount']);
 
     Route::post('add-new-member', [MembersController::class, 'store']);
     Route::get('edit-member/{id}', [MembersController::class, 'edit']);
