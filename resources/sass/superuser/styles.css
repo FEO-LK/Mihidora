@@ -88,15 +88,27 @@
   font-weight: 600 !important;
 }
 
-.css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root:hover {
+.sidebar-button:hover {
   background-color: #ffffff !important;
-  border-radius: 29px !important;
-}
-
-.side-bar-icon.css-cveggr-MuiListItemIcon-root {
-  min-width: 40px !important
 }
 
 .sideBarButtonHighlight:hover {
   background-color: #edf7c9 !important;
+}
+
+.update-button {
+  background-color: #edf7c9 !important;
+  /* text-transform: lowercase !important; */
+  color: #000000 !important;
+  border-radius: 30px !important;
+  height: 35px !important;
+  width: 95px !important;
+}
+
+.update-button:hover {
+  background-color: #b2cf54 !important;
+}
+
+.weight-TextField {
+  height: 0.3em !important;
 }
