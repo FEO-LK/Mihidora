@@ -180,11 +180,13 @@ Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
     Route::get('view-users', [UserController::class, 'index']);
     Route::get('view-org-users', [UserController::class, 'getOrgUsers']);
     Route::get('view-pending-users', [UserController::class, 'getPendingOrganizations']);
+    Route::get('view-rejected-accounts', [UserController::class, 'getRejectedAccounts']);
     Route::get('new-request', [UserController::class, 'newRequest']);
     Route::get('pending-users', [UserController::class, 'pendingUsers']);
     Route::put('activate-account/{id}', [UserController::class, 'activateAccount']);
     Route::put('deactivate-account/{id}', [UserController::class, 'deactivateAccount']);
     Route::put('update-usercredentials/{id}', [UserController::class, 'updateAccount']);
+    Route::post('remove-account', [UserController::class, 'removeUserAccount']);
 
     Route::post('add-new-member', [MembersController::class, 'store']);
     Route::get('edit-member/{id}', [MembersController::class, 'edit']);

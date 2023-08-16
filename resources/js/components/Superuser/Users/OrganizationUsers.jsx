@@ -69,6 +69,11 @@ function OrganizationUsers() {
     return (
         <Box>
             <DataGrid
+                sx={{
+                    '& .MuiButton-root': {
+                        textTransform: 'capitalize'
+                    }
+                }}
                 rows={UserList}
                 slots={{ toolbar: GridToolbar }}
                 columns={columns}

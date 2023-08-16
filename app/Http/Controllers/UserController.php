@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Organizations;
+use App\Models\OrganizationUser;
+use App\Models\RejectedUsers;
 use App\Mail\UserApproved;
+use App\Mail\UserRejected;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
@@ -157,13 +162,52 @@ class UserController extends Controller
         }
     }
 
-    public function removeUserAccount(Request $request, $id)
+    public function removeUserAccount(Request $request)
     {
-        $user = User::find($id);
+        $user = User::find($request->user_id);
+        $organization = Organizations::find($request->organization_id);
+        $organization_user_account = OrganizationUser::find($request->organization_id);
+        if(!$organization){
+            return response()->json([
+                'status' => 404,
+                'message' => 'Organisation not found.!',
+            ]);
+        }
+
+        if(!$organization_user_account){
+            return response()->json([
+                'status' => 404,
+                'message' => 'Organisation User not found.!',
+            ]);
+        }
+        /**
+         * 1. create a record in rejected users before deleting
+         * 2. delete the record from three tabels
+         */
+        $rejected_user = RejectedUsers::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'org_name' => $organization->org_name,
+            'reg_number' => $organization->reg_number,
+            'contact_number' => $organization->contact_number,
+            'joined_on' => $organization->created_at,
+            'reviewed_by' => Auth::user()->id
+        ]);
+        $organization_user_account->delete();
+        $organization->delete();
+        $user->delete();
+        
+        Mail::to($user->email)->send(new UserRejected($user->name));
+
         if ($user) {
             return response()->json([
                 'status' => 200,
-                'message' => 'User account deactivated.!',
+                'account' => [
+                    'user' => $user,
+                    'organization' => $organization,
+                    'organization_user_account' => $organization_user_account,
+                    'rejected_user' => $rejected_user,
+                ],
             ]);
         } else {
             return response()->json([
@@ -181,6 +225,14 @@ class UserController extends Controller
         return response()->json([
             'status' => 200,
             'users' => $users,
+        ]);
+    }
+
+    public function getRejectedAccounts(){
+        $rejected = RejectedUsers::all();
+        return response()->json([
+            'status' => 200,
+            'accounts' => $rejected,
         ]);
     }
 }

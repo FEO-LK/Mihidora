@@ -70,6 +70,11 @@ function Datatable() {
         <Box>
             <DataGrid
                 rows={UserList}
+                sx={{
+                    '& .MuiButton-root': {
+                        textTransform: 'capitalize'
+                    }
+                }}
                 slots={{ toolbar: GridToolbar }}
                 columns={columns}
                 initialState={{

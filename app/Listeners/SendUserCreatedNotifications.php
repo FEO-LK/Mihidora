@@ -29,7 +29,7 @@ class SendUserCreatedNotifications implements ShouldQueue
      */
     public function handle(UserCreated $event)
     {
-        foreach (User::where('id', 34)->cursor() as $user) {
+        foreach (User::where('user_role', 0)->cursor() as $user) {
             $user->notify(new NewUser($event->user));
         }
     }
