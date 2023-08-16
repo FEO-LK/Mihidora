@@ -64,6 +64,9 @@
   border-radius: 0.5rem;
 }
 
+.basic-table.css-16fl5n6-MuiDataGrid-root {
+  border-color: #ffffff !important;
+}
 
 .admin-button-generic {
   border-radius: 50px !important;
@@ -83,4 +86,17 @@
   background-color: #edf7c9 !important;
   border-radius: 29px !important;
   font-weight: 600 !important;
+}
+
+.css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root:hover {
+  background-color: #ffffff !important;
+  border-radius: 29px !important;
+}
+
+.side-bar-icon.css-cveggr-MuiListItemIcon-root {
+  min-width: 40px !important
+}
+
+.sideBarButtonHighlight:hover {
+  background-color: #edf7c9 !important;
 }
