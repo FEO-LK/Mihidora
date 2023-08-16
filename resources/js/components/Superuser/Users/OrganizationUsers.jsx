@@ -8,7 +8,8 @@ const columns = [
     { field: 'organization',headerName: 'Organization', flex: 1},
     { field: 'type', headerName: 'Type', flex: 1 },
     { field: 'reg', headerName: 'Registration', flex: 1 },
-    { field: 'contact', headerName: 'Contact Person', flex: 1 },
+    { field: 'size', headerName: 'Size', flex: 1 },
+    // { field: 'description',headerName: 'Description', flex: 1},
     { field: 'email', headerName: 'Email', flex: 1 },
     { field: 'phone', headerName: 'Phone', flex: 1 },
     { field: 'joined',headerName: 'Joined', flex: 1},
@@ -52,7 +53,9 @@ function OrganizationUsers() {
                     contact: user.name,
                     email: user.email,
                     phone: user.contact_number,
-                    joined: user.created_at
+                    joined: user.created_at,
+                    size: user.org_size,
+                    description: user.description,
                  };
             });
             setUserList(users);

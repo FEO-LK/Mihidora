@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Box, Button, TextField, CssBaseline, Typography, Container, Grid, FormControl, Link } from "@mui/material";
-
+import Alert from '@mui/material/Alert';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import Logo from "../../../../images/logo.jpg";
 
 const styles = {
@@ -27,6 +29,8 @@ function NewLogin() {
         email: '',
         password: '',
         error_list: [],
+        login_error: false,
+        loading: false,
     });
 
     const handleInput = (e) => {
@@ -43,6 +47,7 @@ function NewLogin() {
         }
 
         axios.get('sanctum/csrf-cookie').then(response => {
+            setLogin({...loginInput, loading: true, login_error: false});
             axios.post('/api/login', data).then(res => {
                 if (res.data.status === 200) {
                     localStorage.setItem('auth_id', res.data.profileid);
@@ -61,9 +66,10 @@ function NewLogin() {
                     }
                 }
                 else if (res.data.status === 401) {
-                    alert('error 401')
+                    // alert('error 401')
+                    setLogin({ ...loginInput, login_error: true, loading: false });
                 } else {
-                    setLogin({ ...loginInput, error_list: res.data.validation_errors });
+                    setLogin({ ...loginInput, error_list: res.data.validation_errors, login_error: true, loading: false });
                 }
             });
         });
@@ -79,6 +85,12 @@ function NewLogin() {
 
                         </Grid>
                         <Grid xs={12} md={6} className="login-form" style={styles.forgotPasswordBox}>
+                            <Backdrop
+                                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                open={loginInput.loading}
+                            >
+                                <CircularProgress color="inherit" />
+                            </Backdrop>
                             <div className="form_wrap" style={{ margin: 'auto', padding: "0 25px", width: '75%' }}>
                                 <Typography className="login-right-header" variant="h6" sx={{ textAlign: 'center', fontWeight: 600, marginBottom: '10px' }}>
                                     Login
@@ -86,6 +98,11 @@ function NewLogin() {
                                 <Link href="/"><img src={Logo} className="brand" /></Link>
                                 <Box component={"form"} onSubmit={loginSubmit}>
                                     <FormControl fullWidth>
+                                        {loginInput.login_error ?
+                                            <Alert sx={{ marginBottom: '30px', marginTop: '30px' }} severity="error">
+                                                Invalid Username or Password. Please try again!
+                                            </Alert>
+                                            : ""}
                                         <TextField
                                             margin="normal"
                                             type="text"
@@ -106,7 +123,10 @@ function NewLogin() {
                                                 }
                                             }}
                                         />
-                                        <Typography variant="span">{loginInput.error_list.email}</Typography>
+                                        <Typography variant="span" sx={{
+                                            color: '#d60000de',
+                                            fontSize: '13px',
+                                        }}>{loginInput.error_list.email}</Typography>
                                     </FormControl>
                                     <FormControl fullWidth>
                                         <TextField
@@ -129,7 +149,10 @@ function NewLogin() {
                                                 }
                                             }}
                                         />
-                                        <Typography variant="span">{loginInput.error_list.password}</Typography>
+                                        <Typography variant="span" sx={{
+                                            color: '#d60000de',
+                                            fontSize: '13px',
+                                        }}>{loginInput.error_list.password}</Typography>
                                     </FormControl>
                                     <Typography classname="generic-link" variant="caption">
                                         <NavLink to="/forgot-password">

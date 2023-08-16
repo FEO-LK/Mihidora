@@ -4,8 +4,8 @@ import {
     CssBaseline, TextField, Box, Button, Typography, Container, FormControl, InputLabel, Select,
     MenuItem, Grid, FormLabel, RadioGroup, FormControlLabel, Radio, Link
 } from "@mui/material";
-import axios from "axios";
-
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import Logo from "../../../../images/logo.jpg";
 
 const styles = {
@@ -33,6 +33,7 @@ function OrgReg() {
         description: '',
         contact_number: '',
         error_list: [],
+        loading: false,
     });
     const [orgTypeList, setOrgTypeList] = useState([]);
     const [orgType, setOrgType] = useState("");
@@ -63,12 +64,26 @@ function OrgReg() {
     };
 
     const selectOrgSize = (event) => {
+        setRegister({
+            ...registerInput, error_list: {
+                ...registerInput.error_list,
+                orgSize: '',
+            }
+        });
         setOrgSize(event.target.value);
     }
 
     const registerSubmit = (e) => {
         e.preventDefault();
-
+        if (!orgSize) {
+            setRegister({
+                ...registerInput, error_list: {
+                    ...registerInput.error_list,
+                    orgSize: 'Please select the organisation size',
+                }
+            });
+        }
+        setRegister({ ...registerInput, loading: true });
         const data = {
             name: registerInput.name,
             email: registerInput.email,
@@ -80,6 +95,8 @@ function OrgReg() {
             description: registerInput.description,
             contact_number: registerInput.phone,
         }
+        console.log(registerInput);
+        console.log(orgSize);
         axios.get('sanctum/csrf-cookie').then(response => {
             axios.post('/api/register', data).then(res => {
                 if (res.data.status === 200) {
@@ -87,10 +104,11 @@ function OrgReg() {
                     // localStorage.setItem('org_id', res.data.org_id);
                     // localStorage.setItem('auth_token', res.data.token);
                     // localStorage.setItem('auth_name', res.data.username);
+                    setRegister({ ...registerInput, loading: false });
                     navigate('/thank-you');
                 }
                 else {
-                    setRegister({ ...registerInput, error_list: res.data.validation_errors });
+                    setRegister({ ...registerInput, error_list: res.data.validation_errors, loading:false });
                 }
             });
         });
@@ -127,6 +145,12 @@ function OrgReg() {
 
                         </Grid>
                         <Grid item xs={12} md={6} className="login-form">
+                            <Backdrop
+                                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                open={registerInput.loading}
+                            >
+                                <CircularProgress color="inherit" />
+                            </Backdrop>
                             <div className="form_wrap" style={{ margin: '80px auto', padding: "0 25px", maxWidth: '600px' }}>
                                 <Box
                                     component="div"
@@ -149,6 +173,7 @@ function OrgReg() {
                                         <TextField
                                             type='text'
                                             margin="normal"
+                                            required
                                             small
                                             label="Organisation Name"
                                             InputLabelProps={{
@@ -172,7 +197,7 @@ function OrgReg() {
                                         <InputLabel sx={{
                                             left: '-15px',
                                             fontSize: '14px',
-                                        }} id="organisation-type-label">Organisation Type</InputLabel>
+                                        }} id="organisation-type-label">Organisation Type *</InputLabel>
                                         <Select
                                             labelId="organisation-type-label"
                                             id="organisation-type"
@@ -184,6 +209,7 @@ function OrgReg() {
                                             }}
                                             onChange={selectOrgType}
                                             variant="standard"
+                                            required
                                         >
                                             {orgTypeList.map(row => <MenuItem key={row.id} value={row.id}>{row.type}</MenuItem>)}
                                         </Select>
@@ -191,6 +217,7 @@ function OrgReg() {
                                     <FormControl fullWidth>
                                         <FormLabel sx={{ fontSize: '14px' }} id="size-of-organization">Size of Organization</FormLabel>
                                         <RadioGroup
+                                            required
                                             row
                                             onChange={selectOrgSize}
                                         >
@@ -200,12 +227,14 @@ function OrgReg() {
                                             <FormControlLabel value="61 - 100" control={<Radio />} label="61 - 100" />
                                             <FormControlLabel value="Over 100" control={<Radio />} label="Over 100" />
                                         </RadioGroup>
+                                        <Typography variant="span" className="required">{registerInput.error_list.orgSize}</Typography>
                                     </FormControl>
                                     <FormControl fullWidth>
                                         <TextField
                                             type='text'
                                             margin="normal"
                                             label="Registration No"
+                                            required
                                             InputLabelProps={{
                                                 style: { fontSize: 14 }
                                             }}
@@ -242,6 +271,7 @@ function OrgReg() {
                                                     type='tel'
                                                     margin="normal"
                                                     label="Phone"
+                                                    required
                                                     InputLabelProps={{
                                                         style: { fontSize: 14 }
                                                     }}
@@ -258,6 +288,7 @@ function OrgReg() {
                                                     type='email'
                                                     margin="normal"
                                                     label="Email"
+                                                    required
                                                     InputLabelProps={{
                                                         style: { fontSize: 14 }
                                                     }}
