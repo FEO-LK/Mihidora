@@ -83,7 +83,7 @@ const BaseLayout = ({ children, title }) => {
 
         <ListItem key='Organizations' disablePadding>
           <ListItemButton
-            className={location.pathname == '/admin/dashboard' ? 'sideBarButtonHighlight' : ''}
+            className={`${location.pathname == '/admin/dashboard' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
             component="a" href="/admin/dashboard">
             <ListItemIcon sx={{ minWidth:'40px' }}>
               <MapsHomeWorkIcon fontSize="small" />
@@ -94,7 +94,7 @@ const BaseLayout = ({ children, title }) => {
 
         <ListItem key='Projects' disablePadding>
           <ListItemButton
-            className={location.pathname == '/admin/projects' ? 'sideBarButtonHighlight' : ''}
+            className={`${location.pathname == '/admin/projects' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
             component="a" href="/admin/projects">
             <ListItemIcon sx={{ minWidth:'40px' }}>
               <LocalLibraryIcon fontSize="small" />
@@ -105,7 +105,7 @@ const BaseLayout = ({ children, title }) => {
 
         <ListItem key='Users' disablePadding>
           <ListItemButton
-            className={location.pathname == '/admin/users' ? 'sideBarButtonHighlight' : ''}
+            className={`${location.pathname == '/admin/users' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
             component="a" href="/admin/users">
             <ListItemIcon sx={{ minWidth:'40px' }}>
               <PeopleAltIcon fontSize="small" />
@@ -116,7 +116,7 @@ const BaseLayout = ({ children, title }) => {
 
         <ListItem key='Tags' disablePadding>
           <ListItemButton
-            className={location.pathname == '/admin/tags' ? 'sideBarButtonHighlight' : ''}
+            className={`${location.pathname == '/admin/tags' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
             component="a" href="/admin/tags">
             <ListItemIcon sx={{ minWidth:'40px' }}>
               <LocalOfferIcon fontSize="small" />
@@ -127,7 +127,14 @@ const BaseLayout = ({ children, title }) => {
 
         <ListItem key='Pages' disablePadding>
           <ListItemButton
-            className={location.pathname == '/admin/pages' ? 'sideBarButtonHighlight' : ''}
+        //   sx={{
+        //     '& .MuiTypography-root': {
+        //         '&.MuiTypography-root-hover': {
+        //             backgroundColor: '#ffffff'
+        //         }
+        //     }
+        // }}
+            className={`${location.pathname == '/admin/pages' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
             component="a" href="/admin/pages">
             <ListItemIcon sx={{ minWidth:'40px' }}>
               <WebIcon fontSize="small" />
@@ -138,7 +145,7 @@ const BaseLayout = ({ children, title }) => {
 
         <ListItem key='Analytics' disablePadding>
           <ListItemButton
-            className={location.pathname == '/admin/analytics' ? 'sideBarButtonHighlight' : ''}
+            className={`${location.pathname == '/admin/analytics' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
             component="a" href="/admin/analytics">
             <ListItemIcon sx={{ minWidth:'40px' }}>
               <InsightsIcon fontSize="small" />
