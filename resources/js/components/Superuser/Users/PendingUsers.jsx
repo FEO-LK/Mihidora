@@ -19,10 +19,13 @@ const columns = [
     { field: 'organization',headerName: 'Organization', flex: 1},
     { field: 'type', headerName: 'Type', flex: 1 },
     { field: 'reg', headerName: 'Registration', flex: 1 },
-    { field: 'contact', headerName: 'Contact Person', flex: 1 },
+    { field: 'size', headerName: 'Size', flex: 1 },
+    // { field: 'description',headerName: 'Description', flex: 1},
     { field: 'email', headerName: 'Email', flex: 1 },
     { field: 'phone', headerName: 'Phone', flex: 1 },
     { field: 'joined',headerName: 'Joined', flex: 1},
+    
+    
 ];
 
 const style = {
@@ -88,11 +91,13 @@ function PendingUsers() {
                     organization: user.org_name,
                     type: orgTypes[user.org_type],
                     reg: user.reg_number,
-                    contact: user.name,
+                    // contact: user.name,
+                    description: user.description,
                     email: user.email,
                     phone: user.contact_number,
                     joined: user.created_at,
-                    user_id: user.user_id
+                    user_id: user.user_id,
+                    size: user.org_size
                  };
             });
             setUserList(users);
@@ -234,6 +239,14 @@ function PendingUsers() {
                         </Typography>
                         <Divider />
 
+                        <Typography variant="caption" display="block" style={{ marginTop:'24px', fontWeight:700 }}>
+                            Orginsation Size
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle1" component="div">
+                        {selected.size}
+                        </Typography>
+                        <Divider />
+
 
                         <Typography variant="caption" display="block" style={{ marginTop:'24px', fontWeight:700 }}>
                             Contact Person
@@ -264,6 +277,12 @@ function PendingUsers() {
                         </Typography>
                         <Typography gutterBottom variant="subtitle1" component="div">
                             {selected.joined}
+                        </Typography>
+                        <Typography variant="caption" display="block" style={{ marginTop:'24px', fontWeight:700 }}>
+                            Description
+                        </Typography>
+                        <Typography gutterBottom variant="subtitle1" component="div">
+                            {selected.description}
                         </Typography>
 
 
