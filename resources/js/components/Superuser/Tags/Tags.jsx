@@ -11,9 +11,10 @@ import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import { fontWeight } from "@mui/joy/styles/styleFunctionSx";
-import PendingUsers from '../Users/PendingUsers';
+
 import TagsLevel1 from './TagsLevel1';
 import TagsLevel2 from './TagsLevel2';
+import TagsLevel3 from "./TagsLevel3";
 
 function Tags() {
 
@@ -43,7 +44,7 @@ function Tags() {
           </Box>
           <TabPanel value="1"><TagsLevel1 /></TabPanel>
           <TabPanel value="2"><TagsLevel2 /></TabPanel>
-          <TabPanel value="3"><PendingUsers /></TabPanel>
+          <TabPanel value="3"><TagsLevel3 /></TabPanel>
           <TabPanel value="4">Item Three e</TabPanel>
         </TabContext>
       </Box>
