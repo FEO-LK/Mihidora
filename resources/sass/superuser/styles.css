@@ -98,11 +98,11 @@
 
 .update-button {
   background-color: #edf7c9 !important;
-  /* text-transform: lowercase !important; */
+  text-transform: capitalize !important;
   color: #000000 !important;
   border-radius: 30px !important;
-  height: 35px !important;
-  width: 95px !important;
+  height: 30px !important;
+  width: 100px !important;
 }
 
 .update-button:hover {

@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import { DataGrid, GridColDef, GridValueGetterParams, GridToolbar } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const columns = [
     { field: 'name', headerName: 'Name', flex: 1 },
@@ -29,10 +34,35 @@ const rows = [
     { id: 4, name: 'Lewis Hamilton', slug: 'lewis@mercedesamg.com', weight: 1 },
 ];
 
-function TagsLevel1() {
+function TagsLevel2() {
+
+    const [level, setLevel] = useState('');
+
+    const handleChange = (event) => {
+        setLevel(event.target.value);
+    };
 
     return (
         <Box>
+
+            <Grid container sx={{mb: 2}}>
+
+                <Grid item>
+                    <FormControl sx={{ minWidth: 200 }} size="small">
+                        <Select
+                            value={level}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={'level 1'}>Level 1 tags</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+
+                <Grid item sx={{ ml: 2 }} style={{ display: "flex", alignItems: "center" }}>
+                    <Button className="update-button">Filter</Button>
+                </Grid>
+            </Grid>
+
             <DataGrid
                 rows={rows}
                 slots={{ toolbar: GridToolbar }}
@@ -48,4 +78,4 @@ function TagsLevel1() {
     )
 }
 
-export default TagsLevel1;
+export default TagsLevel2;
