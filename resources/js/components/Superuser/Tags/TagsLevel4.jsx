@@ -34,11 +34,12 @@ const rows = [
     { id: 4, name: 'Lewis Hamilton', slug: 'lewis@mercedesamg.com', weight: 1 },
 ];
 
-function TagsLevel3() {
+function TagsLevel4() {
 
     const [state, setState] = useState({
         level1: '',
-        level2: ''
+        level2: '',
+        level3: '',
     })
 
     const handleChangeLevel1 = (event) => {
@@ -52,6 +53,13 @@ function TagsLevel3() {
         setState({
             ...state,
             level2: event.target.value
+        })
+    };
+
+    const handleChangeLevel3 = (event) => {
+        setState({
+            ...state,
+            level3: event.target.value
         })
     };
 
@@ -83,6 +91,17 @@ function TagsLevel3() {
                     </FormControl>
                 </Grid>
 
+                <Grid item sx={{ ml: 2 }}>
+                    <FormControl sx={{ minWidth: 200 }} size="small">
+                        <Select
+                            value={state.level3}
+                            onChange={handleChangeLevel3}
+                        >
+                            <MenuItem value={'level 3'}>Level 3 tags</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+
                 <Grid item sx={{ ml: 2 }} style={{ display: "flex", alignItems: "center" }}>
                     <Button className="update-button">Filter</Button>
                 </Grid>
@@ -103,4 +122,4 @@ function TagsLevel3() {
     )
 }
 
-export default TagsLevel3;
+export default TagsLevel4;

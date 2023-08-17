@@ -15,6 +15,7 @@ import { fontWeight } from "@mui/joy/styles/styleFunctionSx";
 import TagsLevel1 from './TagsLevel1';
 import TagsLevel2 from './TagsLevel2';
 import TagsLevel3 from "./TagsLevel3";
+import TagsLevel4 from "./TagsLevel4";
 
 function Tags() {
 
@@ -45,7 +46,7 @@ function Tags() {
           <TabPanel value="1"><TagsLevel1 /></TabPanel>
           <TabPanel value="2"><TagsLevel2 /></TabPanel>
           <TabPanel value="3"><TagsLevel3 /></TabPanel>
-          <TabPanel value="4">Item Three e</TabPanel>
+          <TabPanel value="4"><TagsLevel4 /></TabPanel>
         </TabContext>
       </Box>
     </MainLayout>
