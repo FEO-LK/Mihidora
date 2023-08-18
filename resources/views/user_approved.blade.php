@@ -158,14 +158,14 @@
 <div style="font-family: inherit; text-align: inherit"><br></div>
 <div style="font-family: inherit; text-align: inherit">
 <span style="color: #000000; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space-collapse: preserve; text-wrap: wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline; font-family: arial, helvetica, sans-serif">
-Congratulations! We are thrilled to welcome you to Mihidora. Your registration has been approved, and you now have full access to our platform.<br>
-Log in using your credentials to start exploring all the features and benefits we offer.</br>
-- If you have any questions or need assistance, don't hesitate to contact our support team at <strong>mihidorafeo@gmail.com</strong>.</br>
+<br><br>Congratulations! We are thrilled to welcome you to Mihidora. Your registration has been approved, and you now have full access to our platform.<br>
+<br>Log in using your credentials to start exploring all the features and benefits we offer.<br><br>
+- If you have any questions or need assistance, don't hesitate to contact our support team at <strong>mihidorafeo@gmail.com</strong>.<br>
 - If you need technical assistance, please contact our technical team at <strong>askmihidora@gmail.com</strong>.
-<br>Thank you for choosing Mihidora. We look forward to serving you!
+<br><br>Thank you for choosing Mihidora. We look forward to serving you!
 </span>
 </div>
-<div style="font-family: inherit; text-align: inherit"><span style="color: #000000; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space-collapse: preserve; text-wrap: wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline; font-family: arial, helvetica, sans-serif"> </br>Best regards,</span></div>
+<div style="font-family: inherit; text-align: inherit"><span style="color: #000000; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space-collapse: preserve; text-wrap: wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline; font-family: arial, helvetica, sans-serif"><br><br>Best regards,</span></div>
 <div style="font-family: inherit; text-align: inherit"><span style="color: #000000; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space-collapse: preserve; text-wrap: wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline; font-family: arial, helvetica, sans-serif">Mihidora Team</span></div><div></div></div></td>
       </tr>
     </tbody>

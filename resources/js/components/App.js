@@ -114,6 +114,7 @@ import WhatsonMediaAndAdvocacyProfile from "./Frontend/Whatson/WhatsonMediaAndAd
 
 import RegisterThankYou from './Frontend/Pages/RegisterThankYou';
 import SingleUser from './Superuser/Users/SingleUser';
+import SingleUserForm from './Superuser/Users/SingleUserForm';
 
 import OrgReg from './Frontend/Auth/OrgReg';
 import ForgotPassword from './Frontend/Auth/ForgotPassword';
@@ -251,6 +252,7 @@ function App() {
                     <Route path={"/admin/members-list"} element={<SuperUserRoute component={MembersList} />} />
                     <Route path={"/admin/add-new-member"} element={<SuperUserRoute component={AddNewMember} />} />
                     <Route path={"/edit-member/:slug"} element={<SuperUserRoute component={EditMember} />} />
+                    <Route path={"/edit-user/:id"} element={<SuperUserRoute component={SingleUserForm} />} />
 
                     <Route path={"/admin/tags"} element={<SuperUserRoute component={Tags} />} />
                     

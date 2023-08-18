@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { useParams } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import MainLayout from "../BaseLayout";
@@ -12,10 +13,11 @@ import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import AllUsers from './AllUsers';
 import OrganizationUsers from './OrganizationUsers';
+import SingleUserForm from "./SingleUserForm";
 
 
 function SingleUser() {
-
+  const pageParams = useParams();
   const [value, setValue] = useState('1');
 
   const handleChange = (event, newValue) => {
@@ -40,7 +42,7 @@ function SingleUser() {
               <Tab label="Rejected" value="4" />
             </TabList>
           </Box>
-          <TabPanel value="1">Item One 1</TabPanel>
+          <TabPanel value="1"><SingleUserForm id={pageParams.id}/></TabPanel>
           <TabPanel value="2">Item Two 2</TabPanel>
           <TabPanel value="2">Item Three 3</TabPanel>
           <TabPanel value="3">Item Four</TabPanel>

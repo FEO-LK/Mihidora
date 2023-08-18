@@ -105,8 +105,34 @@
   width: 95px !important;
 }
 
-.update-button:hover {
+.update-button:hover { 
   background-color: #b2cf54 !important;
+}
+
+.admin_forms{
+
+}
+
+.admin_forms .MuiInput-root {
+  margin-bottom: 20px !important;
+}
+
+.admin_forms .MuiInput-input {
+  font-size: 13px;
+}
+
+.form-submit-button {
+  background-color: #b2cf54 !important;
+  color: #ffffff !important;
+  border-radius: 30px !important;
+  height: 35px !important;
+  text-transform: capitalize !important;
+  border: solid 2px #b2cf54 !important;
+}
+
+.form-submit-button:hover {
+  background-color: #000000 !important;
+  border: solid 2px #000000 !important;
 }
 
 .weight-TextField {
