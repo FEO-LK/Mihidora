@@ -8,6 +8,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Projects extends Model
 {
@@ -57,5 +58,13 @@ class Projects extends Model
         return $this->belongsTo(User::class)->withDefault([
             'name' => 'Guest Author',
         ]);
+    }
+
+    /**
+     * Get all of the tags for the project.
+     */
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

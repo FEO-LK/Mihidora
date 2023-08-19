@@ -20,6 +20,7 @@ use App\Http\Controllers\MembersController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\DataEducationController;
 use App\Http\Controllers\OrganizationTypeController;
+use App\Http\Controllers\TagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +106,11 @@ Route::get('datahub-single/{slug}', [DataEducationController::class, 'DataHubIte
  Route::get('view-members', [MembersController::class, 'index']);
  Route::get('view-file-by-user', [FileuploadController::class, 'index']);
  
+
+//  Tags
+Route::get('get-tags', [TagsController::class, 'index']);
+Route::post('get-projects-by-tag', [TagsController::class, 'getProjects']);
+
 Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
 //Route::middleware(['auth:sanctum', 'isAdminUser'])->group(function() {    
     Route::get('/user', function () {
