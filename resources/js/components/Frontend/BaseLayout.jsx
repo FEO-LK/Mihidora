@@ -1,5 +1,5 @@
 import React from "react";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Divider  } from "@mui/material";
 import '../../../sass/frontend/styles.css';
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -11,6 +11,7 @@ function BaseLayout({children, title}) {
                 <CssBaseline/>
 
                 <Header />
+                {/* <Divider /> */}
                 {children}
                 {/*{title === 'E-Learning Materials' ? (*/}
                 {/*    <div style={{backgroundColor:'#EBECF0'}}>*/}
