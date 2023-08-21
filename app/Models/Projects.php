@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Spatie\Tags\HasTags;
+use App\Models\Level1Tag;
+use App\Models\Tags;
 //use Laravel\Scout\Searchable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Projects extends Model
 {
@@ -57,5 +60,13 @@ class Projects extends Model
         return $this->belongsTo(User::class)->withDefault([
             'name' => 'Guest Author',
         ]);
+    }
+
+    /**
+     * Get all of the tags for the project.
+     */
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Level1Tag::class, 'level1_taggable', 'level1_taggables');
     }
 }

@@ -22,15 +22,14 @@ class ClassifiedController extends Controller
         //     $photo = Fileuploads::where('id', $photo)->first();
         //     array_push($photoList, $photo);
         // }
-        if($projects) {
+        if ($projects) {
             return response()->json([
                 'status' => 200,
                 'get_data' => $projects,
                 'tags' => $tags,
                 //'photoList' => $photoList,
             ]);
-        }
-        else {
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'No project ID found.!',
@@ -48,152 +47,179 @@ class ClassifiedController extends Controller
         $ProjectDistricts = [];
         $Organizations = [];
         foreach ($classifieds as $job) {
-            $ProjectDistrict = Districts::select('name_en')->where('id', $job->district_id)->first();
+            $ProjectDistrict = Districts::select('name_en')
+                ->where('id', $job->district_id)
+                ->first();
             array_push($ProjectDistricts, $ProjectDistrict);
             //
             $Organization = DB::table('organizations')
-            ->select('*')
-            ->where('id', $job->organization_id)
-            ->first();
+                ->select('*')
+                ->where('id', $job->organization_id)
+                ->first();
 
-            if($Organization){
+            if ($Organization) {
                 array_push($Organizations, $Organization);
-            }else{ array_push($Organizations, null); }
+            } else {
+                array_push($Organizations, null);
+            }
         }
 
         return response()->json([
-            'status'=>200,
-            'classifieds'=>$classifieds,
-            'locations'=>$ProjectDistricts,
-            'organization'=>$Organizations,
+            'status' => 200,
+            'classifieds' => $classifieds,
+            'locations' => $ProjectDistricts,
+            'organization' => $Organizations,
         ]);
     }
 
     public function ClassifiedsJobsMap()
-       {
-           $jobsMap = DB::table('classifieds')->where('type',1)
-               ->select('locations', 'title')
-               ->get();
-           return response()->json([
-               'status'=>200,
-               'jobs_map'=>$jobsMap
-           ]);
-       }
+    {
+        $jobsMap = DB::table('classifieds')
+            ->where('type', 1)
+            ->select('locations', 'title')
+            ->get();
+        return response()->json([
+            'status' => 200,
+            'jobs_map' => $jobsMap,
+        ]);
+    }
     public function ClassifiedsProposalsMap()
-        {
-            $ProposalsMap = DB::table('classifieds')->where('type',2)
-                ->select('locations', 'title')
-                ->get();
-            return response()->json([
-                'status'=>200,
-                'Proposals_map'=>$ProposalsMap
-            ]);
-        }
+    {
+        $ProposalsMap = DB::table('classifieds')
+            ->where('type', 2)
+            ->select('locations', 'title')
+            ->get();
+        return response()->json([
+            'status' => 200,
+            'Proposals_map' => $ProposalsMap,
+        ]);
+    }
     public function ClassifiedsSuppliersMap()
-        {
-            $suppliersMap = DB::table('classifieds')->where('type',3)
-                ->select('locations', 'title')
-                ->get();
-            return response()->json([
-                'status'=>200,
-                'suppliers_map'=>$suppliersMap
-            ]);
-        }
+    {
+        $suppliersMap = DB::table('classifieds')
+            ->where('type', 3)
+            ->select('locations', 'title')
+            ->get();
+        return response()->json([
+            'status' => 200,
+            'suppliers_map' => $suppliersMap,
+        ]);
+    }
     public function ClassifiedsResourceSharingMap()
-        {
-            $resourceSharingMap = DB::table('classifieds')->where('type',4)
-                ->select('locations', 'title')
-                ->get();
-            return response()->json([
-                'status'=>200,
-                'resource_sharing_map'=>$resourceSharingMap
-            ]);
-        }
-
+    {
+        $resourceSharingMap = DB::table('classifieds')
+            ->where('type', 4)
+            ->select('locations', 'title')
+            ->get();
+        return response()->json([
+            'status' => 200,
+            'resource_sharing_map' => $resourceSharingMap,
+        ]);
+    }
 
     public function filterJobs(Request $body)
-            {
-                $district_id = $body->input('district');
-                $classifieds = DB::table('classifieds')
-                    ->select('*')
-                    ->where('type', 1)
-                    ->get();
-               
-                $filteredClassifieds = $classifieds->filter(function($classified) use ($district_id) {
-                    if($district_id != null && $classified->district_id != $district_id) {
-                        return false;
-                    }
-                    return true;
-                });
+    {
+        $district_id = $body->input('district');
+        $classifieds = DB::table('classifieds')
+            ->select('*')
+            ->where('type', 1)
+            ->get();
 
-                return response()->json([
-                    'status'=>200,
-                    'filteredJobs'=>$filteredClassifieds,
-                ]);
+        $filteredClassifieds = $classifieds->filter(function ($classified) use (
+            $district_id
+        ) {
+            if (
+                $district_id != null &&
+                $classified->district_id != $district_id
+            ) {
+                return false;
             }
+            return true;
+        });
 
-        public function filterGrants(Request $body)
-        {
-            $district_id = $body->input('district');
-            $classifieds = DB::table('classifieds')
-                ->select('*')
-                ->where('type', 2)
-                ->get();
-            
-            $filteredClassifieds = $classifieds->filter(function($classified) use ($district_id) {
-                if($district_id != null && $classified->district_id != $district_id) {
-                    return false;
-                }
-                return true;
-            });
+        return response()->json([
+            'status' => 200,
+            'filteredJobs' => $filteredClassifieds,
+        ]);
+    }
 
-            return response()->json([
-                'status'=>200,
-                'filteredJobs'=>$filteredClassifieds,
-            ]);
-        }
+    public function filterGrants(Request $body)
+    {
+        $district_id = $body->input('district');
+        $classifieds = DB::table('classifieds')
+            ->select('*')
+            ->where('type', 2)
+            ->get();
 
-        public function filterSuppliers(Request $body)
-        {
-            $district_id = $body->input('district');
-            $classifieds = DB::table('classifieds')
-                ->select('*')
-                ->where('type', 3)
-                ->get();
-            
-            $filteredClassifieds = $classifieds->filter(function($classified) use ($district_id) {
-                if($district_id != null && $classified->district_id != $district_id) {
-                    return false;
-                }
-                return true;
-            });
+        $filteredClassifieds = $classifieds->filter(function ($classified) use (
+            $district_id
+        ) {
+            if (
+                $district_id != null &&
+                $classified->district_id != $district_id
+            ) {
+                return false;
+            }
+            return true;
+        });
 
-            return response()->json([
-                'status'=>200,
-                'filteredJobs'=>$filteredClassifieds,
-            ]);
-        }
+        return response()->json([
+            'status' => 200,
+            'filteredJobs' => $filteredClassifieds,
+        ]);
+    }
 
-        public function filterResources(Request $body)
-        {
-            $district_id = $body->input('district');
-            $classifieds = DB::table('classifieds')
-                ->select('*')
-                ->where('type', 4)
-                ->get();
-            
-            $filteredClassifieds = $classifieds->filter(function($classified) use ($district_id) {
-                if($district_id != null && $classified->district_id != $district_id) {
-                    return false;
-                }
-                return true;
-            });
+    public function filterSuppliers(Request $body)
+    {
+        $district_id = $body->input('district');
+        $classifieds = DB::table('classifieds')
+            ->select('*')
+            ->where('type', 3)
+            ->get();
 
-            return response()->json([
-                'status'=>200,
-                'filteredJobs'=>$filteredClassifieds,
-            ]);
-        }
+        $filteredClassifieds = $classifieds->filter(function ($classified) use (
+            $district_id
+        ) {
+            if (
+                $district_id != null &&
+                $classified->district_id != $district_id
+            ) {
+                return false;
+            }
+            return true;
+        });
+
+        return response()->json([
+            'status' => 200,
+            'filteredJobs' => $filteredClassifieds,
+        ]);
+    }
+
+    public function filterResources(Request $body)
+    {
+        $district_id = $body->input('district');
+        $classifieds = DB::table('classifieds')
+            ->select('*')
+            ->where('type', 4)
+            ->get();
+
+        $filteredClassifieds = $classifieds->filter(function ($classified) use (
+            $district_id
+        ) {
+            if (
+                $district_id != null &&
+                $classified->district_id != $district_id
+            ) {
+                return false;
+            }
+            return true;
+        });
+
+        return response()->json([
+            'status' => 200,
+            'filteredJobs' => $filteredClassifieds,
+        ]);
+    }
 
     /** All proposal list - Frontend */
     public function ClassifiedsProposalList()
@@ -206,27 +232,31 @@ class ClassifiedController extends Controller
         $ProjectDistrict = [];
         $Organizations = [];
         $Organization = [];
-        
+
         foreach ($classifieds as $job) {
-            $ProjectDistrict = Districts::select('name_en')->where('id', $job->district_id)->first();
+            $ProjectDistrict = Districts::select('name_en')
+                ->where('id', $job->district_id)
+                ->first();
             array_push($ProjectDistricts, $ProjectDistrict);
 
-           // $Organization = Organizations::select('title')->where('id', $job->organization_id)->first();
+            // $Organization = Organizations::select('title')->where('id', $job->organization_id)->first();
             $Organization = DB::table('organizations')
-            ->select('*')
-            ->where('id', $job->organization_id)
-            ->first();
+                ->select('*')
+                ->where('id', $job->organization_id)
+                ->first();
 
-            if($Organization){
+            if ($Organization) {
                 array_push($Organizations, $Organization);
-            }else{ array_push($Organizations, null); }
+            } else {
+                array_push($Organizations, null);
+            }
         }
 
         return response()->json([
-            'status'=>200,
-            'classifieds'=>$classifieds,
-            'locations'=>$ProjectDistricts,
-            'organization'=>$Organizations,
+            'status' => 200,
+            'classifieds' => $classifieds,
+            'locations' => $ProjectDistricts,
+            'organization' => $Organizations,
         ]);
     }
 
@@ -240,24 +270,28 @@ class ClassifiedController extends Controller
         $ProjectDistricts = [];
         $Organizations = [];
         foreach ($classifieds as $job) {
-            $ProjectDistrict = Districts::select('name_en')->where('id', $job->district_id)->first();
+            $ProjectDistrict = Districts::select('name_en')
+                ->where('id', $job->district_id)
+                ->first();
             array_push($ProjectDistricts, $ProjectDistrict);
             //
             $Organization = DB::table('organizations')
-            ->select('*')
-            ->where('id', $job->organization_id)
-            ->first();
+                ->select('*')
+                ->where('id', $job->organization_id)
+                ->first();
 
-            if($Organization){
+            if ($Organization) {
                 array_push($Organizations, $Organization);
-            }else{ array_push($Organizations, null); }
+            } else {
+                array_push($Organizations, null);
+            }
         }
 
         return response()->json([
-            'status'=>200,
-            'classifieds'=>$classifieds,
-            'locations'=>$ProjectDistricts,
-            'organization'=>$Organizations,
+            'status' => 200,
+            'classifieds' => $classifieds,
+            'locations' => $ProjectDistricts,
+            'organization' => $Organizations,
         ]);
     }
 
@@ -271,24 +305,28 @@ class ClassifiedController extends Controller
         $ProjectDistricts = [];
         $Organizations = [];
         foreach ($classifieds as $job) {
-            $ProjectDistrict = Districts::select('name_en')->where('id', $job->district_id)->first();
+            $ProjectDistrict = Districts::select('name_en')
+                ->where('id', $job->district_id)
+                ->first();
             array_push($ProjectDistricts, $ProjectDistrict);
             //
             $Organization = DB::table('organizations')
-            ->select('*')
-            ->where('id', $job->organization_id)
-            ->first();
+                ->select('*')
+                ->where('id', $job->organization_id)
+                ->first();
 
-            if($Organization){
+            if ($Organization) {
                 array_push($Organizations, $Organization);
-            }else{ array_push($Organizations, null); }
+            } else {
+                array_push($Organizations, null);
+            }
         }
 
         return response()->json([
-            'status'=>200,
-            'classifieds'=>$classifieds,
-            'locations'=>$ProjectDistricts,
-            'organization'=>$Organizations,
+            'status' => 200,
+            'classifieds' => $classifieds,
+            'locations' => $ProjectDistricts,
+            'organization' => $Organizations,
         ]);
     }
 
@@ -309,10 +347,10 @@ class ClassifiedController extends Controller
             ->Where('id', $profile->organization_id)
             ->first();
         return response()->json([
-            'status'=>200,
-            'profile'=>$profile,
-            'district'=>$district,
-            'organization'=>$organization,
+            'status' => 200,
+            'profile' => $profile,
+            'district' => $district,
+            'organization' => $organization,
         ]);
     }
 
@@ -333,10 +371,10 @@ class ClassifiedController extends Controller
             ->Where('id', $profile->organization_id)
             ->first();
         return response()->json([
-            'status'=>200,
-            'profile'=>$profile,
-            'district'=>$district,
-            'organization'=>$organization,
+            'status' => 200,
+            'profile' => $profile,
+            'district' => $district,
+            'organization' => $organization,
         ]);
     }
 
@@ -357,10 +395,10 @@ class ClassifiedController extends Controller
             ->Where('id', $profile->organization_id)
             ->first();
         return response()->json([
-            'status'=>200,
-            'profile'=>$profile,
-            'district'=>$district,
-            'organization'=>$organization,
+            'status' => 200,
+            'profile' => $profile,
+            'district' => $district,
+            'organization' => $organization,
         ]);
     }
 
@@ -381,10 +419,10 @@ class ClassifiedController extends Controller
             ->Where('id', $profile->organization_id)
             ->first();
         return response()->json([
-            'status'=>200,
-            'profile'=>$profile,
-            'district'=>$district,
-            'organization'=>$organization,
+            'status' => 200,
+            'profile' => $profile,
+            'district' => $district,
+            'organization' => $organization,
         ]);
     }
 
@@ -394,7 +432,7 @@ class ClassifiedController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required',
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'validation_errors' => $validator->messages(),
             ]);
@@ -406,13 +444,15 @@ class ClassifiedController extends Controller
             'district_id' => $request->district_id,
             'organization_id' => $request->organization_id,
             'city_id' => $request->city_id,
-            'slug' => strtolower(str_replace(' ', '', $request->title).uniqid()),
+            'slug' => strtolower(
+                str_replace(' ', '', $request->title) . uniqid()
+            ),
             'description' => $request->description,
             'overview' => $request->overview,
             'weblink' => json_encode($request->weblink),
             'uploads' => json_encode($request->uploads),
             'photos' => json_encode($request->photos),
-            'status' => 1
+            'status' => 1,
         ]);
         return response()->json([
             'status' => 200,
@@ -423,25 +463,29 @@ class ClassifiedController extends Controller
     /** Organization profile classified list - Frontend */
     public function organizationProfileClassifiedList($org_slug)
     {
-        $org = Organizations::select('user_id')->where('slug', $org_slug)->first();
+        $org = Organizations::select('user_id')
+            ->where('slug', $org_slug)
+            ->first();
         $classifieds = DB::table('classifieds')
             ->select('*')
             ->where('user_id', $org->user_id)
             ->get();
 
         return response()->json([
-            'status'=>200,
-            'classifieds'=>$classifieds,
+            'status' => 200,
+            'classifieds' => $classifieds,
         ]);
     }
 
     /** Classified list by organisation - Dashboard */
     public function getClassifiedByUser(Request $request, $id)
     {
-        $classifieds = Classifieds::where('user_id', $id)->orderByDesc('created_at')->get();
+        $classifieds = Classifieds::where('user_id', $id)
+            ->orderByDesc('created_at')
+            ->get();
         return response()->json([
-            'status'=>200,
-            'classifieds'=>$classifieds
+            'status' => 200,
+            'classifieds' => $classifieds,
         ]);
     }
 
@@ -450,26 +494,25 @@ class ClassifiedController extends Controller
     {
         $classifiedData = Classifieds::where('id', '=', $id)->firstOrFail();
         $photoArray = [];
-        if(!($classifiedData['uploads'] == null)) {
-            foreach(JSON_decode($classifiedData['uploads']) as $row) {
+        if (!($classifiedData['uploads'] == null)) {
+            foreach (JSON_decode($classifiedData['uploads']) as $row) {
                 array_push($photoArray, $row);
             }
             $classifiedData->images = $photoArray;
         }
         $weblinkArray = [];
-        if(!($classifiedData['weblink'] == null)) {
-            foreach(JSON_decode($classifiedData['weblink']) as $row) {
+        if (!($classifiedData['weblink'] == null)) {
+            foreach (JSON_decode($classifiedData['weblink']) as $row) {
                 array_push($weblinkArray, $row);
             }
             $classifiedData->weblink = $weblinkArray;
         }
-        if($classifiedData) {
+        if ($classifiedData) {
             return response()->json([
                 'status' => 200,
                 'get_data' => $classifiedData,
             ]);
-        }
-        else {
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'No ID found.!',
@@ -478,24 +521,26 @@ class ClassifiedController extends Controller
     }
 
     /** classified update - Dashboard */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'status' => 422,
                 'errors' => $validator->messages(),
             ]);
-        }
-        else {
+        } else {
             $classifies = Classifieds::find($id);
-            if($classifies) {
+            if ($classifies) {
                 $classifies->user_id = $request->input('user_id');
                 $classifies->type = $request->input('type');
                 $classifies->title = $request->input('title');
-                $classifies->slug = strtolower(str_replace(' ', '', $request->title).uniqid());
+                $classifies->slug = strtolower(
+                    str_replace(' ', '', $request->title) . uniqid()
+                );
                 $classifies->description = $request->input('description');
                 $classifies->weblink = $request->input('weblink');
                 $classifies->uploads = json_encode($request->uploads);
@@ -508,10 +553,9 @@ class ClassifiedController extends Controller
                 $classifies->save();
                 return response()->json([
                     'status' => 200,
-                    'message' => $classifies->title.' successfully updated.',
+                    'message' => $classifies->title . ' successfully updated.',
                 ]);
-            }
-            else {
+            } else {
                 return response()->json([
                     'status' => 404,
                     'message' => 'No ID found.',
@@ -521,17 +565,16 @@ class ClassifiedController extends Controller
     }
 
     public function delete($id)
-    {   
+    {
         $post = Classifieds::find($id);
-        if($post){
+        if ($post) {
             $post->delete();
 
             return response()->json([
                 'status' => 200,
                 'message' => 'Record deleted',
             ]);
-
-        }else{
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'No ID found.',
@@ -539,4 +582,56 @@ class ClassifiedController extends Controller
         }
     }
 
+    public function addTag(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'tag_id' => 'required',
+            'classified_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 404,
+                'message' => $validator->messages(),
+            ]);
+        }
+
+        $classified = Classifieds::find($request->classified_id);
+        if (!$classified) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Classified Not Found!',
+            ]);
+        }
+        $classified->tags()->attach($request->tag_id);
+        return response()->json([
+            'status' => 200,
+            'classified' => $classified,
+        ]);
+    }
+
+    public function removeTag(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'tag_id' => 'required',
+            'classified_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 404,
+                'message' => $validator->messages(),
+            ]);
+        }
+        $classified = Classifieds::find($request->classified_id);
+        if (!$classified) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Classified Not Found!',
+            ]);
+        }
+        $classified->tags()->detach($request->tag_id);
+        return response()->json([
+            'status' => 200,
+            'classified' => $classified,
+        ]);
+    }
 }

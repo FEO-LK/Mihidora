@@ -50,7 +50,7 @@ const BaseLayout = ({ children, title }) => {
   const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { hash, pathname, search } = location;
-
+  const [name, setName] = useState();
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -61,6 +61,8 @@ const BaseLayout = ({ children, title }) => {
 
   useEffect(() => {
     console.log(location);
+    const name = Array.from(localStorage.getItem('auth_name'))[0];
+    setName(name.toUpperCase());
   }, []);
 
   const handleDrawerToggle = () => {
@@ -213,7 +215,7 @@ const BaseLayout = ({ children, title }) => {
                   border: 'solid 3px #D0DCA2'
                 }}
               >
-                A
+                { name }
               </Avatar>
               <Menu
                 id="menu-appbar"

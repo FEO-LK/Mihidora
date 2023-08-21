@@ -20,6 +20,7 @@ use App\Http\Controllers\MembersController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\DataEducationController;
 use App\Http\Controllers\OrganizationTypeController;
+use App\Http\Controllers\TagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +106,24 @@ Route::get('datahub-single/{slug}', [DataEducationController::class, 'DataHubIte
  Route::get('view-members', [MembersController::class, 'index']);
  Route::get('view-file-by-user', [FileuploadController::class, 'index']);
  
+
+//  Tags
+Route::post('get-tags', [TagsController::class, 'getLevel1Tags']);
+Route::post('add-tag', [TagsController::class, 'addTag']);
+Route::post('update-weight', [TagsController::class, 'updateTag']);
+
+Route::post('get-project-tags', [ProjectController::class, 'getProjectTags']);
+Route::post('get-projects-by-tag', [TagsController::class, 'getProjects']);
+Route::post('add-project-tag', [ProjectController::class, 'addProjectTag']);
+
+Route::post('get-classifieds-by-tags', [TagsController::class, 'getClassifieds']);
+Route::post('add-classified-tag', [ClassifiedController::class, 'addTag']);
+Route::post('remove-classified-tag', [ClassifiedController::class, 'removeTag']);
+
+Route::post('l3-by-l1', [TagsController::class, 'getL3TagsByL1']);
+
+
+
 Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
 //Route::middleware(['auth:sanctum', 'isAdminUser'])->group(function() {    
     Route::get('/user', function () {

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Laravel\Scout\Searchable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Level1Tag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Classifieds extends Model
 {
@@ -45,5 +46,13 @@ class Classifieds extends Model
         return $this->belongsTo(User::class)->withDefault([
             'name' => 'Guest Author',
         ]);
+    }
+
+    /**
+     * Get all of the tags for the classified.
+     */
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Level1Tag::class, 'level1_taggable', 'level1_taggables');
     }
 }

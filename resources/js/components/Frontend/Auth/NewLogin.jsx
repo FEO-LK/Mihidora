@@ -47,7 +47,7 @@ function NewLogin() {
         }
 
         axios.get('sanctum/csrf-cookie').then(response => {
-            setLogin({...loginInput, loading: true, login_error: false});
+            setLogin({ ...loginInput, loading: true, login_error: false });
             axios.post('/api/login', data).then(res => {
                 if (res.data.status === 200) {
                     localStorage.setItem('auth_id', res.data.profileid);
@@ -155,14 +155,14 @@ function NewLogin() {
                                         }}>{loginInput.error_list.password}</Typography>
                                     </FormControl>
                                     <Typography classname="generic-link" variant="caption">
-                                        <NavLink to="/forgot-password">
+                                        <NavLink to="/forgot-password" style={{ color: '#93aa40' }}>
                                             <span style={{ marginLeft: "4px" }}>Forgot Password?</span>
                                         </NavLink>
                                     </Typography>
                                     <Button variant={"outlined"} type={"submit"} className="theme-btn">Login</Button>
                                     <Typography className="other_option-link">Don’t Have an Account?
                                         <NavLink to="/register-as">
-                                            <span style={{ marginLeft: "4px" }}>Singup</span>
+                                            <span style={{ marginLeft: "4px" }}>Signup</span>
                                         </NavLink>
                                     </Typography>
                                 </Box>

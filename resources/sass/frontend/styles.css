@@ -648,6 +648,12 @@ a, a:hover {
   text-align: center;
 }
 
+.thank-you-page {
+  background-size: 37%;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
 .front__site .about-intro {
   padding: 80px 0 52px;
 }
