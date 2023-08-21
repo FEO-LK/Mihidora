@@ -32,6 +32,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import LogoutButton from '../Dashboard/components/LogoutButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 
 import Logo from "../../../images/logo.jpg";
 import { Avatar } from '@mui/material';
@@ -124,6 +125,17 @@ const BaseLayout = ({ children, title }) => {
               <LocalOfferIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary='Tags' />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem key='Other Tags' disablePadding>
+          <ListItemButton
+            className={`${location.pathname == '/admin/other-tags' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
+            component="a" href="/admin/other-tags">
+            <ListItemIcon sx={{ minWidth:'40px' }}>
+              <TurnedInNotIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary='Other Tags' />
           </ListItemButton>
         </ListItem>
 

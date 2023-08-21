@@ -233,6 +233,7 @@ class ProjectController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'project_title' => 'required',
+            'level1' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -261,18 +262,71 @@ class ProjectController extends Controller
                 'organization_id' => $request->organization_id,
             ]);
 
-            $tags = $request->input('tags_thematic');
-            $tagsSubject = $request->input('tags_subject');
-            $tagsExtra = $request->input('tags_extra');
-            $project->attachTags($tags, 1);
-            $project->attachTags($tagsSubject, 2);
-            $project->attachTags($tagsExtra, 3);
+            // $tags = $request->input('tags_thematic');
+            // $tagsSubject = $request->input('tags_subject');
+            // $tagsExtra = $request->input('tags_extra');
+            // $project->attachTags($tags, 1);
+            // $project->attachTags($tagsSubject, 2);
+            // $project->attachTags($tagsExtra, 3);
+
+            // adding thematic tags
+            $project->tags()->attach($request->level1); // level 1 is mandatory
+            if ($request->has('level2')) {
+                $project->tags()->attach($request->level2);
+            }
+            if ($request->has('level3')) {
+                $project->tags()->attach($request->level3);
+            }
+            if ($request->has('level4')) {
+                $project->tags()->attach($request->level4);
+            }
+
+            // adding other tags
+            if ($request->has('other_tags_subject')) {
+                foreach ($request->other_tags_subject as $tag) {
+                    $project->tags()->attach($tag);
+                }
+            }
+            if ($request->has('other_tags_extra')) {
+                foreach ($request->other_tags_extra as $tag) {
+                    $project->tags()->attach($tag);
+                }
+            }
 
             return response()->json([
                 'status' => 200,
                 'message' => $request->project_title . ' successfully added.',
             ]);
         }
+    }
+
+    public function validateTags(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'level1' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 404,
+                'message' => $validator->messages(),
+            ]);
+        }
+        $thematics = $request->thematics;
+        $tags = [];
+        $tags[] = $request->level1;
+        if ($request->has('level2')) {
+            $project->tags()->attach($request->level2);
+        }
+        if ($request->has('level3')) {
+            $project->tags()->attach($request->level3);
+        }
+        if ($request->has('level4')) {
+            $project->tags()->attach($request->level4);
+        }
+        return response()->json([
+            'status' => 200,
+            'message' => $tags,
+        ]);
     }
 
     /** Get data for project update - Dashboard */
@@ -399,7 +453,7 @@ class ProjectController extends Controller
         }
 
         $project = Projects::find($request->project_id);
-        if(!$project){
+        if (!$project) {
             return response()->json([
                 'status' => 404,
                 'message' => 'Project Not Found!',
@@ -408,7 +462,7 @@ class ProjectController extends Controller
         $project->tags()->attach($request->tag_id);
         return response()->json([
             'status' => 200,
-            'project' => $project
+            'project' => $project,
         ]);
     }
 }

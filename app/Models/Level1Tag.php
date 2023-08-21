@@ -18,6 +18,19 @@ class Level1Tag extends Model
     ];
 
     /**
+     * Tag Structure
+     * Table: level1_tags
+     * Pivot: level1_taggables
+     * Levels
+     *  - 1 : level 1 theematic tags
+     *  - 2 : level 2 thematic tags
+     *  - 3 : level 3 thematic tags
+     *  - 4 : level 4 thematic tags
+     *  - 10 : Subject tags 
+     *  - 11 : Extra Tags
+     */
+
+    /**
      * Get all of the projects that are assigned this tag.
      */
     public function projects():MorphToMany
