@@ -23,78 +23,82 @@ class ProjectController extends Controller
     /** All project list - Frontend */
     public function index()
     {
-        $projects = Projects::where('id','>',1)
+        $projects = Projects::where('id', '>', 1)
             ->whereNull('deleted_at')
             ->orderBy('id', 'desc')
             ->get();
         $tags = [];
-        foreach($projects as $project) {
-            $tag = $project->tags->pluck('name','type','id');
+        foreach ($projects as $project) {
+            $tag = $project->tags->pluck('name', 'type', 'id');
             array_push($tags, $tag);
         }
 
         return response()->json([
-            'status'=>200,
-            'projects'=>$projects,
-            'tags'=> $tags
+            'status' => 200,
+            'projects' => $projects,
+            'tags' => $tags,
         ]);
     }
 
-//     public function projectMap()
-//         {
-//             $projectMap = Projects::select('locations', 'org_name')
-//                 ->get();
-//             return response()->json([
-//                 'status'=>200,
-//                 'project_map'=>$organizationMap
-//             ]);
-//         }
-        public function filterProjects(Request $body)
-        {
-            $district_id = $body->input('district');
-            $tag_names = $body->input('tags');
-            $projects = Projects::where('id','>',1)
-                ->whereNull('deleted_at')
-                ->orderBy('id', 'desc')
-                ->get();
-            $tags = [];
-            foreach($projects as $project) {
-                $tag = $project->tags->pluck('name','type','id');
-                array_push($tags, $tag);
-            }
-
-            $filteredProjects = $projects->filter(function($project) use ($district_id) {
-                if($district_id != null && $project->district_id != $district_id) {
-                    return false;
-                }
-                return true;
-            });
-
-            $filteredProjects = $filteredProjects->filter(function($project) use ($tag_names) {
-                if($tag_names != null) {
-                    $projectTags = $project->tags->pluck('name')->toArray();
-                    if(count(array_intersect($projectTags, $tag_names)) == 0) {
-                        return false;
-                    }
-                }
-                return true;
-            });
-            return response()->json([
-                'status'=>200,
-                'filteredProjects'=>$filteredProjects,
-            ]);
+    //     public function projectMap()
+    //         {
+    //             $projectMap = Projects::select('locations', 'org_name')
+    //                 ->get();
+    //             return response()->json([
+    //                 'status'=>200,
+    //                 'project_map'=>$organizationMap
+    //             ]);
+    //         }
+    public function filterProjects(Request $body)
+    {
+        $district_id = $body->input('district');
+        $tag_names = $body->input('tags');
+        $projects = Projects::where('id', '>', 1)
+            ->whereNull('deleted_at')
+            ->orderBy('id', 'desc')
+            ->get();
+        $tags = [];
+        foreach ($projects as $project) {
+            $tag = $project->tags->pluck('name', 'type', 'id');
+            array_push($tags, $tag);
         }
 
+        $filteredProjects = $projects->filter(function ($project) use (
+            $district_id
+        ) {
+            if ($district_id != null && $project->district_id != $district_id) {
+                return false;
+            }
+            return true;
+        });
+
+        $filteredProjects = $filteredProjects->filter(function ($project) use (
+            $tag_names
+        ) {
+            if ($tag_names != null) {
+                $projectTags = $project->tags->pluck('name')->toArray();
+                if (count(array_intersect($projectTags, $tag_names)) == 0) {
+                    return false;
+                }
+            }
+            return true;
+        });
+        return response()->json([
+            'status' => 200,
+            'filteredProjects' => $filteredProjects,
+        ]);
+    }
 
     public function projectMap()
     {
-        $projectMap = DB::table('projects')->where('id','>',1)
+        $projectMap = DB::table('projects')
+            ->where('id', '>', 1)
             ->select('locations', 'project_title')
             ->whereNull('deleted_at')
             ->get();
         return response()->json([
-            'status'=>200,
-            'project_map'=>$projectMap
+            'status' => 200,
+            'project_map' => $projectMap,
         ]);
     }
 
@@ -110,8 +114,8 @@ class ProjectController extends Controller
             ->get();
 
         return response()->json([
-            'status'=>200,
-            'projects'=>$projects
+            'status' => 200,
+            'projects' => $projects,
         ]);
     }
 
@@ -120,29 +124,56 @@ class ProjectController extends Controller
     {
         $photoList = [];
         $projects = Projects::where('slug', $slug)->first();
-        $projectCity = Cities::select('name_en')->where('id', $projects->city_id)->first();
-        $ProjectDistrict = Districts::select('name_en')->where('id', $projects->district_id)->first();
+        $projectCity = Cities::select('name_en')
+            ->where('id', $projects->city_id)
+            ->first();
+        $ProjectDistrict = Districts::select('name_en')
+            ->where('id', $projects->district_id)
+            ->first();
 
-        if($projectCity == null) { $city = 1; } else { $city = $projectCity; }
-        if($ProjectDistrict == null) { $district = 1; } else { $district = $ProjectDistrict; }
+        if ($projectCity == null) {
+            $city = 1;
+        } else {
+            $city = $projectCity;
+        }
+        if ($ProjectDistrict == null) {
+            $district = 1;
+        } else {
+            $district = $ProjectDistrict;
+        }
 
-        $organization = Organizations::select('org_name', 'slug', 'org_type', 'city_id')->where('id', $projects->organization_id)->first();
-        $organizationCity = Cities::select('name_en')->where('id', $organization->city_id)->first();
+        $organization = Organizations::select(
+            'org_name',
+            'slug',
+            'org_type',
+            'city_id'
+        )
+            ->where('id', $projects->organization_id)
+            ->first();
+        $organizationCity = Cities::select('name_en')
+            ->where('id', $organization->city_id)
+            ->first();
 
-        if($organizationCity == null) { $Orgdistrict = 1; } else { $Orgdistrict = $organizationCity; }
+        if ($organizationCity == null) {
+            $Orgdistrict = 1;
+        } else {
+            $Orgdistrict = $organizationCity;
+        }
 
-        $organizationType = OrganizationType::select('type')->where('id', $organization->org_type)->first();
+        $organizationType = OrganizationType::select('type')
+            ->where('id', $organization->org_type)
+            ->first();
 
         $tags = $projects->tags->pluck('name');
         $photoArray = [];
         $projects->images = [];
-        if(!($projects['photos'] == 'null')) {
-            foreach(JSON_decode($projects['photos']) as $row) {
+        if (!($projects['photos'] == 'null')) {
+            foreach (JSON_decode($projects['photos']) as $row) {
                 array_push($photoArray, $row);
             }
             $projects->images = $photoArray;
         }
-        if($projects) {
+        if ($projects) {
             return response()->json([
                 'status' => 200,
                 'get_data' => $projects,
@@ -153,8 +184,7 @@ class ProjectController extends Controller
                 'organization_city' => $Orgdistrict,
                 'organization_type' => $organizationType,
             ]);
-        }
-        else {
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'No project ID found.!',
@@ -162,11 +192,12 @@ class ProjectController extends Controller
         }
     }
 
-
     /** Organization profile project list - Frontend */
     public function organizationProfileProjectList($org_slug)
     {
-        $org = Organizations::select('user_id')->where('slug', $org_slug)->first();
+        $org = Organizations::select('user_id')
+            ->where('slug', $org_slug)
+            ->first();
         $projects = DB::table('projects')
             ->select('*')
             ->where('user_id', $org->user_id)
@@ -174,8 +205,8 @@ class ProjectController extends Controller
             ->get();
 
         return response()->json([
-            'status'=>200,
-            'projects'=>$projects,
+            'status' => 200,
+            'projects' => $projects,
         ]);
     }
 
@@ -200,23 +231,22 @@ class ProjectController extends Controller
     /** Project store - Dashboard */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),
-            [
-                'project_title' => 'required',
-            ]
-        );
-        if($validator->fails()){
+        $validator = Validator::make($request->all(), [
+            'project_title' => 'required',
+        ]);
+        if ($validator->fails()) {
             return response()->json([
                 'validation_errors' => $validator->messages(),
             ]);
-        }
-        else {
+        } else {
             //$orgType = OrganizationUser::select('organization_id')->where('user_id', $request->user_id)->first();
             //dd($orgType['organization_id']);
             $project = Projects::create([
                 'user_id' => $request->user_id,
                 'project_title' => $request->project_title,
-                'slug' => strtolower(str_replace(' ', '', $request->project_title).uniqid()),
+                'slug' => strtolower(
+                    str_replace(' ', '', $request->project_title) . uniqid()
+                ),
                 'overview' => $request->overview,
                 'description' => $request->description,
                 'locations' => json_encode($request->locations),
@@ -228,7 +258,7 @@ class ProjectController extends Controller
                 'city_id' => $request->city_id,
                 'district_id' => $request->district_id,
                 'linked_content' => json_encode($request->linked_content),
-                'organization_id' => $request->organization_id
+                'organization_id' => $request->organization_id,
             ]);
 
             $tags = $request->input('tags_thematic');
@@ -240,7 +270,7 @@ class ProjectController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message' => $request->project_title.' successfully added.',
+                'message' => $request->project_title . ' successfully added.',
             ]);
         }
     }
@@ -251,21 +281,20 @@ class ProjectController extends Controller
         $data = Projects::where('id', '=', $id)->firstOrFail();
         $photoArray = [];
         $data->images = [];
-        if(!($data['photos'] == 'null')) {
-            foreach(JSON_decode($data['photos']) as $row) {
+        if (!($data['photos'] == 'null')) {
+            foreach (JSON_decode($data['photos']) as $row) {
                 array_push($photoArray, $row);
             }
             $data->images = $photoArray;
         }
         $tags[] = $data->tags->pluck('name', 'type');
 
-        if($data) {
+        if ($data) {
             return response()->json([
                 'status' => 200,
-                'get_data' => $data
+                'get_data' => $data,
             ]);
-        }
-        else {
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'No project ID found.!',
@@ -280,16 +309,14 @@ class ProjectController extends Controller
             'project_title' => 'required',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'status' => 422,
                 'errors' => $validator->messages(),
             ]);
-        }
-        else {
+        } else {
             $project = Projects::find($id);
-            if($project) {
-
+            if ($project) {
                 $project->project_title = $request->input('project_title');
                 $project->overview = $request->input('overview');
                 $project->description = $request->input('description');
@@ -301,7 +328,9 @@ class ProjectController extends Controller
                 //$project->ongoing = $request->input('ongoing');
                 $project->city_id = $request->input('city_id');
                 $project->district_id = $request->input('district_id');
-                $project->linked_content = json_encode($request->linked_content);
+                $project->linked_content = json_encode(
+                    $request->linked_content
+                );
 
                 $project->delete(); //deleting the tags and re adding
 
@@ -315,10 +344,10 @@ class ProjectController extends Controller
                 $project->save();
                 return response()->json([
                     'status' => 200,
-                    'message' => $project->project_title.' successfully updated.',
+                    'message' =>
+                        $project->project_title . ' successfully updated.',
                 ]);
-            }
-            else {
+            } else {
                 return response()->json([
                     'status' => 404,
                     'message' => 'No project ID found.',
@@ -328,9 +357,9 @@ class ProjectController extends Controller
     }
 
     public function delete($id)
-    {   
+    {
         $project = Projects::find($id);
-        if($project){
+        if ($project) {
             //$post->delete();
             $project->deleted_at = \Carbon\Carbon::now()->toDateTimeString();
             $project->save();
@@ -339,8 +368,7 @@ class ProjectController extends Controller
                 'status' => 200,
                 'message' => 'Record deleted',
             ]);
-
-        }else{
+        } else {
             return response()->json([
                 'status' => 404,
                 'message' => 'No ID found.',
@@ -348,4 +376,39 @@ class ProjectController extends Controller
         }
     }
 
+    public function getProjectTags(Request $request)
+    {
+        $project = Projects::find($request->id);
+        return response()->json([
+            'status' => 200,
+            'tags' => $project->tags,
+        ]);
+    }
+
+    public function addProjectTag(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'tag_id' => 'required',
+            'project_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 404,
+                'message' => $validator->messages(),
+            ]);
+        }
+
+        $project = Projects::find($request->project_id);
+        if(!$project){
+            return response()->json([
+                'status' => 404,
+                'message' => 'Project Not Found!',
+            ]);
+        }
+        $project->tags()->attach($request->tag_id);
+        return response()->json([
+            'status' => 200,
+            'project' => $project
+        ]);
+    }
 }

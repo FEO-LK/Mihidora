@@ -121,6 +121,10 @@
   font-size: 13px;
 }
 
+.admin_forms .MuiSelect-select {
+  max-width: 300px !important;
+}
+
 .form-submit-button {
   background-color: #b2cf54 !important;
   color: #ffffff !important;

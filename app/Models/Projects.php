@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Spatie\Tags\HasTags;
+use App\Models\Level1Tag;
+use App\Models\Tags;
 //use Laravel\Scout\Searchable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
@@ -65,6 +67,6 @@ class Projects extends Model
      */
     public function tags(): MorphToMany
     {
-        return $this->morphToMany(Tag::class, 'taggable');
+        return $this->morphToMany(Level1Tag::class, 'level1_taggable', 'level1_taggables');
     }
 }

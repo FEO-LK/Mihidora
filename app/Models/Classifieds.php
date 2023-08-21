@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Laravel\Scout\Searchable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Level1Tag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,6 +53,6 @@ class Classifieds extends Model
      */
     public function tags(): MorphToMany
     {
-        return $this->morphToMany(Tag::class, 'taggable');
+        return $this->morphToMany(Level1Tag::class, 'level1_taggable', 'level1_taggables');
     }
 }

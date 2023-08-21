@@ -123,7 +123,9 @@ import ResetPassword from './Frontend/Auth/ResetPassword';
 // Temp imports Remove on production
 import PendingUsers from './Superuser/Users/PendingUsers';
 import NewLogin from './Frontend/Auth/NewLogin';
-
+import TagsLevel2 from './Superuser/Tags/TagsLevel2';
+import TagsLevel3 from './Superuser/Tags/TagsLevel3';
+import TagsLevel4 from './Superuser/Tags/TagsLevel4';
 
 /** Axios configuration  */
 axios.defaults.baseURL = baseUrl;
@@ -270,6 +272,9 @@ function App() {
                     <Route path={"/forgot-password"} element={<ForgotPassword />} />
                     <Route path={"/reset-password"} element={<ResetPassword />} />
                     <Route path={"/login"} element={<NewLogin />} />
+                    <Route path={"/tag-level-2"} element={<TagsLevel2 />} />
+                    <Route path={"/tag-level-3"} element={<TagsLevel3 />} />
+                    <Route path={"/tag-level-4"} element={<TagsLevel4 />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
