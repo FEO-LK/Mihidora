@@ -111,13 +111,25 @@ function Registrations() {
 
                     <Grid item xs={2}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker renderInput={renderInput} label="Start Date" value={startDate} onChange={handleStartDateChange} />
+                            <DatePicker
+                                renderInput={renderInput}
+                                label="Start Date"
+                                value={startDate}
+                                onChange={handleStartDateChange}
+                                inputFormat="DD/MM/YYYY"
+                            />
                         </LocalizationProvider>
                     </Grid>
 
                     <Grid item xs={2}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker renderInput={renderInput} label="End Date" value={endDate} onChange={handleEndDateChange} />
+                            <DatePicker
+                                renderInput={renderInput}
+                                label="End Date"
+                                value={endDate}
+                                onChange={handleEndDateChange}
+                                inputFormat="DD/MM/YYYY"
+                            />
                         </LocalizationProvider>
                     </Grid>
 
@@ -137,8 +149,8 @@ function Registrations() {
                         },
                     ]}
                     yAxis={[
-                        {label: 'Total',}
-                      ]}
+                        { label: 'Total', }
+                    ]}
                     series={[
                         {
                             data: [2, 5, 3, 8, 1, 9, 4, 7, 2, 5, 3, 7],

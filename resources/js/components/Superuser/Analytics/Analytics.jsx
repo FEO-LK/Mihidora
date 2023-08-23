@@ -13,6 +13,7 @@ import TabPanel from '@material-ui/lab/TabPanel';
 // import { fontWeight } from "@mui/joy/styles/styleFunctionSx";
 
 import AnalyticsRegistrations from './AnalyticsRegistrations';
+import AnalyticsSubmissions from './AnalyticsSubmissions';
 
 function Analytics() {
 
@@ -39,7 +40,7 @@ function Analytics() {
             </TabList>
           </Box>
           <TabPanel value="1"><AnalyticsRegistrations /></TabPanel>
-          <TabPanel value="2"><AnalyticsRegistrations /></TabPanel>
+          <TabPanel value="2"><AnalyticsSubmissions /></TabPanel>
         </TabContext>
       </Box>
     </MainLayout>
