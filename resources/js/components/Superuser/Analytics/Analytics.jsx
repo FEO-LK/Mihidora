@@ -12,12 +12,9 @@ import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 // import { fontWeight } from "@mui/joy/styles/styleFunctionSx";
 
-import TagsLevel1 from './TagsLevel1';
-import TagsLevel2 from './TagsLevel2';
-import TagsLevel3 from "./TagsLevel3";
-import TagsLevel4 from "./TagsLevel4";
+import AnalyticsRegistrations from './AnalyticsRegistrations';
 
-function Tags() {
+function Analytics() {
 
   const [value, setValue] = useState('1');
 
@@ -37,20 +34,16 @@ function Tags() {
                 }
               }}
             >
-              <Tab label="Level 1" value="1" />
-              <Tab label="Level 2" value="2" />
-              <Tab label="Level 3" value="3" />
-              <Tab label="Level 4" value="4" />
+              <Tab label="Registrations" value="1" />
+              <Tab label="Submissions" value="2" />
             </TabList>
           </Box>
-          <TabPanel value="1"><TagsLevel1 /></TabPanel>
-          <TabPanel value="2"><TagsLevel2 /></TabPanel>
-          <TabPanel value="3"><TagsLevel3 /></TabPanel>
-          <TabPanel value="4"><TagsLevel4 /></TabPanel>
+          <TabPanel value="1"><AnalyticsRegistrations /></TabPanel>
+          <TabPanel value="2"><AnalyticsRegistrations /></TabPanel>
         </TabContext>
       </Box>
     </MainLayout>
   )
 }
 
-export default Tags;
+export default Analytics;

@@ -89,6 +89,7 @@ import AddNewMember from "./Superuser/Members/AddNewMember";
 import EditMember from "./Superuser/Members/EditMember";
 
 import Tags from "./Superuser/Tags/Tags";
+import Analytics from "./Superuser/Analytics/Analytics"
 
 import Datatable from "./Superuser/Datatable";
 
@@ -126,6 +127,7 @@ import NewLogin from './Frontend/Auth/NewLogin';
 import TagsLevel2 from './Superuser/Tags/TagsLevel2';
 import TagsLevel3 from './Superuser/Tags/TagsLevel3';
 import TagsLevel4 from './Superuser/Tags/TagsLevel4';
+// import { Analytics } from "@mui/icons-material";
 
 /** Axios configuration  */
 axios.defaults.baseURL = baseUrl;
@@ -257,6 +259,7 @@ function App() {
                     <Route path={"/edit-user/:id"} element={<SuperUserRoute component={SingleUserForm} />} />
 
                     <Route path={"/admin/tags"} element={<SuperUserRoute component={Tags} />} />
+                    <Route path={"/admin/analytics"} element={<SuperUserRoute component={Analytics} />} />
                     
                     {/* =================== ENC001 =================== */}
 
