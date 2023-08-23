@@ -35,8 +35,26 @@ function Analytics() {
                 }
               }}
             >
-              <Tab label="Registrations" value="1" />
-              <Tab label="Submissions" value="2" />
+              <Tab
+                label="Registrations"
+                value="1"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              <Tab
+                label="Submissions"
+                value="2"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
             </TabList>
           </Box>
           <TabPanel value="1"><AnalyticsRegistrations /></TabPanel>
