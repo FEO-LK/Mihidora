@@ -27,7 +27,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import ListIcon from '@mui/icons-material/List';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
-import ListSkeleton from '../components/ListSkeleton';
+import ListSkeleton8 from '../components/ListSkeleton8';
 import Chip from '@mui/material/Chip';
 
 function NewProjectList() {
@@ -511,10 +511,10 @@ function NewProjectList() {
               <Typography variant="h4" className="section-title">Projects</Typography>
             </Grid>
             <Grid item xs={6} sx={{ textAlign: 'right' }}>
-              <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
+              
             </Grid>
           </Grid>
-          {projectLoad ? <ListSkeleton /> :
+          {projectLoad ? <ListSkeleton8 /> :
             <Grid container spacing={2}>
               {projectList.map((project, key) => (
                 <Grid item key={key} xs={3} className="organization_card" >
@@ -557,11 +557,11 @@ function NewProjectList() {
           }
           {
             projectList.length == 0 ?
-              <Grid container>
-                <Grid item sm={12} md={6}>
-                  <Typography sx={{ fontSize: '12px' }} mt={3}>No projects found for selected filters</Typography>
-                </Grid>
+              !projectLoad ? <Grid container>
+              <Grid item sm={12} md={6}>
+                <Typography sx={{ fontSize: '12px' }} mt={3}>No projects found for selected filters</Typography>
               </Grid>
+            </Grid> : ''
               : ''
           }
         </Container>
