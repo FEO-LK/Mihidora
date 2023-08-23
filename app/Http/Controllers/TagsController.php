@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\Tags;
 use App\Models\Level1Tag;
+use App\Models\Projects;
+use App\Models\DataEducation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class TagsController extends Controller
 {
@@ -160,11 +163,67 @@ class TagsController extends Controller
         ])
             ->distinct()
             ->pluck('id');
-        // for each parent load 
-        $l3Tags = Level1Tag::whereIn('parent', $parents)->orderBy('name')->get();
+        // for each parent load
+        $l3Tags = Level1Tag::whereIn('parent', $parents)
+            ->orderBy('name')
+            ->get();
         return response()->json([
             'status' => 404,
             'tags' => $l3Tags,
         ]);
+    }
+
+    public function filterTopics(Request $request)
+    {
+        $filters = $request->filters;
+        $tags = array_filter($filters);
+        if ($request->has('take')) {
+            //projects
+            $projects = Projects::whereHas('tags', function ($query) use ($tags) {
+                $query->whereIn('id', $tags);
+            }, '=', count($tags))->take($request->take)->with('tags')->orderByRaw('created_at DESC')->get();
+
+            //data
+            $data = DataEducation::whereHas('tags', function ($query) use ($tags) {
+                $query->whereIn('id', $tags);
+            }, '=', count($tags))->with('tags')->orderByRaw('created_at DESC')->get();
+
+            return response()->json([
+                'status' => 200,
+                'project_count' => count($projects),
+                'data_count' => count($data),
+                'projects' => $projects,
+                'data' => $data,
+                'tags' => $tags,
+            ]);
+        }
+        
+        // projects
+        $projects = Projects::whereHas('tags', function ($query) use ($tags) {
+            $query->whereIn('id', $tags);
+        }, '=', count($tags))->with('tags')->orderByRaw('created_at DESC')->get();
+        //data
+        $data = DataEducation::whereHas('tags', function ($query) use ($tags) {
+            $query->whereIn('id', $tags);
+        }, '=', count($tags))->with('tags')->orderByRaw('created_at DESC')->get();
+
+        return response()->json([
+            'status' => 200,
+            'project_count' => count($projects),
+            'data_count' => count($data),
+            'projects' => $projects,
+            'tags' => $tags,
+            'data' => $data,
+        ]);
+        
+        /**
+         $posts = Post::where('published', true) // Additional filter
+            ->whereHas('tags', function ($query) use ($tags) {
+                $query->whereIn('name', $tags);
+            }, '>=', count($tags)) // Filter based on tags
+            ->paginate(10); // Assuming 10 posts per page
+         */
+
+        
     }
 }

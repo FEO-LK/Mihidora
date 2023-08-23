@@ -465,4 +465,28 @@ class ProjectController extends Controller
             'project' => $project,
         ]);
     }
+
+    public function getProjects(Request $request)
+    {
+        $projects = [];
+        if ($request->has('take')) {
+            $projects = Projects::skip($request->skip)
+                ->take($request->take)
+                ->with('tags')
+                ->orderByRaw('created_at DESC')
+                ->get();
+            return response()->json([
+                'status' => 200,
+                'count' => count($projects),
+                'projects' => $projects,
+            ]);
+        }
+        $projects = Projects::orderByRaw('created_at DESC')->get();
+        $projects->load('tags');
+        return response()->json([
+            'status' => 200,
+            'count' => count($projects),
+            'projects' => $projects,
+        ]);
+    }
 }

@@ -21,7 +21,7 @@ import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplicationsOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import BaseLayout from "../BaseLayout";
-import TopicMenu from "./TopicMenu";
+// import TopicMenu from "./TopicMenu";
 import SearchIcon from '@mui/icons-material/Search';
 import PlaceIcon from '@mui/icons-material/Place';
 import ListIcon from '@mui/icons-material/List';
@@ -30,7 +30,7 @@ import Button from '@mui/material/Button';
 import ListSkeleton from '../components/ListSkeleton';
 import Chip from '@mui/material/Chip';
 
-function TopicsList() {
+function NewProjectList() {
   const [projectList, setProjectList] = useState([]);
   const [projectLoad, setProjectLoad] = useState(true);
   const [dataList, setDataList] = useState([]);
@@ -65,7 +65,7 @@ function TopicsList() {
   const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    loadProjects({ skip: 0, take: 4 });
+    loadProjects({ skip: 0, take: 50 });
     loadTags({ level: 1 }); // load level 1 tags
     loadTags({ level: 10 }); // load subject tags
     loadTags({ level: 11 }); // load extra tags
@@ -163,7 +163,7 @@ function TopicsList() {
       ...otherTags.extra.map((option) => option.id),
     ]
     console.log(data);
-    filterProjects({ filters: data, take: 4 });
+    filterProjects({ filters: data, take: 50 });
   }
   const handleL2Change = (e) => {
     setState({
@@ -179,7 +179,7 @@ function TopicsList() {
       ...otherTags.subject.map((option) => option.id),
       ...otherTags.extra.map((option) => option.id),
     ]
-    filterProjects({ filters: data, take: 4 });
+    filterProjects({ filters: data, take: 50 });
   }
   const handleL3Change = (e) => {
     setState({
@@ -195,7 +195,7 @@ function TopicsList() {
       ...otherTags.subject.map((option) => option.id),
       ...otherTags.extra.map((option) => option.id),
     ]
-    filterProjects({ filters: data, take: 4 });
+    filterProjects({ filters: data, take: 50 });
   }
   const handleL4Change = (e) => {
     setState({
@@ -210,7 +210,7 @@ function TopicsList() {
       ...otherTags.subject.map((option) => option.id),
       ...otherTags.extra.map((option) => option.id),
     ]
-    filterProjects({ filters: data, take: 4 });
+    filterProjects({ filters: data, take: 50 });
   }
   const handleSujectTagChange = (event, newValue) => {
     setOtherTags({ ...otherTags, subject: newValue });
@@ -222,7 +222,7 @@ function TopicsList() {
       ...newValue.map((option) => option.id),
       ...otherTags.extra.map((option) => option.id),
     ]
-    filterProjects({ filters: data, take: 4 });
+    filterProjects({ filters: data, take: 50 });
   }
   const handleExtraTagSelect = (event, newValue) => {
     setOtherTags({ ...otherTags, extra: newValue });
@@ -234,7 +234,7 @@ function TopicsList() {
       ...otherTags.subject.map((option) => option.id),
       ...newValue.map((option) => option.id),
     ]
-    filterProjects({ filters: data, take: 4 });
+    filterProjects({ filters: data, take: 50 });
   }
   const handleChange = (e) => {
     setState({
@@ -266,7 +266,7 @@ function TopicsList() {
         <Container>
           <Grid container>
             <Grid item sm={12} md={6} lg={6}>
-              <Typography variant="h1">Topics</Typography>
+              <Typography variant="h1">Projects</Typography>
             </Grid>
             <Grid item sm={12} md={6} lg={6}>
               {/* Add section icons here */}
@@ -297,7 +297,7 @@ function TopicsList() {
         />
         <Grid container mt={3}>
             <Grid item sm={12} md={6}>
-              <Typography>Quickly sort through different key words and find information on Mihidora</Typography>
+              <Typography>Filter through tags & find the type of projects you are looking for</Typography>
             </Grid>
           </Grid>
         <Grid container>
@@ -567,213 +567,8 @@ function TopicsList() {
         </Container>
       </div>
 
-      {/* ------------------------- Data --------------------------------- */}
-
-      <Container><Divider sx={{ mt: 2 }} /></Container>
-
-      <div id="datasets" className="topic-sub-section">
-        <Container>
-          <Grid container>
-            <Grid item xs={6}>
-              <Typography variant="h4" className="section-title">Data</Typography>
-            </Grid>
-            <Grid item xs={6} sx={{ textAlign: 'right' }}>
-              <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
-            </Grid>
-          </Grid>
-          {dataLoad ? <ListSkeleton /> :
-            <Grid container spacing={2}>
-              {dataList.map((data, key) => (
-                <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={``}>
-                    {data.photos.length !== 0 ? 
-                      <CardMedia
-                      component="img"
-                      height="140"
-                      image={`/storage/`+JSON.parse(data.photos)[0]}
-                      onError={handleImageErrorData}
-                      alt="green iguana"
-                    />
-                    : 
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="../../../images/project.jpg"
-                      alt="green iguana"
-                    />
-                    }
-                    <CardContent className="card_content project-card">
-                      {/* <Typography variant="span" className="main-tag">{project.tags[0].name}</Typography> */}
-                      <Typography variant="h6" className="card-title">{data.project_title} {data.tags.length}</Typography>
-                      <Typography variant="subtitle" className="card-body">
-                        {data.overview !== null ? data.overview.substring(0, 50) : ''}
-                      </Typography>
-                      <ul className="related-tags">
-
-                        {/* {data.tags.length !== 0 ?
-                          <li><Link to=''>
-                            <Chip sx={{ marginTop: '5px', backgroundColor: '#edf7c9' }} label={data.tags[0].name.substring(0, 20)} />
-                          </Link></li>
-                          : ''} */}
-                      </ul>
-                    </CardContent>
-                  </Link>
-                </Grid>
-              ))}
-            </Grid>
-          }
-          {
-            dataList.length == 0 ?
-              <Grid container>
-                <Grid item sm={12} md={6}>
-                  <Typography sx={{ fontSize: '12px' }} mt={3}>No Data sets found for selected filters</Typography>
-                </Grid>
-              </Grid>
-              : ''
-          }
-        </Container>
-      </div>
-
-      {/* ------------------------- E-Learning --------------------------------- */}
-
-      <Container><Divider sx={{ mt: 2 }} /></Container>
-
-      <div id="datasets" className="topic-sub-section">
-        <Container>
-          <Grid container>
-            <Grid item xs={6}>
-              <Typography variant="h4" className="section-title">E-Learning</Typography>
-            </Grid>
-            <Grid item xs={6} sx={{ textAlign: 'right' }}>
-              <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
-            </Grid>
-          </Grid>
-          {loading ? <ListSkeleton /> :
-            <Grid container spacing={2}>
-              {projectList.map((row, key) => (
-                <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={``}>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="../../../images/project.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent className="card_content">
-                      <Typography variant="span" className="main-tag">THEMATIC AREA</Typography>
-                      <Typography variant="h5" className="org_title">Conservation, UN-SDG 1</Typography>
-                      <ul className="card_tags">
-                        <li><a href=""><ArticleOutlinedIcon style={menuIcon} /> CSV</a></li>
-                        <li><a href=""><SettingsApplicationsOutlinedIcon style={menuIcon} /> API</a></li>
-                        <li><a href=""><LocationOnOutlinedIcon style={menuIcon} /> Map</a></li>
-                      </ul>
-                      <ul className="related-tags">
-                        <li><Link to=''>#Airquality</Link></li>
-                        <li><Link to=''>#Flora</Link></li>
-                      </ul>
-                    </CardContent>
-                  </Link>
-                </Grid>
-              ))}
-            </Grid>
-          }
-        </Container>
-      </div>
-
-      {/* ------------------------- Resources --------------------------------- */}
-
-      <Container><Divider sx={{ mt: 2 }} /></Container>
-
-      <div id="datasets" className="topic-sub-section">
-        <Container>
-          <Grid container>
-            <Grid item xs={6}>
-              <Typography variant="h4" className="section-title">Resources</Typography>
-            </Grid>
-            <Grid item xs={6} sx={{ textAlign: 'right' }}>
-              <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
-            </Grid>
-          </Grid>
-          {loading ? <ListSkeleton /> :
-            <Grid container spacing={2}>
-              {projectList.map((row, key) => (
-                <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={``}>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="../../../images/project.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent className="card_content">
-                      <Typography variant="span" className="main-tag">THEMATIC AREA</Typography>
-                      <Typography variant="h5" className="org_title">Conservation, UN-SDG 1</Typography>
-                      <ul className="card_tags">
-                        <li><a href=""><ArticleOutlinedIcon style={menuIcon} /> CSV</a></li>
-                        <li><a href=""><SettingsApplicationsOutlinedIcon style={menuIcon} /> API</a></li>
-                        <li><a href=""><LocationOnOutlinedIcon style={menuIcon} /> Map</a></li>
-                      </ul>
-                      <ul className="related-tags">
-                        <li><Link to=''>#Airquality</Link></li>
-                        <li><Link to=''>#Flora</Link></li>
-                      </ul>
-                    </CardContent>
-                  </Link>
-                </Grid>
-              ))}
-            </Grid>
-          }
-        </Container>
-      </div>
-
-      {/* ------------------------- Resources --------------------------------- */}
-
-      <Container><Divider sx={{ mt: 2 }} /></Container>
-
-      <div id="datasets" className="topic-sub-section">
-        <Container>
-          <Grid container>
-            <Grid item xs={6}>
-              <Typography variant="h4" className="section-title">Events</Typography>
-            </Grid>
-            <Grid item xs={6} sx={{ textAlign: 'right' }}>
-              <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
-            </Grid>
-          </Grid>
-          {loading ? <ListSkeleton /> :
-            <Grid container spacing={2}>
-              {projectList.map((row, key) => (
-                <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={``}>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="../../../images/project.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent className="card_content">
-                      <Typography variant="span" className="main-tag">THEMATIC AREA</Typography>
-                      <Typography variant="h5" className="org_title">Conservation, UN-SDG 1</Typography>
-                      <ul className="card_tags">
-                        <li><a href=""><ArticleOutlinedIcon style={menuIcon} /> CSV</a></li>
-                        <li><a href=""><SettingsApplicationsOutlinedIcon style={menuIcon} /> API</a></li>
-                        <li><a href=""><LocationOnOutlinedIcon style={menuIcon} /> Map</a></li>
-                      </ul>
-                      <ul className="related-tags">
-                        <li><Link to=''>#Airquality</Link></li>
-                        <li><Link to=''>#Flora</Link></li>
-                      </ul>
-                    </CardContent>
-                  </Link>
-                </Grid>
-              ))}
-            </Grid>
-          }
-        </Container>
-      </div>
-
     </BaseLayout>
   )
 }
 
-export default TopicsList
+export default NewProjectList

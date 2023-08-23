@@ -472,6 +472,39 @@ a, a:hover {
   display: none !important;
 }
 
+/* Topic Page */
+.project-card {
+
+}
+
+.project-card .card-title{
+    color: #000000;
+    font-size: 1rem;
+    margin-top: 10px;
+    font-smoothing: auto;
+    -webkit-font-smoothing: auto;
+    min-height: 50px;
+}
+
+.project-card .card-body{
+    color: #868383;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    font-smoothing: auto;
+    -webkit-font-smoothing: auto;
+}
+
+.project-card .card-tags{
+  
+}
+
+.searchbox {
+  border-radius: 30px !important;
+}
+.css-34dwtx-MuiInputBase-root-MuiOutlinedInput-root {
+  border-radius: 30px !important;
+}
+
 @media (max-width: 899.98px) {
   .logoBox {
     width: 100%;
@@ -1302,7 +1335,13 @@ a, a:hover {
   border-radius: 10px;
 }
 
+.filter_forms {
 
+}
+
+.filter_forms .MuiSelect-select {
+  max-width: 200px !important;
+}
 
 
 /* header */

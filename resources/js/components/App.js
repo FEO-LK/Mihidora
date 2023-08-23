@@ -120,6 +120,7 @@ import SingleUserForm from './Superuser/Users/SingleUserForm';
 import OrgReg from './Frontend/Auth/OrgReg';
 import ForgotPassword from './Frontend/Auth/ForgotPassword';
 import ResetPassword from './Frontend/Auth/ResetPassword';
+import NewProjectList from './Frontend/Projects/NewProjectList';
 
 // Temp imports Remove on production
 import PendingUsers from './Superuser/Users/PendingUsers';
@@ -175,6 +176,7 @@ function App() {
                     <Route path={"/:slug/classified"} element={<OrganizationClassified />} />
 
                     <Route path={"/projects"} element={<Projects />} />
+                    <Route path={"/projects-new"} element={<NewProjectList />} />
                     <Route path={"/project-map"} element={<ProjectMap />} />
                     <Route path={"/project/:slug"} element={<ProjectSingle />} />
 

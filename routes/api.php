@@ -123,6 +123,8 @@ Route::post('remove-classified-tag', [ClassifiedController::class, 'removeTag'])
 Route::post('l3-by-l1', [TagsController::class, 'getL3TagsByL1']);
 
 Route::post('validate-tags', [ProjectController::class, 'validateTags']);
+Route::post('filter-topics', [TagsController::class, 'filterTopics']);
+Route::post('get-projects', [ProjectController::class, 'getProjects']);
 
 
 
