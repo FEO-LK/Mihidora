@@ -90,6 +90,7 @@ import EditMember from "./Superuser/Members/EditMember";
 
 import Tags from "./Superuser/Tags/Tags";
 import OtherTags from "./Superuser/Tags/OtherTags";
+import Analytics from "./Superuser/Analytics/Analytics"
 
 import Datatable from "./Superuser/Datatable";
 
@@ -129,6 +130,7 @@ import TagsLevel2 from './Superuser/Tags/TagsLevel2';
 import TagsLevel3 from './Superuser/Tags/TagsLevel3';
 import TagsLevel4 from './Superuser/Tags/TagsLevel4';
 import TopicsNew from './Frontend/Topics/TopicsNew';
+// import { Analytics } from "@mui/icons-material";
 
 /** Axios configuration  */
 axios.defaults.baseURL = baseUrl;
@@ -263,6 +265,7 @@ function App() {
                     <Route path={"/admin/tags"} element={<SuperUserRoute component={Tags} />} />
                     <Route path={"/admin/other-tags"} element={<SuperUserRoute component={OtherTags} />} />
                     
+                    <Route path={"/admin/analytics"} element={<SuperUserRoute component={Analytics} />} />
                     
                     {/* =================== ENC001 =================== */}
 

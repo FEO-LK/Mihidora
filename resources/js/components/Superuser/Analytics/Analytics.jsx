@@ -10,15 +10,12 @@ import UserMenu from "../components/submenus/UserMenu";
 import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
+// import { fontWeight } from "@mui/joy/styles/styleFunctionSx";
 
-import TagsLevel1 from './TagsLevel1';
-import TagsLevel2 from './TagsLevel2';
-import TagsLevel3 from "./TagsLevel3";
-import TagsLevel4 from "./TagsLevel4";
-import SubjectTags from "./SubjectTags";
-import ExtraTags from "./ExtraTags";
+import AnalyticsRegistrations from './AnalyticsRegistrations';
+import AnalyticsSubmissions from './AnalyticsSubmissions';
 
-function OtherTags() {
+function Analytics() {
 
   const [value, setValue] = useState('1');
 
@@ -38,16 +35,34 @@ function OtherTags() {
                 }
               }}
             >
-              <Tab label="Subject Tags" value="1" />
-              <Tab label="Extra Tags" value="2" />
+              <Tab
+                label="Registrations"
+                value="1"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              <Tab
+                label="Submissions"
+                value="2"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
             </TabList>
           </Box>
-          <TabPanel value="1"><SubjectTags /></TabPanel>
-          <TabPanel value="2"><ExtraTags /></TabPanel>
+          <TabPanel value="1"><AnalyticsRegistrations /></TabPanel>
+          <TabPanel value="2"><AnalyticsSubmissions /></TabPanel>
         </TabContext>
       </Box>
     </MainLayout>
   )
 }
 
-export default OtherTags;
+export default Analytics;

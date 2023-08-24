@@ -97,7 +97,7 @@
 }
 
 .update-button {
-  background-color: #edf7c9 !important;
+  background-color: #C6D697 !important;
   text-transform: capitalize !important;
   color: #000000 !important;
   border-radius: 30px !important;
@@ -106,7 +106,7 @@
 }
 
 .update-button:hover { 
-  background-color: #b2cf54 !important;
+  /* background-color: #daeca4 !important; */
 }
 
 .admin_forms{

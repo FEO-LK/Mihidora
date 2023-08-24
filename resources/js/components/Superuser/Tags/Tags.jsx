@@ -10,7 +10,7 @@ import UserMenu from "../components/submenus/UserMenu";
 import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
-import { fontWeight } from "@mui/joy/styles/styleFunctionSx";
+// import { fontWeight } from "@mui/joy/styles/styleFunctionSx";
 
 import TagsLevel1 from './TagsLevel1';
 import TagsLevel2 from './TagsLevel2';
@@ -37,10 +37,46 @@ function Tags() {
                 }
               }}
             >
-              <Tab label="Level 1" value="1" />
-              <Tab label="Level 2" value="2" />
-              <Tab label="Level 3" value="3" />
-              <Tab label="Level 4" value="4" />
+              <Tab
+                label="Level 1"
+                value="1"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              <Tab
+                label="Level 2"
+                value="2"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              <Tab
+                label="Level 3"
+                value="3"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              <Tab
+                label="Level 4"
+                value="4"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
             </TabList>
           </Box>
           <TabPanel value="1"><TagsLevel1 /></TabPanel>
