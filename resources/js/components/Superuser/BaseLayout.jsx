@@ -85,8 +85,8 @@ const BaseLayout = ({ children, title }) => {
 
         <ListItem key='Organizations' disablePadding>
           <ListItemButton
-            className={`${location.pathname == '/admin/dashboard' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
-            component="a" href="/admin/dashboard">
+            className={`${location.pathname == '/admin/organizations' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
+            component="a" href="/admin/organizations">
             <ListItemIcon sx={{ minWidth:'40px' }}>
               <MapsHomeWorkIcon fontSize="small" />
             </ListItemIcon>
