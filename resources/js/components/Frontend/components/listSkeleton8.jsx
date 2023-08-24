@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 
-function listSkeleton8() {
+function ListSkeleton8() {
 
     return (
         <Grid container spacing={2}>
@@ -56,4 +56,4 @@ function listSkeleton8() {
     )
 }
 
-export default listSkeleton8
+export default ListSkeleton8

@@ -131,6 +131,7 @@ function TopicsList() {
   const filterProjects = (data) => {
     setProjectLoad(true);
     setDataLoad(true);
+    console.log(data);
     axios.get('sanctum/csrf-cookie').then(response => {
       axios.post('/api/filter-topics', data).then(res => {
         console.log(res)

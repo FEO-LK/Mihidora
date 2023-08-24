@@ -21,6 +21,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\DataEducationController;
 use App\Http\Controllers\OrganizationTypeController;
 use App\Http\Controllers\TagsController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +127,13 @@ Route::post('validate-tags', [ProjectController::class, 'validateTags']);
 Route::post('filter-topics', [TagsController::class, 'filterTopics']);
 Route::post('get-projects', [ProjectController::class, 'getProjects']);
 
+Route::get('/storage-link', function () {
+    $status = Artisan::call('storage:link');
+    return response()->json([
+        'status' => 200,
+        'message' => $status
+    ], 200);
+});
 
 
 Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
