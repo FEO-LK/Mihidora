@@ -42,7 +42,7 @@ function Registrations() {
     return (
         <Box sx={{ width: '100%', typography: 'body1' }} className="admin_forms">
             <Grid container spacing={5}>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                     <Card variant="outlined" sx={{ border: '2px solid #8FA93B' }}>
                         <CardContent sx={{ pb: 0 }}>
                             <Typography variant="h4" gutterBottom sx={{ color: '#8FA93B' }}>
@@ -54,7 +54,7 @@ function Registrations() {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                     <Card variant="outlined" sx={{ border: '2px solid #8FA93B' }}>
                         <CardContent sx={{ pb: 0 }}>
                             <Typography variant="h4" gutterBottom sx={{ color: '#8FA93B' }}>
@@ -66,7 +66,7 @@ function Registrations() {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                     <Card variant="outlined" sx={{ border: '2px solid #8FA93B' }}>
                         <CardContent sx={{ pb: 0 }}>
                             <Typography variant="h4" gutterBottom sx={{ color: '#8FA93B' }}>
@@ -83,8 +83,8 @@ function Registrations() {
             <Box sx={{ mt: 7 }}>
                 <Typography variant="body1" sx={{ mb: 3 }}>New Registrations</Typography>
 
-                <Grid container spacing={2}>
-                    <Grid item xs={2}>
+                <Grid container spacing={2} columns={16}>
+                    <Grid item xs={3}>
                         <FormControl size="small" fullWidth>
                             <InputLabel id="demo-simple-select-label">Date Range</InputLabel>
                             <Select
@@ -109,7 +109,7 @@ function Registrations() {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 renderInput={renderInput}
@@ -121,7 +121,7 @@ function Registrations() {
                         </LocalizationProvider>
                     </Grid>
 
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 renderInput={renderInput}
