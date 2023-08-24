@@ -7,17 +7,22 @@ import { DataGrid, GridColDef, GridValueGetterParams, GridToolbar } from '@mui/x
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-function Organizations() {
+function Projects() {
 
     const columns = [
-        { field: 'organization', headerName: 'Organization', flex: 1 },
-        { field: 'type', headerName: 'Type', flex: 1 },
-        { field: 'reg', headerName: 'Registration', flex: 1 },
-        { field: 'size', headerName: 'Size', flex: 1 },
-        { field: 'email', headerName: 'Email', flex: 1 },
-        { field: 'phone', headerName: 'Phone', flex: 1 },
-        { field: 'joined', headerName: 'Joined', flex: 1 },
+        { field: 'project', headerName: 'Project', flex: 1 },
+        { field: 'location', headerName: 'Location', flex: 1 },
+        { field: 'tags', headerName: 'Tags', flex: 1,
+        renderCell: (params) => (
+            <ul style={{paddingLeft: '0'}}>
+              {params.value.map((tag, index) => (
+                <li key={index}>{tag}</li>
+              ))}
+            </ul>
+          ),
+         },
         {
             field: 'actions', headerName: '', flex: 1,
             renderCell: (params) => {
@@ -47,6 +52,12 @@ function Organizations() {
                                 </MenuItem>
                                 <MenuItem onClick={() => handleOptionSelect('Option 2')}>
                                     <ListItemIcon>
+                                        <RemoveCircleIcon />
+                                    </ListItemIcon>
+                                    Unpublish
+                                </MenuItem>
+                                <MenuItem onClick={() => handleOptionSelect('Option 2')}>
+                                    <ListItemIcon>
                                         <DeleteIcon />
                                     </ListItemIcon>
                                     Remove
@@ -60,8 +71,8 @@ function Organizations() {
     ];
 
     const rows = [
-        { id: 1, organization: 'Organization', type: 'Academia', reg: '123456789', size: '11 - 30', email: 'organization@feo.lk', phone: '0112938475', joined: '2023-02-23 07:33:22' },
-        { id: 2, organization: 'Organization', type: 'Academia', reg: '123456789', size: '11 - 30', email: 'organization@feo.lk', phone: '0112938475', joined: '2023-02-23 07:33:22' },
+        { id: 1, project: 'Project 1', location: 'Colombo', tags: ['#Flora', '#Water'] },
+        { id: 2, project: 'Project 2', location: 'Kandy', tags: ['#Flora', '#Water'] },
     ];
 
 
@@ -98,4 +109,4 @@ function Organizations() {
     )
 }
 
-export default Organizations;
+export default Projects;
