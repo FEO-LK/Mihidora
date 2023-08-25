@@ -92,6 +92,7 @@ import Tags from "./Superuser/Tags/Tags";
 import Analytics from "./Superuser/Analytics/Analytics";
 import Organizations from "./Superuser/Organizations/Organizations";
 import ProjectsAdmin from "./Superuser/Projects/Projects";
+import DataSets from "./Superuser/DataSets/DataSets";
 
 import Datatable from "./Superuser/Datatable";
 
@@ -264,6 +265,7 @@ function App() {
                     <Route path={"/admin/analytics"} element={<SuperUserRoute component={Analytics} />} />
                     <Route path={"/admin/organizations"} element={<SuperUserRoute component={Organizations} />} />
                     <Route path={"/admin/projects"} element={<SuperUserRoute component={ProjectsAdmin} />} />
+                    <Route path={"/admin/data-sets"} element={<SuperUserRoute component={DataSets} />} />
                     
                     {/* =================== ENC001 =================== */}
 

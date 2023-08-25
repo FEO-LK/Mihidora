@@ -127,6 +127,17 @@ const BaseLayout = ({ children, title }) => {
           </ListItemButton>
         </ListItem>
 
+        <ListItem key='Data Sets' disablePadding>
+          <ListItemButton
+            className={`${location.pathname == '/admin/data-sets' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
+            component="a" href="/admin/data-sets">
+            <ListItemIcon sx={{ minWidth:'40px' }}>
+              <LocalOfferIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary='Data Sets' />
+          </ListItemButton>
+        </ListItem>
+
         <ListItem key='Pages' disablePadding>
           <ListItemButton
         //   sx={{

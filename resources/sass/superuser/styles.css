@@ -150,5 +150,9 @@
     height: 2rem;
     width: 2rem;
     border-radius: 1rem;
-    border: 1px solid #85a129;
+    border: 1px solid #95b430;
+}
+
+.file-link:hover {
+  text-decoration: underline !important;
 }
