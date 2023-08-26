@@ -21,6 +21,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\DataEducationController;
 use App\Http\Controllers\OrganizationTypeController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\AnalyticsController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -228,6 +229,14 @@ Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
     Route::put('update-homepage/{template}', [PagesController::class, 'homePageUpdate']);
     Route::get('edit-aboutpage/{page}', [PagesController::class, 'aboutPageEdit']);
     Route::put('update-aboutpage/{template}', [PagesController::class, 'aboutPageUpdate']);
+
+    // Analytics
+    Route::get('get-user-counts', [AnalyticsController::class, 'getUserCounts']);
+    Route::post('get-user-counts-for-days', [AnalyticsController::class, 'getUserCountByDays']);
+    Route::post('get-user-counts-for-months', [AnalyticsController::class, 'getUserCountByMonths']);
+    Route::post('get-user-counts-by-weeks', [AnalyticsController::class, 'getUserCountByDateRange']);
+    Route::post('get-user-counts-by-months', [AnalyticsController::class, 'getUserCountBreakdownByMonth']);
+    Route::post('get-user-counts-by-year', [AnalyticsController::class, 'getUserCountByYear']);
 
 });
 
