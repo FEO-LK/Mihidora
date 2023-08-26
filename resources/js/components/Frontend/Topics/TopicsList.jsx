@@ -28,6 +28,12 @@ import ListIcon from '@mui/icons-material/List';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import ListSkeleton from '../components/ListSkeleton';
+import NaturePeopleIcon from '@mui/icons-material/NaturePeople';
+import ProjectLink from '../components/ProjectLink';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import ArchitectureIcon from '@mui/icons-material/Architecture';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Chip from '@mui/material/Chip';
 
 function TopicsList() {
@@ -270,8 +276,13 @@ function TopicsList() {
               <Typography variant="h1">Topics</Typography>
             </Grid>
             <Grid item sm={12} md={6} lg={6}>
-              {/* Add section icons here */}
-              {/* <Typography variant="h1">Topics</Typography> */}
+              <div className="section-links">
+                <div style={{marginRight:'20px'}}><ProjectLink name="Projects" link={'/projects'} icon={<NaturePeopleIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Data" link={'/data'} icon={<TextSnippetIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Resources" link={'/projects'} icon={<ArchitectureIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="E-Learning" link={'/data'} icon={<AutoStoriesIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Events" link={'/data'} icon={<CalendarMonthIcon fontSize="small" className="iconActive" />} /></div>
+              </div>
             </Grid>
           </Grid>
         </Container>
@@ -297,10 +308,10 @@ function TopicsList() {
           }}
         />
         <Grid container mt={3}>
-            <Grid item sm={12} md={6}>
-              <Typography>Quickly sort through different key words and find information on Mihidora</Typography>
-            </Grid>
+          <Grid item sm={12} md={6}>
+            <Typography>Quickly sort through different key words and find information on Mihidora</Typography>
           </Grid>
+        </Grid>
         <Grid container>
           <Grid item sm={12} md={6}>
             <Typography sx={{ fontSize: '12px' }} mt={3}>Thematic Tags</Typography>
@@ -422,7 +433,7 @@ function TopicsList() {
             <Typography sx={{ fontSize: '12px' }} mt={3}>Other Tags</Typography>
           </Grid>
         </Grid>
-        <Grid container spacing={3}>
+        <Grid container>
 
           <Grid item>
             <FormControl sx={{ minWidth: 200, mt: 0 }} size="small" variant="standard">
@@ -512,29 +523,29 @@ function TopicsList() {
               <Typography variant="h4" className="section-title">Projects</Typography>
             </Grid>
             <Grid item xs={6} sx={{ textAlign: 'right' }}>
-              <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
+              <Link to='/projects'><Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography></Link>
             </Grid>
           </Grid>
           {projectLoad ? <ListSkeleton /> :
             <Grid container spacing={2}>
               {projectList.map((project, key) => (
                 <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={``}>
-                    {project.photos.length !== 0 ? 
+                  <Link to={`/project/` + project.slug}>
+                    {project.photos.length !== 0 ?
                       <CardMedia
-                      component="img"
-                      height="140"
-                      image={`/storage/`+JSON.parse(project.photos)[0]}
-                      onError={handleImageError}
-                      alt="green iguana"
-                    />
-                    : 
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="../../../images/project.jpg"
-                      alt="green iguana"
-                    />
+                        component="img"
+                        height="140"
+                        image={`/storage/` + JSON.parse(project.photos)[0]}
+                        onError={handleImageError}
+                        alt="green iguana"
+                      />
+                      :
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image="../../../images/project.jpg"
+                        alt="green iguana"
+                      />
                     }
                     <CardContent className="card_content project-card">
                       {/* <Typography variant="span" className="main-tag">{project.tags[0].name}</Typography> */}
@@ -587,25 +598,25 @@ function TopicsList() {
               {dataList.map((data, key) => (
                 <Grid item key={key} xs={3} className="organization_card" >
                   <Link to={``}>
-                    {data.photos.length !== 0 ? 
+                    {data.photos.length !== 0 ?
                       <CardMedia
-                      component="img"
-                      height="140"
-                      image={`/storage/`+JSON.parse(data.photos)[0]}
-                      onError={handleImageErrorData}
-                      alt="green iguana"
-                    />
-                    : 
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="../../../images/project.jpg"
-                      alt="green iguana"
-                    />
+                        component="img"
+                        height="140"
+                        image={`/storage/` + JSON.parse(data.photos)[0]}
+                        onError={handleImageErrorData}
+                        alt="green iguana"
+                      />
+                      :
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image="../../../images/project.jpg"
+                        alt="green iguana"
+                      />
                     }
                     <CardContent className="card_content project-card">
                       {/* <Typography variant="span" className="main-tag">{project.tags[0].name}</Typography> */}
-                      <Typography variant="h6" className="card-title">{data.project_title} {data.tags.length}</Typography>
+                      <Typography variant="h6" className="card-title">{data.title} {data.tags.length}</Typography>
                       <Typography variant="subtitle" className="card-body">
                         {data.overview !== null ? data.overview.substring(0, 50) : ''}
                       </Typography>

@@ -477,6 +477,51 @@ a, a:hover {
 
 }
 
+.section-links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.section-links .iconWrapperActive {
+  background-color: #93aa40;
+  border-radius: 40px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 4px #c6d39d;
+  margin: auto;
+}
+
+.section-links .iconWrapperVisited {
+  background-color: #ffffff;
+  border-radius: 40px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 4px #c6d39d;
+  margin: auto;
+}
+
+.section-links .iconActive {
+  color: #ffffff;
+}
+
+.section-links .iconVisited {
+  color: #c6d39d;
+}
+
+.section-links .iconWrapperActive:hover{
+  scale: 1.1;
+}
+
+.iconLink:hover {
+
+}
+
 .project-card .card-title{
     color: #000000;
     font-size: 1rem;

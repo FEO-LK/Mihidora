@@ -29,6 +29,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import ListSkeleton8 from '../components/ListSkeleton8';
 import Chip from '@mui/material/Chip';
+import NaturePeopleIcon from '@mui/icons-material/NaturePeople';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import ArchitectureIcon from '@mui/icons-material/Architecture';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ProjectLink from '../components/ProjectLink';
 
 function NewProjectList() {
   const [projectList, setProjectList] = useState([]);
@@ -269,8 +275,13 @@ function NewProjectList() {
               <Typography variant="h1">Projects</Typography>
             </Grid>
             <Grid item sm={12} md={6} lg={6}>
-              {/* Add section icons here */}
-              {/* <Typography variant="h1">Topics</Typography> */}
+              <div className="section-links">
+                <div style={{ marginRight: '20px' }}><ProjectLink visited name="Projects" link={'/projects'} icon={<NaturePeopleIcon fontSize="small" className="iconVisited" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Data" link={'/data'} icon={<TextSnippetIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Resources" link={'/projects'} icon={<ArchitectureIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="E-Learning" link={'/data'} icon={<AutoStoriesIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Events" link={'/data'} icon={<CalendarMonthIcon fontSize="small" className="iconActive" />} /></div>
+              </div>
             </Grid>
           </Grid>
         </Container>
@@ -296,10 +307,10 @@ function NewProjectList() {
           }}
         />
         <Grid container mt={3}>
-            <Grid item sm={12} md={6}>
-              <Typography>Filter through tags & find the type of projects you are looking for</Typography>
-            </Grid>
+          <Grid item sm={12} md={6}>
+            <Typography>Filter through tags & find the type of projects you are looking for</Typography>
           </Grid>
+        </Grid>
         <Grid container>
           <Grid item sm={12} md={6}>
             <Typography sx={{ fontSize: '12px' }} mt={3}>Thematic Tags</Typography>
@@ -421,7 +432,7 @@ function NewProjectList() {
             <Typography sx={{ fontSize: '12px' }} mt={3}>Other Tags</Typography>
           </Grid>
         </Grid>
-        <Grid container spacing={3}>
+        <Grid container>
 
           <Grid item>
             <FormControl sx={{ minWidth: 200, mt: 0 }} size="small" variant="standard">
@@ -511,29 +522,29 @@ function NewProjectList() {
               <Typography variant="h4" className="section-title">Projects</Typography>
             </Grid>
             <Grid item xs={6} sx={{ textAlign: 'right' }}>
-              
+
             </Grid>
           </Grid>
           {projectLoad ? <ListSkeleton8 /> :
             <Grid container spacing={2}>
               {projectList.map((project, key) => (
                 <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={``}>
-                    {project.photos.length !== 0 ? 
+                  <Link to={`/project/` + project.slug}>
+                    {project.photos.length !== 0 ?
                       <CardMedia
-                      component="img"
-                      height="140"
-                      image={`/storage/`+JSON.parse(project.photos)[0]}
-                      onError={handleImageError}
-                      alt="green iguana"
-                    />
-                    : 
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="../../../images/project.jpg"
-                      alt="green iguana"
-                    />
+                        component="img"
+                        height="140"
+                        image={`/storage/` + JSON.parse(project.photos)[0]}
+                        onError={handleImageError}
+                        alt="green iguana"
+                      />
+                      :
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image="../../../images/project.jpg"
+                        alt="green iguana"
+                      />
                     }
                     <CardContent className="card_content project-card">
                       {/* <Typography variant="span" className="main-tag">{project.tags[0].name}</Typography> */}
@@ -558,10 +569,10 @@ function NewProjectList() {
           {
             projectList.length == 0 ?
               !projectLoad ? <Grid container>
-              <Grid item sm={12} md={6}>
-                <Typography sx={{ fontSize: '12px' }} mt={3}>No projects found for selected filters</Typography>
-              </Grid>
-            </Grid> : ''
+                <Grid item sm={12} md={6}>
+                  <Typography sx={{ fontSize: '12px' }} mt={3}>No projects found for selected filters</Typography>
+                </Grid>
+              </Grid> : ''
               : ''
           }
         </Container>

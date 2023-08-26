@@ -177,8 +177,8 @@ function App() {
                     <Route path={"/:slug/datasets"} element={<OrganizationDatasets />} />
                     <Route path={"/:slug/classified"} element={<OrganizationClassified />} />
 
-                    <Route path={"/projects"} element={<Projects />} />
-                    <Route path={"/projects-new"} element={<NewProjectList />} />
+                    <Route path={"/projects"} element={<NewProjectList />} />
+                    <Route path={"/projects-old"} element={<Projects />} />
                     <Route path={"/project-map"} element={<ProjectMap />} />
                     <Route path={"/project/:slug"} element={<ProjectSingle />} />
 
