@@ -51,6 +51,7 @@
         "@mui/x-date-pickers": "^5.0.20",
         "dayjs": "^1.11.9",
         "file-upload-with-preview": "^5.0.8",
+        "google-maps-react": "^2.0.6",
         "leaflet": "^1.9.4",
         "leaflet-draw": "^1.0.4",
         "lexical": "^0.7.9",

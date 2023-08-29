@@ -13,19 +13,34 @@ import {
   InputAdornment,
   FormControl,
   Select,
+  ListItemText,
+  ListItem,
+  List,
+  ListItemButton,
+  ListItemIcon,
   MenuItem,
   InputLabel,
-  Divider
+  Divider,
+  Dialog,
+  Toolbar,
+  IconButton,
+  Slide
 } from "@mui/material";
-import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+
 import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplicationsOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import Drawer from '@mui/material/Drawer';
+import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
+
+import MenuIcon from '@mui/icons-material/Menu';
+
 import BaseLayout from "../BaseLayout";
 import TopicMenu from "./TopicMenu";
 import SearchIcon from '@mui/icons-material/Search';
 import PlaceIcon from '@mui/icons-material/Place';
 import ListIcon from '@mui/icons-material/List';
 import Autocomplete from '@mui/material/Autocomplete';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Button from '@mui/material/Button';
 import ListSkeleton from '../components/ListSkeleton';
 import NaturePeopleIcon from '@mui/icons-material/NaturePeople';
@@ -34,7 +49,14 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import ArchitectureIcon from '@mui/icons-material/Architecture';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import Chip from '@mui/material/Chip';
+
+const drawerWidth = '20%';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function TopicsList() {
   const [projectList, setProjectList] = useState([]);
@@ -69,6 +91,9 @@ function TopicsList() {
   })
   // Results
   const [loading, setloading] = useState(true);
+  const [mapState, setMapState] = useState(true);
+  const [activeMarker, setActiveMarker] = useState(null)
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     loadProjects({ skip: 0, take: 4 });
@@ -265,6 +290,50 @@ function TopicsList() {
     margin: '4px 5px 0px 0px'
   }
 
+  const menuIconx = {
+    color: '#c4c4c4',
+    fontSize: 18,
+    float: 'left',
+    margin: '4px 5px 0px 0px'
+  }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const windowHasClosed = (props, marker, e) => {
+    setMapState(false);
+  };
+
+  const onMarkerClick = (props, marker, e) => {
+    setActiveMarker(marker);
+  }
+
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+
+  const drawer = (
+    <div>
+      <Toolbar className="map-toolBar"  />
+      <Divider />
+      <List sx={{ px: '2rem' }}>
+        <ListItem key='test' disablePadding>
+          <ListItemButton>
+            <ListItemIcon sx={{ minWidth: '40px' }}>
+              <MapsHomeWorkIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary='test' />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </div>
+  );
 
   return (
     <BaseLayout title={"Topic"}>
@@ -505,7 +574,7 @@ function TopicsList() {
               justifyContent: 'flex-end',
               paddingTop: '20px',
             }}>
-              <PlaceIcon sx={{ mr: 2, cursor: 'pointer', fontSize: 32 }} />
+              <PlaceIcon sx={{ mr: 2, cursor: 'pointer', fontSize: 32 }} onClick={handleClickOpen} />
               <ListIcon sx={{ cursor: 'pointer', fontSize: 32 }} />
             </div>
           </Grid>
@@ -784,8 +853,90 @@ function TopicsList() {
         </Container>
       </div>
 
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+
+        <div className="map-top-div">
+          <HighlightOffIcon sx={{ cursor: 'pointer', fontSize: 50, color: 'white' }} className="close-icon" onClick={handleClose} />
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+            className="icon-button-menu"
+          >
+            <MenuIcon sx={{fontSize: 35}} />
+          </IconButton>
+        </div>
+
+        <div sx={{ display: 'flex' }}>
+          <div
+            component="nav"
+            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+            aria-label="mailbox folders"
+          >
+            <Drawer
+              // container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true,
+              }}
+              sx={{
+                display: { xs: 'block', sm: 'none' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              }}
+            >
+              {drawer}
+            </Drawer>
+            <Drawer
+              variant="permanent"
+              sx={{
+                display: { xs: 'none', sm: 'block' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              }}
+              open
+            >
+              {drawer}
+            </Drawer>
+          </div>
+          <div
+            component="main"
+            sx={{ flexGrow: 1, p: 3, height: '100%', ml: { sm: `${drawerWidth}px` }, }}
+          >
+            {/* <Toolbar /> */}
+            <div>
+              <Map google={google} zoom={13}>
+
+                <Marker name={'Current location'} onClick={onMarkerClick} />
+
+                <InfoWindow
+                  marker={activeMarker}
+                  onClose={windowHasClosed}
+                  visible={true}
+                >
+                  <div>
+                    <h3 className="mapInfoText">"Encyte"</h3>
+                  </div>
+                </InfoWindow>
+
+              </Map>
+            </div>
+          </div>
+        </div>
+      </Dialog>
+
     </BaseLayout>
   )
 }
 
-export default TopicsList
+export default
+  GoogleApiWrapper({
+    apiKey: process.env.GOOGLE_MAP_API_KEY,
+  })(TopicsList)
