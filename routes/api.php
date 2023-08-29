@@ -22,6 +22,7 @@ use App\Http\Controllers\DataEducationController;
 use App\Http\Controllers\OrganizationTypeController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\SubmissionAnalyticsController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -42,6 +43,7 @@ Route::post('reset-password', [RegisterController::class, 'resetPassword']);
 
 Route::get('organisation-types', [OrganizationTypeController::class, 'index']);
 Route::get('organisations', [OrganizationController::class, 'index']);
+Route::get('list-organisations', [OrganizationController::class, 'getOrganizationList']);
 Route::get('organisation-map', [OrganizationController::class, 'organizationMap']);
 Route::get('organization/{slug}', [OrganizationController::class, 'show']);
 Route::get('organization-profile-projects/{org_slug}', [ProjectController::class, 'organizationProfileProjectList']);
@@ -233,10 +235,18 @@ Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
     // Analytics
     Route::get('get-user-counts', [AnalyticsController::class, 'getUserCounts']);
     Route::post('get-user-counts-for-days', [AnalyticsController::class, 'getUserCountByDays']);
+    Route::post('get-user-counts-for-days-by-week', [AnalyticsController::class, 'getUserCountsByWeeks']);
+    Route::post('get-user-counts-for-days-by-month', [AnalyticsController::class, 'getUserCountsByMonthsforNumberofDays']);
     Route::post('get-user-counts-for-months', [AnalyticsController::class, 'getUserCountByMonths']);
     Route::post('get-user-counts-by-weeks', [AnalyticsController::class, 'getUserCountByDateRange']);
     Route::post('get-user-counts-by-months', [AnalyticsController::class, 'getUserCountBreakdownByMonth']);
     Route::post('get-user-counts-by-year', [AnalyticsController::class, 'getUserCountByYear']);
+
+    Route::get('get-submission-counts', [SubmissionAnalyticsController::class, 'getSubmissionCounts']);
+    Route::post('get-submission-by-org', [SubmissionAnalyticsController::class, 'submissionsByOrganisations']);
+    Route::post('get-submission-by-org-by-week', [SubmissionAnalyticsController::class, 'submissionsByOrganisationsByWeek']);
+    Route::post('get-submission-by-org-by-month', [SubmissionAnalyticsController::class, 'submissionsByOrganisationsByMonth']);
+    Route::post('get-submission-by-org-by-year', [SubmissionAnalyticsController::class, 'submissionsByOrganisationsByYear']);
 
 });
 

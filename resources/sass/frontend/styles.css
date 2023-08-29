@@ -518,6 +518,14 @@ a, a:hover {
   scale: 1.1;
 }
 
+.iconLink {
+  color: #93aa3f;
+}
+
+.iconLink:visited {
+  color: #93aa3f;
+}
+
 .iconLink:hover {
 
 }

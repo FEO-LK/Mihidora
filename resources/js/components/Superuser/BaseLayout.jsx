@@ -86,8 +86,8 @@ const BaseLayout = ({ children, title }) => {
 
         <ListItem key='Organizations' disablePadding>
           <ListItemButton
-            className={`${location.pathname == '/admin/dashboard' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
-            component="a" href="/admin/dashboard">
+            className={`${location.pathname == '/admin/organizations' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
+            component="a" href="/admin/organizations">
             <ListItemIcon sx={{ minWidth:'40px' }}>
               <MapsHomeWorkIcon fontSize="small" />
             </ListItemIcon>
@@ -103,6 +103,17 @@ const BaseLayout = ({ children, title }) => {
               <LocalLibraryIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary='Projects' />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem key='DataSets' disablePadding>
+          <ListItemButton
+            className={`${location.pathname == '/admin/data-sets' ? 'sideBarButtonHighlight' : ''} sidebar-button`}
+            component="a" href="/admin/data-sets">
+            <ListItemIcon sx={{ minWidth:'40px' }}>
+              <LocalLibraryIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary='Data Sets' />
           </ListItemButton>
         </ListItem>
 

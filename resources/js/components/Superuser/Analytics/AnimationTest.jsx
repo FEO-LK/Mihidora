@@ -13,7 +13,6 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { BarChart } from '@mui/x-charts/BarChart';
 import Link from '@mui/material/Link';
 import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Slide from '@mui/material/Slide';
@@ -35,17 +34,16 @@ const styles = {
     }
 }
 
-function Registrations() {
+function AnimationTest() {
     const [chartConfig, setChartConfig] = useState({
         xAxis: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        title: 'Showing Registration Count for Past 30 Days',
-        width: '100%',
+        title: 'Showing Registration Count for Past 30 Days'
     })
     const [state, setState] = useState({
         duration: 30,
-        start: Dayjs().subtract(30, 'day'),
-        end: Dayjs(),
+        start: Dayjs(),
+        end: Dayjs().add(30, 'day'),
         breakdown: 'week'
     });
     const [counters, setCounters] = useState({
@@ -58,7 +56,6 @@ function Registrations() {
         durationLoad: false,
         filterLoad: false,
         breakdownLoad: false,
-        loaderState: false,
     });
     const [errors, setError] = useState({
         error: false,
@@ -82,9 +79,11 @@ function Registrations() {
     }
 
     const handleStartDateChange = (newDate) => {
+        let newEnd = newDate.add(7, 'day');
         setState({
             ...state,
             start: newDate,
+            end: newEnd
         });
     };
 
@@ -104,43 +103,12 @@ function Registrations() {
             ...state,
             breakdown: value
         });
-        const data = {
-            start: {
-                year: state.start.year(),
-                month: state.start.month() + 1, // offset the month number 
-                date: state.start.date()
-            },
-            end: {
-                year: state.end.year(),
-                month: state.end.month() + 1, // offset the month number 
-                date: state.end.date()
-            }
-        }
-        getUserCountByDates(data, value);
     }
 
     const handleFilter = () => {
         console.log(state);
         console.log(state.start.year(), state.start.month(), state.start.date());
         console.log(state.end.year(), state.end.month(), state.end.date());
-        let data = {
-            start: {
-                year: state.start.year(),
-                month: state.start.month() + 1, // offset the month number 
-                date: state.start.date()
-            },
-            end: {
-                year: state.end.year(),
-                month: state.end.month() + 1, // offset the month number 
-                date: state.end.date()
-            }
-        }
-        console.log(data);
-        setState({
-            ...state,
-            breakdown: 'week'
-        });
-        getUserCountByDates(data, 'week');
     }
 
     //API calls
@@ -159,7 +127,6 @@ function Registrations() {
         });
     }
     const getDataFromDurations = (days) => {
-        setLoaders({ ...loaders, loaderState: true });
         console.log(days);
         const data = { days: days };
         let API = 'get-user-counts-for-days';
@@ -181,45 +148,6 @@ function Registrations() {
                 setChartConfig({
                     xAxis: res.data.dates,
                     data: res.data.count,
-                    title: title,
-                    width: '100%'
-                })
-                setLoaders({ ...loaders, durationLoad: false });
-            } else if (res.data.status === 404) {
-                console.log(res.data.errors);
-                setLoaders({ ...loaders, durationLoad: false });
-            } else {
-                console.log(res.data.errors);
-                setLoaders({ ...loaders, durationLoad: false });
-            }
-        });
-    }
-    const getUserCountByDates = (data, breakdown) => {
-        setLoaders({ ...loaders, loaderState: true });
-        let API = `get-user-counts-by-weeks`;
-        let title = `Showing number or registration from ${state.start.format('DD/MM/YYYY')} to ${state.end.format('DD/MM/YYYY')}: Breakdown by Week`
-        if (breakdown == 'week') {
-            API = `get-user-counts-by-weeks`;
-            title = `Showing number or registration from ${state.start.format('DD/MM/YYYY')} to ${state.end.format('DD/MM/YYYY')} : Breakdown by Week`
-        }
-        if (breakdown == 'month') {
-            API = `get-user-counts-by-months`;
-            title = `Showing number or registration from ${state.start.format('DD/MM/YYYY')} to ${state.end.format('DD/MM/YYYY')} : Breakdown by Month`
-        }
-        if (breakdown == 'year') {
-            API = `get-user-counts-by-year`;
-            title = `Showing number or registration from ${state.start.format('DD/MM/YYYY')} to ${state.end.format('DD/MM/YYYY')} : Breakdown by Year`
-        }
-        axios.post(`/api/${API}`, data).then(res => {
-            if (res.data.status === 200) {
-                console.log(res);
-                setChartConfig({
-                    xAxis: res.data.results.map((object) => {
-                        return object.date
-                    }),
-                    data: res.data.results.map((object) => {
-                        return object.count
-                    }),
                     title: title
                 })
                 setLoaders({ ...loaders, durationLoad: false });
@@ -240,8 +168,6 @@ function Registrations() {
         }
         setError({ error: false, errorMessage: '' });
     };
-    // loading handlers
-    const handleClose = () => setLoaders({ ...loaders, loaderState: false });
 
     // Error notification components
     const Alert = React.forwardRef(function Alert(props, ref) {
@@ -297,7 +223,7 @@ function Registrations() {
             </Grid>
 
             <Box sx={{ mt: 7 }}>
-                <Typography variant="body1" sx={{ mb: 3 }}>Number of Registrations</Typography>
+                <Typography variant="body1" sx={{ mb: 3 }}>New Registrations</Typography>
 
                 <Grid container spacing={2} columns={16}>
                     <Grid item xs={3}>
@@ -395,7 +321,7 @@ function Registrations() {
                         },
                     ]}
                     yAxis={[
-                        { label: 'No of Registrations', }
+                        { label: 'Total', }
                     ]}
                     series={[
                         {
@@ -404,9 +330,8 @@ function Registrations() {
                     ]}
                     height={500}
                     sx={{
-                        width: chartConfig.width,
                         '& .MuiBarElement-root': {
-                            fill: '#c6d697',
+                            fill: '#97c2e2',
                             transition: 'fill 0.5s ease-in-out',
                         },
                         '& .MuiChartsAxis-root.MuiChartsAxis-bottom .MuiChartsAxis-tickLabel, .MuiChartsAxis-root.MuiChartsAxis-bottom .MuiChartsAxis-label': {
@@ -433,15 +358,8 @@ function Registrations() {
                     {errors.errorMessage}
                 </Alert>
             </Snackbar>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={loaders.loaderState}
-                onClick={handleClose}
-            >
-                <CircularProgress color="success" />
-            </Backdrop>
         </Box>
     )
 }
 
-export default Registrations;
+export default AnimationTest;

@@ -16,6 +16,9 @@ class DataEducation extends Model
 
     /**
      * The table associated with the model.
+     * type 1 - data
+     * type 2 - E-Learning
+     * 
      *
      * @var string
      */

@@ -126,10 +126,46 @@ function Users() {
                 }
               }}
             >
-              <Tab label="Org Users" value="1" />
-              <Tab label="All Users" value="2" />
-              <Tab label="Pending Requests" value="3" />
-              <Tab label="Rejected" value="4" />
+              <Tab
+                label="Org Users"
+                value="1"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              <Tab
+                label="All Users"
+                value="2"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              <Tab
+                label="Pending Requests"
+                value="3"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              <Tab
+                label="Rejected"
+                value="4"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
             </TabList>
           </Box>
           <TabPanel value="1"><OrganizationUsers /></TabPanel>

@@ -57,8 +57,9 @@ function Analytics() {
               />
             </TabList>
           </Box>
-          <TabPanel value="1"><AnalyticsRegistrations /></TabPanel>
-          <TabPanel value="2"><AnalyticsSubmissions /></TabPanel>
+          
+          <TabPanel value="1"><AnalyticsSubmissions /></TabPanel>
+          <TabPanel value="2"><AnalyticsRegistrations /></TabPanel>
         </TabContext>
       </Box>
     </MainLayout>

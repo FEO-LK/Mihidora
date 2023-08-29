@@ -38,16 +38,23 @@ class AnalyticsController extends Controller
         ]);
     }
 
-    // User counts by past dasy (past 7, 30, 90)
+    /**
+     * Returns the number of registrations for a given number of days
+     * Breakdown by Months
+     * User counts by past dasy (past 7, 30)
+     */
     public function getUserCountByDays(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'days' => 'required',
+            'days' => 'required|integer|min:1',
         ]);
         if ($validator->fails()) {
-            return response()->json([
-                'validation_errors' => $validator->messages(),
-            ]);
+            return response()->json(
+                [
+                    'validation_errors' => $validator->messages(),
+                ],
+                400
+            ); // Return a 400 Bad Request status
         }
 
         $endDate = Carbon::now();
@@ -60,14 +67,19 @@ class AnalyticsController extends Controller
         while ($currentDate <= $endDate) {
             $dateRange[] = $currentDate->format('Y-m-d');
 
-            $userCount = User::whereDate('created_at', $currentDate)->count();
-            $userCounts[$currentDate->format('Y-m-d')] = $userCount;
-
+            // Use whereBetween to optimize querying for each day
+            $nextDate = $currentDate->copy()->addDay();
+            $userCount = User::whereBetween('created_at', [
+                $currentDate,
+                $nextDate,
+            ])->count();
+            $userCounts[] = $userCount;
             $currentDate->addDay();
         }
         return response()->json([
             'status' => 200,
             'count' => $userCounts,
+            'dates' => $dateRange,
         ]);
     }
 
@@ -107,6 +119,102 @@ class AnalyticsController extends Controller
             'count' => $monthCounts,
         ]);
     }
+    /**
+     * Returns the number of registrations for a given number of days
+     * Breakdown by Weeks
+     */
+    public function getUserCountsByWeeks(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'days' => 'required|integer|min:1', // Ensure days is a positive integer
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'validation_errors' => $validator->messages(),
+                ],
+                400
+            );
+        }
+
+        $endDate = Carbon::now();
+        $startDate = Carbon::now()->subDays($request->days);
+        $dateRange = [];
+        $userCounts = [];
+
+        $currentDate = $startDate->copy();
+
+        while ($currentDate <= $endDate) {
+            $weekStart = $currentDate->copy()->startOfWeek();
+            $weekEnd = $currentDate->copy()->endOfWeek();
+            $dateRange[] =
+                $weekStart->format('M d') . ' - ' . $weekEnd->format('M d');
+
+            $nextWeekStart = $weekStart->copy()->addWeek();
+            $userCount = User::whereBetween('created_at', [
+                $weekStart,
+                $nextWeekStart,
+            ])->count();
+            $userCounts[] = $userCount;
+
+            $currentDate->addWeek();
+        }
+
+        return response()->json([
+            'status' => 200,
+            'count' => $userCounts,
+            'dates' => $dateRange,
+        ]);
+    }
+
+    /**
+     * Returns the number of registrations for a given number of days
+     * Breakdown by Months
+     */
+    public function getUserCountsByMonthsforNumberofDays(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'days' => 'required|integer|min:1', // Ensure days is a positive integer
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'validation_errors' => $validator->messages(),
+                ],
+                400
+            );
+        }
+
+        $endDate = Carbon::now();
+        $startDate = Carbon::now()->subDays($request->days);
+        $dateRange = [];
+        $userCounts = [];
+
+        $currentDate = $startDate->copy();
+
+        while ($currentDate <= $endDate) {
+            $monthStart = $currentDate->copy()->startOfMonth();
+            $monthEnd = $currentDate->copy()->endOfMonth();
+            $dateRange[] = $monthStart->format('M Y');
+
+            $nextMonthStart = $monthStart->copy()->addMonth();
+            $userCount = User::whereBetween('created_at', [
+                $monthStart,
+                $nextMonthStart,
+            ])->count();
+            $userCounts[] = $userCount;
+
+            $currentDate->addMonth();
+        }
+
+        return response()->json([
+            'status' => 200,
+            'count' => $userCounts,
+            'dates' => $dateRange,
+        ]);
+    }
 
     // Return the user count between two dates, by week
     public function getUserCountByDateRange(Request $request)
@@ -130,12 +238,13 @@ class AnalyticsController extends Controller
             $start['date']
         );
         $endDate = Carbon::create($end['year'], $end['month'], $end['date']);
-
+        $dateRange = [];
         $weekCounts = [];
 
         $currentWeek = $startDate->copy()->startOfWeek();
 
         while ($currentWeek <= $endDate) {
+            $object = [];
             $startOfWeek = $currentWeek->copy();
             $endOfWeek = $currentWeek->copy()->endOfWeek();
 
@@ -143,15 +252,19 @@ class AnalyticsController extends Controller
                 $startOfWeek,
                 $endOfWeek,
             ])->count();
-
-            $weekCounts[$startOfWeek->format('Y-m-d')] = $userCount;
+            $object = [
+                'date' => $startOfWeek->format('Y-m-d'),
+                'count' => $userCount,
+            ];
+            $weekCounts[] = $object;
+            $dateRange[] = $startOfWeek->format('Y-m-d');
 
             $currentWeek->addWeek();
         }
 
         return response()->json([
             'status' => 200,
-            'total' => $weekCounts,
+            'results' => $weekCounts,
         ]);
     }
 
@@ -185,20 +298,23 @@ class AnalyticsController extends Controller
         while ($currentMonth <= $endDate) {
             $startOfMonth = $currentMonth->copy();
             $endOfMonth = $currentMonth->copy()->endOfMonth();
-
+            $object = [];
             $userCount = User::whereBetween('created_at', [
                 $startOfMonth,
                 $endOfMonth,
             ])->count();
-
-            $monthCounts[$startOfMonth->format('Y-m')] = $userCount;
+            $object = [
+                'date' => $startOfMonth->format('Y-m'),
+                'count' => $userCount,
+            ];
+            $monthCounts[] = $object;
 
             $currentMonth->addMonth();
         }
 
         return response()->json([
             'status' => 200,
-            'total' => $monthCounts,
+            'results' => $monthCounts,
         ]);
     }
 
@@ -232,20 +348,22 @@ class AnalyticsController extends Controller
         while ($currentYear <= $endDate) {
             $startOfYear = $currentYear->copy();
             $endOfYear = $currentYear->copy()->endOfYear();
-
+            $object = [];
             $userCount = User::whereBetween('created_at', [
                 $startOfYear,
                 $endOfYear,
             ])->count();
 
-            $yearCounts[$startOfYear->year] = $userCount;
-
+            $object = [
+                'date' => $startOfYear->year,
+                'count' => $userCount
+            ];
+            $yearCounts[] = $object;
             $currentYear->addYear();
         }
-
         return response()->json([
             'status' => 200,
-            'total' => $yearCounts,
+            'results' => $yearCounts,
         ]);
     }
 

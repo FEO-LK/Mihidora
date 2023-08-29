@@ -17,7 +17,11 @@ class Classifieds extends Model
 
     /**
      * The attributes that are mass assignable.
-     *
+     * Type 1 : Job Advert
+     * Type 2 : Grants & RFPs
+     * Type 3 : Green / Sustainable Suppliers
+     * Type 4 : Resource Pool
+     * 
      * @var array<int, string>
      */
     protected $fillable = [

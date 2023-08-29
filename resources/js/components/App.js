@@ -91,6 +91,9 @@ import EditMember from "./Superuser/Members/EditMember";
 import Tags from "./Superuser/Tags/Tags";
 import OtherTags from "./Superuser/Tags/OtherTags";
 import Analytics from "./Superuser/Analytics/Analytics"
+import Organizations from "./Superuser/Organizations/Organizations";
+import ProjectsAdmin from "./Superuser/Projects/Projects";
+import DataSets from "./Superuser/DataSets/DataSets";
 
 import Datatable from "./Superuser/Datatable";
 
@@ -130,6 +133,9 @@ import TagsLevel2 from './Superuser/Tags/TagsLevel2';
 import TagsLevel3 from './Superuser/Tags/TagsLevel3';
 import TagsLevel4 from './Superuser/Tags/TagsLevel4';
 import TopicsNew from './Frontend/Topics/TopicsNew';
+import AnalyticsSubmissions from './Superuser/Analytics/AnalyticsSubmissions';
+import SubmissionsByOrg from './Superuser/Analytics/SubmissionsByOrg';
+import AnimationTest from './Superuser/Analytics/AnimationTest';
 // import { Analytics } from "@mui/icons-material";
 
 /** Axios configuration  */
@@ -266,6 +272,9 @@ function App() {
                     <Route path={"/admin/other-tags"} element={<SuperUserRoute component={OtherTags} />} />
                     
                     <Route path={"/admin/analytics"} element={<SuperUserRoute component={Analytics} />} />
+                    <Route path={"/admin/organizations"} element={<SuperUserRoute component={Organizations} />} />
+                    <Route path={"/admin/projects"} element={<SuperUserRoute component={ProjectsAdmin} />} />
+                    <Route path={"/admin/data-sets"} element={<SuperUserRoute component={DataSets} />} />
                     
                     {/* =================== ENC001 =================== */}
 
@@ -285,6 +294,8 @@ function App() {
                     <Route path={"/tag-level-3"} element={<TagsLevel3 />} />
                     <Route path={"/tag-level-4"} element={<TagsLevel4 />} />
                     <Route path={"/topics-new"} element={<TopicsNew />} />
+                    <Route path={"/submissions-report"} element={<SubmissionsByOrg />} />
+                    <Route path={"/animation-test"} element={<AnimationTest />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
