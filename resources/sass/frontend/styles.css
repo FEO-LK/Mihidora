@@ -1611,9 +1611,9 @@ a, a:hover {
   padding-right: 1rem;
 }
 
-.close-icon:hover {
-  transform: scale(1.2);
-}
+/* .close-icon:hover {
+  transform: scale(1.1);
+} */
 
 .icon-button-menu {
   position: absolute !important;
