@@ -1597,4 +1597,33 @@ a, a:hover {
 }/*# sourceMappingURL=styles.css.map */
 
 
+/* ----------------map---------------- */
+.map-top-div {
+  height: 3rem;
+  background-color: #a8c255 !important;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.close-icon {
+  margin-left: auto;
+  padding-right: 1rem;
+}
+
+.close-icon:hover {
+  transform: scale(1.2);
+}
+
+.icon-button-menu {
+  position: absolute !important;
+  left: 0 !important;
+  padding-left: 1.5rem;
+}
+
+.map-toolBar {
+  min-height: 3rem !important;
+}
+
+
 

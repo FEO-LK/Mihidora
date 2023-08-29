@@ -7,7 +7,6 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  menuIcon,
   Box,
   TextField,
   InputAdornment,
@@ -15,8 +14,27 @@ import {
   Select,
   MenuItem,
   InputLabel,
-  Divider
+  Divider,
+  Dialog,
+  Button,
+  ListItemText,
+  ListItem,
+  List,
+  AppBar,
+  Toolbar,
+  IconButton,
+  CloseIcon,
+  Slide,
+  CssBaseline,
+  InboxIcon,
+  ListItemButton,
+  ListItemIcon,
+  MailIcon,
 } from "@mui/material";
+import Drawer from '@mui/material/Drawer';
+import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
+
+import MenuIcon from '@mui/icons-material/Menu';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplicationsOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
@@ -25,11 +43,22 @@ import TopicMenu from "./TopicMenu";
 import SearchIcon from '@mui/icons-material/Search';
 import PlaceIcon from '@mui/icons-material/Place';
 import ListIcon from '@mui/icons-material/List';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import PropTypes from 'prop-types';
 
-function TopicsList() {
+const drawerWidth = '20%';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function TopicsList({ google }) {
   const [projectList, setProjectList] = useState([]);
   const [elearningList, setElearningList] = useState([]);
   const [eventList, setEventList] = useState([]);
+  const [mapState, setMapState] = useState(true);
+  const [activeMarker, setActiveMarker] = useState(null)
 
 
   useEffect(() => {
@@ -64,7 +93,7 @@ function TopicsList() {
   }
 
 
-  const menuIcon = {
+  const menuIconx = {
     color: '#c4c4c4',
     fontSize: 18,
     float: 'left',
@@ -89,6 +118,48 @@ function TopicsList() {
     });
   }
 
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const windowHasClosed = (props, marker, e) => {
+    setMapState(false);
+  };
+
+  const onMarkerClick = (props, marker, e) => {
+    setActiveMarker(marker);
+  }
+
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <div>
+      <Toolbar className="map-toolBar"  />
+      <Divider />
+      <List sx={{ px: '2rem' }}>
+        <ListItem key='test' disablePadding>
+          <ListItemButton>
+            <ListItemIcon sx={{ minWidth: '40px' }}>
+              <MapsHomeWorkIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary='test' />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </div>
+  );
+
   return (
     <BaseLayout title={"Topic"}>
 
@@ -103,7 +174,7 @@ function TopicsList() {
         </Container>
       </div>
 
-      <Container sx={{mb: 2}}>
+      <Container sx={{ mb: 2 }}>
         <TextField fullWidth placeholder="Search using tags: energy, water etc..." id="fullWidth" size="small"
           InputProps={{
             startAdornment: (
@@ -294,7 +365,7 @@ function TopicsList() {
 
           <Grid item sx={{ textAlign: 'right', alignSelf: 'end' }} xs={4}>
             <div>
-              <PlaceIcon sx={{ mr: 2, cursor: 'pointer', fontSize: 32 }} />
+              <PlaceIcon sx={{ mr: 2, cursor: 'pointer', fontSize: 32 }} onClick={handleClickOpen} />
               <ListIcon sx={{ cursor: 'pointer', fontSize: 32 }} />
             </div>
           </Grid>
@@ -344,9 +415,9 @@ function TopicsList() {
                     <Typography variant="span" className="main-tag">THEMATIC AREA</Typography>
                     <Typography variant="h5" className="org_title">Conservation, UN-SDG 1</Typography>
                     <ul className="card_tags">
-                      <li><a href=""><ArticleOutlinedIcon style={menuIcon} /> CSV</a></li>
-                      <li><a href=""><SettingsApplicationsOutlinedIcon style={menuIcon} /> API</a></li>
-                      <li><a href=""><LocationOnOutlinedIcon style={menuIcon} /> Map</a></li>
+                      <li><a href=""><ArticleOutlinedIcon style={menuIconx} /> CSV</a></li>
+                      <li><a href=""><SettingsApplicationsOutlinedIcon style={menuIconx} /> API</a></li>
+                      <li><a href=""><LocationOnOutlinedIcon style={menuIconx} /> Map</a></li>
                     </ul>
                     <ul className="related-tags">
                       <li><Link to=''>#Airquality</Link></li>
@@ -362,92 +433,171 @@ function TopicsList() {
 
       {/* ------------------------- organizations --------------------------------- */}
 
-        <Container><Divider sx={{ mt: 2 }} /></Container>
+      <Container><Divider sx={{ mt: 2 }} /></Container>
 
-        <div id="datasets" className="topic-sub-section">
-          <Container>
-            <Grid container>
-              <Grid item xs={6}>
-                <Typography variant="h4" className="section-title">Organizations</Typography>
-              </Grid>
-              <Grid item xs={6} sx={{ textAlign: 'right' }}>
-                <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
-              </Grid>
+      <div id="datasets" className="topic-sub-section">
+        <Container>
+          <Grid container>
+            <Grid item xs={6}>
+              <Typography variant="h4" className="section-title">Organizations</Typography>
             </Grid>
-            <Grid container spacing={2}>
-              {projectList.slice(0, 4).map((row, key) => (
-                <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={``}>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="../../../images/project.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent className="card_content">
-                      <Typography variant="span" className="main-tag">THEMATIC AREA</Typography>
-                      <Typography variant="h5" className="org_title">Conservation, UN-SDG 1</Typography>
-                      <ul className="card_tags">
-                        <li><a href=""><ArticleOutlinedIcon style={menuIcon} /> CSV</a></li>
-                        <li><a href=""><SettingsApplicationsOutlinedIcon style={menuIcon} /> API</a></li>
-                        <li><a href=""><LocationOnOutlinedIcon style={menuIcon} /> Map</a></li>
-                      </ul>
-                      <ul className="related-tags">
-                        <li><Link to=''>#Airquality</Link></li>
-                        <li><Link to=''>#Flora</Link></li>
-                      </ul>
-                    </CardContent>
-                  </Link>
-                </Grid>
-              ))}
+            <Grid item xs={6} sx={{ textAlign: 'right' }}>
+              <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
             </Grid>
-          </Container>
+          </Grid>
+          <Grid container spacing={2}>
+            {projectList.slice(0, 4).map((row, key) => (
+              <Grid item key={key} xs={3} className="organization_card" >
+                <Link to={``}>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image="../../../images/project.jpg"
+                    alt="green iguana"
+                  />
+                  <CardContent className="card_content">
+                    <Typography variant="span" className="main-tag">THEMATIC AREA</Typography>
+                    <Typography variant="h5" className="org_title">Conservation, UN-SDG 1</Typography>
+                    <ul className="card_tags">
+                      <li><a href=""><ArticleOutlinedIcon style={menuIconx} /> CSV</a></li>
+                      <li><a href=""><SettingsApplicationsOutlinedIcon style={menuIconx} /> API</a></li>
+                      <li><a href=""><LocationOnOutlinedIcon style={menuIconx} /> Map</a></li>
+                    </ul>
+                    <ul className="related-tags">
+                      <li><Link to=''>#Airquality</Link></li>
+                      <li><Link to=''>#Flora</Link></li>
+                    </ul>
+                  </CardContent>
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </div>
+
+      {/* ------------------------- Datahub --------------------------------- */}
+
+      <Container><Divider sx={{ mt: 2 }} /></Container>
+
+      <div id="datasets" className="topic-sub-section">
+        <Container>
+          <Grid container>
+            <Grid item xs={6}>
+              <Typography variant="h4" className="section-title">Datahub</Typography>
+            </Grid>
+            <Grid item xs={6} sx={{ textAlign: 'right' }}>
+              <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
+            </Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            {projectList.slice(0, 4).map((row, key) => (
+              <Grid item key={key} xs={3} className="organization_card" >
+                <Link to={``}>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image="../../../images/project.jpg"
+                    alt="green iguana"
+                  />
+                  <CardContent className="card_content">
+                    <Typography variant="span" className="main-tag">THEMATIC AREA</Typography>
+                    <Typography variant="h5" className="org_title">Conservation, UN-SDG 1</Typography>
+
+                    <ul className="card_tags">
+                      <li><a href=""><ArticleOutlinedIcon style={menuIconx} /> CSV</a></li>
+                      <li><a href=""><SettingsApplicationsOutlinedIcon style={menuIconx} /> API</a></li>
+                      <li><a href=""><LocationOnOutlinedIcon style={menuIconx} /> Map</a></li>
+                    </ul>
+                    <ul className="related-tags">
+                      <li><Link to=''>#Airquality</Link></li>
+                      <li><Link to=''>#Flora</Link></li>
+                    </ul>
+                  </CardContent>
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </div>
+
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+
+        <div className="map-top-div">
+          <HighlightOffIcon sx={{ cursor: 'pointer', fontSize: 50, color: 'white' }} className="close-icon" onClick={handleClose} />
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+            className="icon-button-menu"
+          >
+            <MenuIcon sx={{fontSize: 35}} />
+          </IconButton>
         </div>
 
-        {/* ------------------------- Datahub --------------------------------- */}
+        <div sx={{ display: 'flex' }}>
+          <div
+            component="nav"
+            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+            aria-label="mailbox folders"
+          >
+            <Drawer
+              // container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true,
+              }}
+              sx={{
+                display: { xs: 'block', sm: 'none' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              }}
+            >
+              {drawer}
+            </Drawer>
+            <Drawer
+              variant="permanent"
+              sx={{
+                display: { xs: 'none', sm: 'block' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              }}
+              open
+            >
+              {drawer}
+            </Drawer>
+          </div>
+          <div
+            component="main"
+            sx={{ flexGrow: 1, p: 3, height: '100%', ml: { sm: `${drawerWidth}px` }, }}
+          >
+            {/* <Toolbar /> */}
+            <div>
+              <Map google={google} zoom={13}>
 
-        <Container><Divider sx={{ mt: 2 }} /></Container>
-        
-        <div id="datasets" className="topic-sub-section">
-          <Container>
-            <Grid container>
-              <Grid item xs={6}>
-                <Typography variant="h4" className="section-title">Datahub</Typography>
-              </Grid>
-              <Grid item xs={6} sx={{ textAlign: 'right' }}>
-                <Typography variant="button" sx={{ cursor: 'pointer' }}><b>View All</b></Typography>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-              {projectList.slice(0, 4).map((row, key) => (
-                <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={``}>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image="../../../images/project.jpg"
-                      alt="green iguana"
-                    />
-                    <CardContent className="card_content">
-                      <Typography variant="span" className="main-tag">THEMATIC AREA</Typography>
-                      <Typography variant="h5" className="org_title">Conservation, UN-SDG 1</Typography>
+                <Marker name={'Current location'} onClick={onMarkerClick} />
 
-                      <ul className="card_tags">
-                        <li><a href=""><ArticleOutlinedIcon style={menuIcon} /> CSV</a></li>
-                        <li><a href=""><SettingsApplicationsOutlinedIcon style={menuIcon} /> API</a></li>
-                        <li><a href=""><LocationOnOutlinedIcon style={menuIcon} /> Map</a></li>
-                      </ul>
-                      <ul className="related-tags">
-                        <li><Link to=''>#Airquality</Link></li>
-                        <li><Link to=''>#Flora</Link></li>
-                      </ul>
-                    </CardContent>
-                  </Link>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
+                <InfoWindow
+                  marker={activeMarker}
+                  onClose={windowHasClosed}
+                  visible={true}
+                >
+                  <div>
+                    <h3 className="mapInfoText">"Encyte"</h3>
+                  </div>
+                </InfoWindow>
+
+              </Map>
+            </div>
+          </div>
         </div>
+      </Dialog>
 
 
       {/* <div id="projects" className="topic-sub-section" style={{ background: '#f8f8f8' }}>
@@ -589,4 +739,7 @@ function TopicsList() {
   )
 }
 
-export default TopicsList
+export default
+  GoogleApiWrapper({
+    apiKey: 'AIzaSyAa4iktQ8XNg1TJDk_CPptIgzZWmBQm7bM',
+  })(TopicsList)
