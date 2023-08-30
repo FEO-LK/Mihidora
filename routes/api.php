@@ -20,6 +20,7 @@ use App\Http\Controllers\MembersController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\DataEducationController;
 use App\Http\Controllers\OrganizationTypeController;
+use App\Http\Controllers\StorageAnalyticsController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\SubmissionAnalyticsController;
@@ -247,6 +248,8 @@ Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
     Route::post('get-submission-by-org-by-week', [SubmissionAnalyticsController::class, 'submissionsByOrganisationsByWeek']);
     Route::post('get-submission-by-org-by-month', [SubmissionAnalyticsController::class, 'submissionsByOrganisationsByMonth']);
     Route::post('get-submission-by-org-by-year', [SubmissionAnalyticsController::class, 'submissionsByOrganisationsByYear']);
+    Route::get('get-storage-by-user', [StorageAnalyticsController::class, 'getUserCounts']);
+    Route::get('get-users-files', [StorageAnalyticsController::class, 'returnAllUserswithFiles']);
 
 });
 
