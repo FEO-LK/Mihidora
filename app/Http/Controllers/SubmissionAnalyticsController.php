@@ -26,7 +26,7 @@ class SubmissionAnalyticsController extends Controller
             'status' => 200,
             'projects' => $projectCount,
             'data' => $dataCount,
-            'e-learning' => $eLearningCount,
+            'elearning' => $eLearningCount,
             'resources' => $resources,
             'events' => $events,
         ]);
@@ -132,14 +132,15 @@ class SubmissionAnalyticsController extends Controller
             ])
                 ->where('organization_id', $org_id)
                 ->count();
-
-            $weekCounts[$startOfWeek->format('Y-m-d')] = [
+            $object = [
                 'projects' => $projectCount,
                 'data' => $dataCount,
-                'e-learning' => $eLearningCount,
+                'elearning' => $eLearningCount,
                 'resources' => $resources,
                 'events' => $events,
+                'week' => $startOfWeek->format('Y-m-d')
             ];
+            $weekCounts[] = $object;
             $currentWeek->addWeek();
         }
 

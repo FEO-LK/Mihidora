@@ -110,7 +110,7 @@ function SubmissionsByOrg(props) {
     <BarChart
       dataset={props.dataset ? props.dataset : dataset}
       xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
-      colors={['#004E64', '#00A5CF', '#9FFFCB', '#25A18E', '#7AE582']}
+      colors={['#c0ff8c', '#fff78c', '#ffd08c', '#2ab2a5', '#ff8c9d']}
       series={[
         { dataKey: 'london', label: 'London', valueFormatter },
         { dataKey: 'paris', label: 'Paris', valueFormatter },
