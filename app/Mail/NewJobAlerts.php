@@ -7,11 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
-use App\Models\User;
 
-class OrgRegistered extends Mailable implements ShouldQueue
+class NewJobAlerts extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -20,9 +18,9 @@ class OrgRegistered extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(public User $user)
+    public function __construct(public $data)
     {
-        
+        //
     }
 
     /**
@@ -33,10 +31,7 @@ class OrgRegistered extends Mailable implements ShouldQueue
     public function envelope()
     {
         return new Envelope(
-            subject: 'Mihidora - Thank you for joining us',
-            replyTo: [
-                new Address('mihidorafeo@gmail.com', 'Mihidora Team'),
-            ],
+            subject: 'Latest Job Posts - Mihidora',
         );
     }
 

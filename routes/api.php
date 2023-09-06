@@ -25,6 +25,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\SubmissionAnalyticsController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -131,6 +132,9 @@ Route::post('l3-by-l1', [TagsController::class, 'getL3TagsByL1']);
 Route::post('validate-tags', [ProjectController::class, 'validateTags']);
 Route::post('filter-topics', [TagsController::class, 'filterTopics']);
 Route::post('get-projects', [ProjectController::class, 'getProjects']);
+
+// Notifications
+Route::get('send-job-alerts', [NotificationController::class, 'sendJobAlerts']);
 
 Route::get('/storage-link', function () {
     $status = Artisan::call('storage:link');
@@ -261,6 +265,8 @@ Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
     Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
     Route::post('unsubscribe', [SubscriptionController::class, 'unsubscribe']);
     Route::post('get-subscriptions', [SubscriptionController::class, 'getSubscriptions']);
+
+    
 
 });
 

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Projects;
 use App\Models\Districts;
 use App\Models\Classifieds;
+use App\Events\TopicCreated;
 use Illuminate\Http\Request;
 use App\Models\Organizations;
 use Illuminate\Support\Facades\DB;
@@ -454,6 +455,7 @@ class ClassifiedController extends Controller
             'photos' => json_encode($request->photos),
             'status' => 1,
         ]);
+        event(new TopicCreated($classified));
         return response()->json([
             'status' => 200,
             'message' => 'Record created successfully.',
