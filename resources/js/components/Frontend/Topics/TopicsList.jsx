@@ -347,8 +347,8 @@ function TopicsList() {
             <Grid item sm={12} md={6} lg={6}>
               <div className="section-links">
                 <div style={{marginRight:'20px'}}><ProjectLink name="Projects" link={'/projects'} icon={<NaturePeopleIcon fontSize="small" className="iconActive" />} /></div>
-                <div style={{ marginRight: '20px' }}><ProjectLink name="Data" link={'/projects'} icon={<TextSnippetIcon fontSize="small" className="iconActive" />} /></div>
-                <div style={{ marginRight: '20px' }}><ProjectLink name="Resources" link={'/projects'} icon={<ArchitectureIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Data" link={'/datahub'} icon={<TextSnippetIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Resources" link={'/resource-exchange'} icon={<ArchitectureIcon fontSize="small" className="iconActive" />} /></div>
                 <div style={{ marginRight: '20px' }}><ProjectLink name="E-Learning" link={'/projects'} icon={<AutoStoriesIcon fontSize="small" className="iconActive" />} /></div>
                 <div style={{ marginRight: '20px' }}><ProjectLink name="Events" link={'/projects'} icon={<CalendarMonthIcon fontSize="small" className="iconActive" />} /></div>
               </div>

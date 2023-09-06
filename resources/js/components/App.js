@@ -125,6 +125,10 @@ import OrgReg from './Frontend/Auth/OrgReg';
 import ForgotPassword from './Frontend/Auth/ForgotPassword';
 import ResetPassword from './Frontend/Auth/ResetPassword';
 import NewProjectList from './Frontend/Projects/NewProjectList';
+import NewDataHub from './Frontend/DataHub/NewDataHub';
+import ResourcePage from './Frontend/ResourceExchange/ResourcePage';
+
+import Subscriptions from './Dashboard/Settings/Subscriptions';
 
 // Temp imports Remove on production
 import PendingUsers from './Superuser/Users/PendingUsers';
@@ -191,7 +195,8 @@ function App() {
                     <Route path={"/elearning-materials"} element={<ElearningMaterials />} />
                     <Route path={"elearning-material/:slug"} element={<ElearningSingle />} />
 
-                    <Route path={"/datahub"} element={<DataHub />} />
+                    <Route path={"/datahub"} element={<NewDataHub />} />
+                    <Route path={"/datahub-old"} element={<DataHub />} />
                     <Route path={"datahub/:slug"} element={<DatahubSingle />} />
 
                     <Route path={"/whatson"} element={<Whatson />} />
@@ -209,7 +214,8 @@ function App() {
 
                     <Route path={"topics"} element={<TopicList />} />
 
-                    <Route path={"resource-exchange"} element={<ResourceExchange />} />
+                    <Route path={"resource-exchange-old"} element={<ResourceExchange />} />
+                    <Route path={"resource-exchange"} element={<ResourcePage />} />
                     <Route path={"resource-exchange/jobs"} element={<ResourceExchangeJobs />} />
                     <Route path={"resource-exchange/suppliers"} element={<ResourceExchangeSuppliers />} />
                     <Route path={"resource-exchange/grants-and-proposals"} element={<ResourceExchangeGrantsAndProposals />} />
@@ -222,6 +228,7 @@ function App() {
 
                     {/* =================== USER Routes =================== */}
                     <Route path={"/dashboard"} element={<Protected component={Dashboard} />} />
+                    <Route path={"/subscriptions"} element={<Protected component={Subscriptions} />} />
 
                     <Route path={"/profile"} element={<Protected component={OrganizationProfile} />} />
                     <Route path={"/profile-contact"} element={<Protected component={OrganizationContact} />} />

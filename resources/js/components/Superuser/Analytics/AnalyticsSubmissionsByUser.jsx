@@ -31,7 +31,7 @@ const styles = {
 
 
 
-function AnalyticsSubmissions() {
+function AnalyticsSubmissionsByUser() {
     const [chartConfig, setChartConfig] = useState({
         xAxis: [{ scaleType: 'band', dataKey: 'week' }],
         data: [{
@@ -50,10 +50,15 @@ function AnalyticsSubmissions() {
             "id": 0,
             "org_name": "Organization"
         },
+        user: {
+            id: 0,
+            name: 'Users'
+        },
         start: Dayjs().subtract(30, 'day'),
         end: Dayjs(),
     });
     const [organizations, setOrganizations] = useState([]);
+    const [users, setUsers] = useState([]);
     const [counters, setCounters] = useState({
         projects: 0,
         data: 0,
@@ -93,13 +98,31 @@ function AnalyticsSubmissions() {
                 month: state.end.month() + 1, // offset the month number 
                 date: state.end.date()
             },
-            organization_id: state.organization.id,
+            user_id: state.user.id,
         }
         console.log(data);
-        getSubmissionsByOrganization(data);
+        getSubmissionsByUser(data);
     }
 
     //API calls
+    const loadUserList = (data) => {
+        axios.post(`/api/get-user-list-by-org`, data).then(res => {
+            console.log(res.data);
+            if (res.data.status === 200) {
+                setUsers(res.data.users);
+                setLoaders({ ...loaders, initialLoad: false });
+                if(res.data.users.length != 0){
+                    setState({...state, user: res.data.users[0]})
+                }
+            } else if (res.data.status === 404) {
+                setError({ error: true, errorMessage: res.data.errors });
+                setLoaders({ ...loaders, initialLoad: false });
+            } else {
+                setError({ error: true, errorMessage: res.data.errors });
+                setLoaders({ ...loaders, initialLoad: false });
+            }
+        });
+    }
     const loadSubmissionCounts = () => {
         axios.get(`/api/get-submission-counts`).then(res => {
             if (res.data.status === 200) {
@@ -120,9 +143,9 @@ function AnalyticsSubmissions() {
             }
         });
     }
-    const getSubmissionsByOrganization = (data) => {
+    const getSubmissionsByUser = (data) => {
         setLoaders({ ...loaders, initialLoad: true });
-        axios.post(`/api/get-submission-by-org-by-week`, data).then(res => {
+        axios.post(`/api/get-submission-by-user`, data).then(res => {
             if (res.data.status === 200) {
                 setChartConfig({
                     ...chartConfig, data: res.data.total.map((submission) => {
@@ -165,11 +188,19 @@ function AnalyticsSubmissions() {
     }
 
     // input handlers
+    const handleUserSelect = (event, newValue) => {
+        setState({
+            ...state,
+            user: newValue
+        });
+    }
     const handleOrganizationSelect = (event, newValue) => {
         setState({
             ...state,
             organization: newValue
         });
+        setLoaders({ ...loaders, initialLoad: true });
+        loadUserList({ organization_id: newValue.id });
     }
     const handleStartDateChange = (newDate) => {
         setState({
@@ -277,7 +308,7 @@ function AnalyticsSubmissions() {
             </Grid>
 
             <Box sx={{ mt: 7 }}>
-                <Typography variant="body1" sx={{ mb: 3 }}>Submissions By Organization</Typography>
+                <Typography variant="body1" sx={{ mb: 3 }}>Submissions By Individuals</Typography>
 
                 <Grid container spacing={2} columns={16}>
                     <Grid item xs={3}>
@@ -290,6 +321,27 @@ function AnalyticsSubmissions() {
                                 defaultValue={[]}
                                 getOptionLabel={(option) => option.org_name}
                                 options={organizations}
+                                sx={{
+                                    paddingTop: '0px',
+                                    paddingBottom: '0px',
+                                    '& .MuiOutlinedInput-root .MuiAutocomplete-input': {
+                                        padding: '0px 4px 0px 5px'
+                                    }
+                                }}
+                                renderInput={(params) => <TextField {...params} label="Organizations" />}
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <FormControl size="small" fullWidth>
+                            <Autocomplete
+                                disablePortal
+                                id="combo-box-user-list"
+                                value={state.user}
+                                onChange={handleUserSelect}
+                                defaultValue={[]}
+                                getOptionLabel={(option) => option.name}
+                                options={users}
                                 sx={{
                                     paddingTop: '0px',
                                     paddingBottom: '0px',
@@ -328,7 +380,7 @@ function AnalyticsSubmissions() {
                             />
                         </LocalizationProvider>
                     </Grid>
-
+                                
                     <Grid item style={{ display: "flex", alignItems: "center" }}>
                         <Button className="update-button" sx={{ ml: 2 }} onClick={handleFilter} >Filter</Button>
                     </Grid>
@@ -345,7 +397,7 @@ function AnalyticsSubmissions() {
                 <BarChart
                     dataset={chartConfig.data}
                     xAxis={[{ scaleType: 'band', dataKey: 'week' }]}
-                    colors={['#d4c685', '#f7ef81', '#cfe795', '#a7d3a6', '#2a9d8f']}
+                    colors={['#d4c685', '#f7ef81', '#cfe795', '#a7d3a6', '#add2c2']}
                     series={[
                         { dataKey: 'projects', label: 'Projects', valueFormatter },
                         { dataKey: 'data', label: 'Data', valueFormatter },
@@ -503,4 +555,4 @@ function AnalyticsSubmissions() {
     )
 }
 
-export default AnalyticsSubmissions;
+export default AnalyticsSubmissionsByUser;

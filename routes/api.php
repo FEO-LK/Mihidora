@@ -24,6 +24,7 @@ use App\Http\Controllers\StorageAnalyticsController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\SubmissionAnalyticsController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -248,8 +249,18 @@ Route::middleware(['auth:sanctum', 'isSuperUser'])->group(function() {
     Route::post('get-submission-by-org-by-week', [SubmissionAnalyticsController::class, 'submissionsByOrganisationsByWeek']);
     Route::post('get-submission-by-org-by-month', [SubmissionAnalyticsController::class, 'submissionsByOrganisationsByMonth']);
     Route::post('get-submission-by-org-by-year', [SubmissionAnalyticsController::class, 'submissionsByOrganisationsByYear']);
+    Route::post('get-user-list-by-org', [SubmissionAnalyticsController::class, 'getUserListbyOrganization']);
+    Route::post('get-submission-by-user', [SubmissionAnalyticsController::class, 'submissionsByUserByWeek']);
+
     Route::get('get-storage-by-user', [StorageAnalyticsController::class, 'getUserCounts']);
     Route::get('get-users-files', [StorageAnalyticsController::class, 'returnAllUserswithFiles']);
+    Route::get('get-storage-by-org', [StorageAnalyticsController::class, 'getStorageUsageByOrganization']);
+    Route::post('get-storage-by-users-by-org', [StorageAnalyticsController::class, 'filterStorageByOrganization']);
+
+    // Subscriptions
+    Route::post('subscribe', [SubscriptionController::class, 'subscribe']);
+    Route::post('unsubscribe', [SubscriptionController::class, 'unsubscribe']);
+    Route::post('get-subscriptions', [SubscriptionController::class, 'getSubscriptions']);
 
 });
 

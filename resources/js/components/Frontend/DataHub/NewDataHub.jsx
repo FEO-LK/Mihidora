@@ -36,7 +36,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ProjectLink from '../components/ProjectLink';
 
-function NewProjectList() {
+function NewDataHub() {
   const [projectList, setProjectList] = useState([]);
   const [projectLoad, setProjectLoad] = useState(true);
   const [dataList, setDataList] = useState([]);
@@ -272,12 +272,12 @@ function NewProjectList() {
         <Container>
           <Grid container>
             <Grid item sm={12} md={6} lg={6}>
-              <Typography variant="h1">Projects</Typography>
+              <Typography variant="h1">Data Hub</Typography>
             </Grid>
             <Grid item sm={12} md={6} lg={6}>
               <div className="section-links">
-                <div style={{ marginRight: '20px' }}><ProjectLink visited name="Projects" link={'/projects'} icon={<NaturePeopleIcon fontSize="small" className="iconVisited" />} /></div>
-                <div style={{ marginRight: '20px' }}><ProjectLink name="Data" link={'/datahub'} icon={<TextSnippetIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Projects" link={'/projects'} icon={<NaturePeopleIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink visited name="Data" link={'/datahub'} icon={<TextSnippetIcon fontSize="small" className="iconVisited" />} /></div>
                 <div style={{ marginRight: '20px' }}><ProjectLink name="Resources" link={'/resource-exchange'} icon={<ArchitectureIcon fontSize="small" className="iconActive" />} /></div>
                 <div style={{ marginRight: '20px' }}><ProjectLink name="E-Learning" link={'/projects'} icon={<AutoStoriesIcon fontSize="small" className="iconActive" />} /></div>
                 <div style={{ marginRight: '20px' }}><ProjectLink name="Events" link={'/projects'} icon={<CalendarMonthIcon fontSize="small" className="iconActive" />} /></div>
@@ -519,7 +519,7 @@ function NewProjectList() {
 
           <Grid container>
             <Grid item xs={6}>
-              <Typography variant="h4" className="section-title">Projects</Typography>
+              <Typography variant="h4" className="section-title">Data</Typography>
             </Grid>
             <Grid item xs={6} sx={{ textAlign: 'right' }}>
 
@@ -582,4 +582,4 @@ function NewProjectList() {
   )
 }
 
-export default NewProjectList
+export default NewDataHub

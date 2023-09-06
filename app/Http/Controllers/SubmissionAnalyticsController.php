@@ -6,7 +6,8 @@ use App\Models\Projects;
 use App\Models\DataEducation;
 use App\Models\WhatsOn;
 use App\Models\Classifieds;
-
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -138,7 +139,7 @@ class SubmissionAnalyticsController extends Controller
                 'elearning' => $eLearningCount,
                 'resources' => $resources,
                 'events' => $events,
-                'week' => $startOfWeek->format('Y-m-d')
+                'week' => $startOfWeek->format('Y-m-d'),
             ];
             $weekCounts[] = $object;
             $currentWeek->addWeek();
@@ -315,6 +316,115 @@ class SubmissionAnalyticsController extends Controller
         return response()->json([
             'status' => 200,
             'total' => $yearCounts,
+        ]);
+    }
+
+    public function getUserListbyOrganization(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'organization_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'validation_errors' => $validator->messages(),
+            ]);
+        }
+        //Retriew all organizational users;
+        $users = DB::table('organization_users')
+            ->where('organization_id', $request->organization_id)
+            ->get();
+        $userList = [];
+        foreach ($users as $user) {
+            $userDetails = User::find($user->user_id);
+            $userList[] = $userDetails;
+        }
+        return response()->json([
+            'status' => 200,
+            'users' => $userList,
+        ]);
+    }
+
+    // get submissions by week for a given date range
+    public function submissionsByUserByWeek(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'start' => 'required',
+            'end' => 'required',
+            'user_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'validation_errors' => $validator->messages(),
+            ]);
+        }
+        $user_id = $request->user_id;
+        $start = $request->start;
+        $end = $request->end;
+
+        $startDate = Carbon::create(
+            $start['year'],
+            $start['month'],
+            $start['date']
+        );
+        $endDate = Carbon::create($end['year'], $end['month'], $end['date']);
+
+        $weekCounts = [];
+
+        $currentWeek = $startDate->copy()->startOfWeek();
+
+        while ($currentWeek <= $endDate) {
+            $startOfWeek = $currentWeek->copy();
+            $endOfWeek = $currentWeek->copy()->endOfWeek();
+
+            $projectCount = Projects::whereBetween('created_at', [
+                $startOfWeek,
+                $endOfWeek,
+            ])
+                ->where('user_id', $user_id)
+                ->count();
+
+            $dataCount = DataEducation::whereBetween('created_at', [
+                $startOfWeek,
+                $endOfWeek,
+            ])
+                ->where([['user_id', '=', $user_id], ['type', '=', 1]])
+                ->count();
+
+            $eLearningCount = DataEducation::whereBetween('created_at', [
+                $startOfWeek,
+                $endOfWeek,
+            ])
+                ->where([['user_id', '=', $user_id], ['type', '=', 2]])
+                ->count();
+
+            $resources = Classifieds::whereBetween('created_at', [
+                $startOfWeek,
+                $endOfWeek,
+            ])
+                ->where('user_id', $user_id)
+                ->count();
+
+            $events = Classifieds::whereBetween('created_at', [
+                $startOfWeek,
+                $endOfWeek,
+            ])
+                ->where('user_id', $user_id)
+                ->count();
+            $object = [
+                'projects' => $projectCount,
+                'data' => $dataCount,
+                'elearning' => $eLearningCount,
+                'resources' => $resources,
+                'events' => $events,
+                'week' => $startOfWeek->format('Y-m-d'),
+            ];
+            $weekCounts[] = $object;
+            $currentWeek->addWeek();
+        }
+
+        return response()->json([
+            'status' => 200,
+            'total' => $weekCounts,
         ]);
     }
 }

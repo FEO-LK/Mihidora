@@ -15,6 +15,8 @@ import TabPanel from '@material-ui/lab/TabPanel';
 import AnalyticsRegistrations from './AnalyticsRegistrations';
 import AnalyticsSubmissions from './AnalyticsSubmissions';
 import StorageAnalytics from './StorageAnalytics';
+import StorageByOrg from './StorageByOrg';
+import AnalyticsSubmissionsByUser from './AnalyticsSubmissionsByUser';
 
 function Analytics() {
 
@@ -57,7 +59,7 @@ function Analytics() {
                 }}
               />
               <Tab
-                label="Storage"
+                label="Submissions by Individual"
                 value="3"
                 sx={{
                   "&.Mui-selected": {
@@ -66,13 +68,34 @@ function Analytics() {
                   }
                 }}
               />
+              <Tab
+                label="Storage By Organization"
+                value="4"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              <Tab
+                label="Storage By User"
+                value="5"
+                sx={{
+                  "&.Mui-selected": {
+                    color: "black",
+                    fontWeight: "bold"
+                  }
+                }}
+              />
+              
             </TabList>
           </Box>
-          
-          <TabPanel value="1"><StorageAnalytics /></TabPanel>
-          <TabPanel value="2"><AnalyticsRegistrations /></TabPanel>
-          <TabPanel value="3"><AnalyticsSubmissions /></TabPanel>
-          
+          <TabPanel value="1"><AnalyticsRegistrations /></TabPanel>
+          <TabPanel value="2"><AnalyticsSubmissions /></TabPanel>
+          <TabPanel value="3"><AnalyticsSubmissionsByUser /></TabPanel>
+          <TabPanel value="4"><StorageByOrg /></TabPanel>
+          <TabPanel value="5"><StorageAnalytics /></TabPanel>
           
         </TabContext>
       </Box>
