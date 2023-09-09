@@ -11,11 +11,17 @@ import {
     Box,
     TextField,
     InputAdornment,
+    ListItemText,
+    ListItem,
+    List,
+    ListItemButton,
+    ListItemIcon,
     FormControl,
     Select,
     MenuItem,
     InputLabel,
-    Divider
+    Divider,
+    Toolbar
 } from "@mui/material";
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplicationsOutlined';
@@ -37,7 +43,12 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ProjectLink from '../components/ProjectLink';
 
+import Drawer from '@mui/material/Drawer';
+import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+
 import resourceImg from "../../../../../public/images/resources-illustration.png";
+const drawerWidth = '20%';
 
 function ResourcePage() {
     const [projectList, setProjectList] = useState([]);
@@ -72,6 +83,9 @@ function ResourcePage() {
     })
     // Results
     const [loading, setloading] = useState(true);
+
+    const [activeMarker, setActiveMarker] = useState(null)
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         loadProjects({ skip: 0, take: 50 });
@@ -267,6 +281,21 @@ function ResourcePage() {
         margin: '4px 5px 0px 0px'
     }
 
+    const windowHasClosed = (props, marker, e) => {
+        setMapState(false);
+    };
+
+    const onMarkerClick = (props, marker, e) => {
+        setActiveMarker(marker);
+    }
+
+
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
+
 
     return (
         <BaseLayout title={"Topic"}>
@@ -306,14 +335,15 @@ function ResourcePage() {
                             harum quidem rerum facilis est et expedita distinctio
                         </Typography>
                         <Stack direction="row" spacing={1}>
-                            <Chip sx={{ backgroundColor: '#000000', color: '#ffffff' }} label="Jobs" component="a" href="#basic-chip" clickable />
-                            <Chip sx={{ backgroundColor: '#000000', color: '#ffffff' }} label="Grants & RFPs" component="a" href="#basic-chip" clickable />
-                            <Chip sx={{ backgroundColor: '#000000', color: '#ffffff' }} label="Suppliers" component="a" href="#basic-chip" clickable />
-                            <Chip sx={{ backgroundColor: '#000000', color: '#ffffff' }} label="Resources Pool" component="a" href="#basic-chip" clickable />
-                            
+                            <Chip sx={{ backgroundColor: '#000000', color: '#ffffff' }} label="Jobs" component="a" href="/resource-exchange/jobs" clickable />
+                            <Chip sx={{ backgroundColor: '#000000', color: '#ffffff' }} label="Grants & RFPs" component="a" href="/resource-exchange/grants-and-proposals" clickable />
+                            <Chip sx={{ backgroundColor: '#000000', color: '#ffffff' }} label="Suppliers" component="a" href="/resource-exchange/suppliers" clickable />
+                            <Chip sx={{ backgroundColor: '#000000', color: '#ffffff' }} label="Resources Pool" component="a" href="/resource-exchange/resource-sharing" clickable />
+
                         </Stack>
                     </Grid>
                 </Grid>
+
                 {/* <TextField className="searchbox" sx={{
                     '& .MuiInputBase-root-MuiOutlinedInput-root': {
                         borderRadius: '30px'
@@ -348,6 +378,27 @@ function ResourcePage() {
 
                         </Grid>
                     </Grid>
+                    <Grid container>
+                        <Grid item>
+                            <div style={{position:'relative', height:'600px', width: `${drawerWidth}px`, maxWidth: '100%'}}>
+                                <Map google={google} zoom={13}>
+
+                                    <Marker name={'Current location'} onClick={onMarkerClick} />
+
+                                    <InfoWindow
+                                        marker={activeMarker}
+                                        onClose={windowHasClosed}
+                                        visible={true}
+                                    >
+                                        <div>
+                                            <h3 className="mapInfoText">"Encyte"</h3>
+                                        </div>
+                                    </InfoWindow>
+
+                                </Map>
+                            </div>
+                        </Grid>
+                    </Grid>
                 </Container>
             </div>
 
@@ -355,4 +406,9 @@ function ResourcePage() {
     )
 }
 
-export default ResourcePage
+// export default ResourcePage
+
+export default
+    GoogleApiWrapper({
+        apiKey: process.env.GOOGLE_MAP_API_KEY,
+    })(ResourcePage)

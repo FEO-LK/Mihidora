@@ -1,1 +1,1 @@
-export const STORAGE_LIMIT = 10;
+export const STORAGE_LIMIT = 5.5;

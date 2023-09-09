@@ -136,6 +136,10 @@ Route::post('get-projects', [ProjectController::class, 'getProjects']);
 // Notifications
 Route::get('send-job-alerts', [NotificationController::class, 'sendJobAlerts']);
 
+//Data & Elearning New APIs
+Route::post('get-e-learing-data', [DataEducationController::class, 'getDataEducationList']);
+
+
 Route::get('/storage-link', function () {
     $status = Artisan::call('storage:link');
     return response()->json([

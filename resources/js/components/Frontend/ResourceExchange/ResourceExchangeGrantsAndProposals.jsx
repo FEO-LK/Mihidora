@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Button,
@@ -11,14 +11,14 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FilterSideBar from "../Whatson/FilterSideBar";
 import BaseLayout from "../BaseLayout";
-import {updatedTimeFormat} from "../components/timeFormatFunctions";
+import { updatedTimeFormat } from "../components/timeFormatFunctions";
 import Pagination from "../../Dashboard/components/Pagination";
-import ResourceExchangeNavbar from "../../Frontend/ResourceExchange/ResourceExchangeNavbar"; 
+import ResourceExchangeNavbar from "../../Frontend/ResourceExchange/ResourceExchangeNavbar";
 import MapLocations from "../components/MapLocations";
-import {tagsThematic, tagsSubject, tagsExtra} from "../components/Tags";
+import { tagsThematic, tagsSubject, tagsExtra } from "../components/Tags";
 
 function ResourceExchangeGrantsAndProposals() {
 
@@ -58,19 +58,19 @@ function ResourceExchangeGrantsAndProposals() {
     useEffect(() => {
         getProposalList();
         getProjectMapList();
-        getFilteredJobs(null,[]);
+        getFilteredJobs(null, []);
     }, []);
 
     const getProposalList = () => {
         axios.get(`/api/classified-proposals`).then(res => {
-            if(res.data.status === 200) {
+            if (res.data.status === 200) {
                 setProposalList(res.data.classifieds);
                 setLocations(res.data.locations);
             }
         });
     }
 
-    const sorted = (data) => data.sort(function(a, b) {
+    const sorted = (data) => data.sort(function (a, b) {
         if (a.project_title > b.project_title) {
             return 1;
         }
@@ -83,9 +83,9 @@ function ResourceExchangeGrantsAndProposals() {
     const getFilteredJobs = (district, tags) => {
         axios.post(
             '/api/classified-grants-filtered',
-            {district, tags}
+            { district, tags }
         ).then(res => {
-            if(res.data.status === 200) {
+            if (res.data.status === 200) {
                 let filteredJobs;
                 if (Array.isArray(res.data.filteredJobs)) {
                     filteredJobs = res.data.filteredJobs
@@ -96,24 +96,24 @@ function ResourceExchangeGrantsAndProposals() {
             }
         })
     }
-    
+
     useEffect(() => {
         if (district == '26') {
-            getFilteredJobs(null,[]);
+            getFilteredJobs(null, []);
         } else {
-            getFilteredJobs(district,[]);
+            getFilteredJobs(district, []);
         }
-    },[district,thematicTags.length,subjectTags.length,extraTags.length]);
-    
+    }, [district, thematicTags.length, subjectTags.length, extraTags.length]);
+
     const handleOnChangeSortBy = (e) => {
         setSortBy(e.target.value);
         if (e.target.value === 'A-Z') {
             setProposalList(sorted(proposalList))
         } else {
             if (district == '26') {
-                getFilteredJobs(null,[...thematicTags, ...subjectTags, ...extraTags]);
+                getFilteredJobs(null, [...thematicTags, ...subjectTags, ...extraTags]);
             } else {
-                getFilteredJobs(district,[...thematicTags, ...subjectTags, ...extraTags]);
+                getFilteredJobs(district, [...thematicTags, ...subjectTags, ...extraTags]);
             }
         }
     }
@@ -128,11 +128,11 @@ function ResourceExchangeGrantsAndProposals() {
     const howManyPages = Math.ceil(proposalList?.length / 100);
 
     const postYourAdBtn = () => {
-        if(localStorage.getItem('user_role') == 2) {
+        if (localStorage.getItem('user_role') == 2) {
             return <Link to={'/dashboard'} className="theme-btn small-btn add_event-btn">Post your Ad</Link>
-        }else if(localStorage.getItem('user_role') == 1){
-           
-        }else {
+        } else if (localStorage.getItem('user_role') == 1) {
+
+        } else {
             return <Link to={'/login'} className="theme-btn small-btn add_event-btn">Post your Ad</Link>
         }
     }
@@ -152,8 +152,8 @@ function ResourceExchangeGrantsAndProposals() {
                 <Container>
                     <Grid container>
                         <Grid item sm={12} md={6} className="title-and-description">
-                            <Typography variant="h1" style={{marginBottom: 0}}>Resource Exchange / Grants and
-                                Proposals</Typography>
+                            <Typography variant="h1" style={{ marginBottom: 0 }}>Resource Exchange / Grants and
+                                RFPs</Typography>
                         </Grid>
                         <Grid item sm={12} md={6} className="add-org-link">
                             <Typography>
@@ -164,7 +164,7 @@ function ResourceExchangeGrantsAndProposals() {
                     </Grid>
                 </Container>
 
-                <Container style={{display:'flex', justifyContent: 'center', marginTop:'2em', marginBottom: '2em'}}>
+                <Container style={{ display: 'flex', justifyContent: 'center', marginTop: '2em', marginBottom: '2em' }}>
                 </Container>
                 <Container>
                     <Grid container className="search_bar" direction="row" justifyContent="space-around">
@@ -176,12 +176,12 @@ function ResourceExchangeGrantsAndProposals() {
                                 placeholder="Search for proposals"
                                 onChange={ListSearchInput}
                                 value={searchKeyword}
-                                style={{width: '100%'}}
+                                style={{ width: '100%' }}
                             >
                             </TextField>
                         </Grid>
-                    
-                       
+
+
                         <Grid item sm={4} md={2}>
                             <Button
                                 fullWidth
@@ -189,7 +189,7 @@ function ResourceExchangeGrantsAndProposals() {
                                 type={"button"}
                                 className="theme-btn ligth-btn small-btn"
                                 onClick={stringSearch}
-                                style={{float: 'right'}}>
+                                style={{ float: 'right' }}>
                                 Search
                             </Button>
                         </Grid>
@@ -225,7 +225,7 @@ function ResourceExchangeGrantsAndProposals() {
                                 <Grid container>
                                     <Grid item sm={12} md={4}>
                                         <Typography variant="span" className="item-count">
-                                            Showing {proposalList?.length} Grants and Proposals
+                                            Showing {proposalList?.length} Grants and RFPs
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -233,30 +233,29 @@ function ResourceExchangeGrantsAndProposals() {
                         </Grid>
                         {
                             view === 'map' ?
-                                <MapLocations locationList={projectMapList}/> :
+                                <MapLocations locationList={projectMapList} /> :
                                 <>
-                                    <Grid container spacing={2} style={{paddingLeft: '20px'}}>
+                                    <Grid container spacing={2} style={{ paddingLeft: '20px' }}>
                                         {proposalList.slice((currentPage - 1) * 4, currentPage * 4).map((jobDetails, key) => (
                                             <Grid item key={key} xs={12} className="data_card card-row resource-card">
                                                 <Grid container>
                                                     <Grid item sm={12} md={1}>
                                                         <Box className="card-logo"
-                                                             style={{
-                                                                 backgroundImage: `url(${
-                                                                     JSON.parse(jobDetails.photos)[0]
-                                                                         ? `/storage/${JSON.parse(jobDetails.photos)[0]}`
-                                                                         : "../../../../images/project.jpg"
-                                                                 })`
-                                                             }}></Box>
+                                                            style={{
+                                                                backgroundImage: `url(${JSON.parse(jobDetails.photos)[0]
+                                                                        ? `/storage/${JSON.parse(jobDetails.photos)[0]}`
+                                                                        : "../../../../images/project.jpg"
+                                                                    })`
+                                                            }}></Box>
                                                     </Grid>
                                                     <Grid item sm={12} md={11} className="card-content">
                                                         <Typography
                                                             variant="h5"
                                                             className="card_title"
-                                                            style={{cursor: 'pointer'}}
+                                                            style={{ cursor: 'pointer' }}
                                                             onClick={() => handleClick(jobDetails?.slug)}
                                                         >
-                                    
+
                                                             {jobDetails.title} - {organization?.[key]?.org_name}
                                                         </Typography>
                                                         <Grid container className="description">
@@ -276,7 +275,7 @@ function ResourceExchangeGrantsAndProposals() {
                                             </Grid>
                                         ))}
                                     </Grid>
-                                    <Pagination pages={howManyPages} setCurrentPage={setCurrentPage}/>
+                                    <Pagination pages={howManyPages} setCurrentPage={setCurrentPage} />
 
                                 </>
                         }

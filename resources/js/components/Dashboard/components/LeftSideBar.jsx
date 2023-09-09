@@ -4,6 +4,18 @@ import { Grid, Typography } from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import StorageCounter from './StorageCounter';
 import {STORAGE_LIMIT} from '../../utils/misc';
+
+import NaturePeopleIcon from '@mui/icons-material/NaturePeople';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import ArchitectureIcon from '@mui/icons-material/Architecture';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import PermMediaIcon from '@mui/icons-material/PermMedia';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import GroupIcon from '@mui/icons-material/Group';
+import SecurityIcon from '@mui/icons-material/Security';
+
 export default function LeftSideBar() {
 
   const [usage, setUsage] = useState({
@@ -57,6 +69,7 @@ export default function LeftSideBar() {
     fontSize: 18,
     float: 'left',
     margin: '1px 5px 0 0',
+    color: '#93aa40'
   }
   const profileMenuItem = {
     color: '#5bb318',
@@ -69,42 +82,45 @@ export default function LeftSideBar() {
   }
 
   return (
-    <div>
+    <div class="side-menu-links">
       <Grid sx={{ marginBottom: 2, padding: 2, borderRadius: 1, border: '1px solid #ebebeb' }}>
         <ul className='primary_menu' style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           <li style={menuListItem}>
             <Link to="/dashboard" style={menuItem}><InboxIcon style={menuIcon} /> Dashboard</Link>
           </li>
           <li style={menuListItem}>
-            <Link to="/project-list" style={menuItem}><InboxIcon style={menuIcon} /> Projects</Link>
+            <Link to="/project-list" style={menuItem}><NaturePeopleIcon style={menuIcon} /> Projects</Link>
           </li>
           <li style={menuListItem}>
-            <Link to="/elearning-list" style={menuItem}><InboxIcon style={menuIcon} /> E-learning</Link>
+            <Link to="/elearning-list" style={menuItem}><AutoStoriesIcon style={menuIcon} /> E-learning</Link>
           </li>
           <li style={menuListItem}>
-            <Link to="/datahub-list" style={menuItem}><InboxIcon style={menuIcon} /> Data Hub</Link>
+            <Link to="/datahub-list" style={menuItem}><TextSnippetIcon style={menuIcon} /> Data Hub</Link>
           </li>
           <li style={menuListItem}>
-            <Link to="/whatson-list" style={menuItem}><InboxIcon style={menuIcon} /> What's On</Link>
+            <Link to="/whatson-list" style={menuItem}><CalendarMonthIcon style={menuIcon} /> What's On</Link>
           </li>
           <li style={menuListItem}>
-            <Link to="/classified-list" style={menuItem}><InboxIcon style={menuIcon} /> Resource Exchange</Link>
+            <Link to="/classified-list" style={menuItem}><ArchitectureIcon style={menuIcon} /> Resource Exchange</Link>
+          </li>
+          <li style={menuListItem}>
+            <Link to="/media-library" style={menuItem}><PermMediaIcon style={menuIcon} /> Media Library</Link>
           </li>
           <li>
-            <Link to="/media-library" style={menuItem}><InboxIcon style={menuIcon} /> Media Library</Link>
+            <Link to="/subscriptions" style={menuItem}><NotificationsActiveIcon style={menuIcon} /> Notifications</Link>
           </li>
         </ul>
       </Grid>
       <Grid sx={{ marginBottom: 1, padding: 2, borderRadius: 1, border: '1px solid #5bb318' }}>
         <ul className='primary_menu' style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           <li style={menuListItem}>
-            <Link to="/profile" style={profileMenuItem} color='#5bb318'><InboxIcon style={menuIcon} /> Profile</Link>
+            <Link to="/profile" style={profileMenuItem} color='#5bb318'><AccountCircleIcon style={menuIcon} /> Profile</Link>
           </li>
           <li style={menuListItem}>
-            <Link to="/all-members" style={profileMenuItem}><InboxIcon style={menuIcon} /> Members</Link>
+            <Link to="/all-members" style={profileMenuItem}><GroupIcon style={menuIcon} /> Members</Link>
           </li>
           <li>
-            <Link to="/profile-settings" style={profileMenuItem}><InboxIcon style={menuIcon} /> Login & Security</Link>
+            <Link to="/profile-settings" style={profileMenuItem}><SecurityIcon style={menuIcon} /> Login & Security</Link>
           </li>
 
           <li>

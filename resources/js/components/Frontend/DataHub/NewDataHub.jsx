@@ -71,7 +71,7 @@ function NewDataHub() {
   const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    loadProjects({ skip: 0, take: 50 });
+    loadProjects({ skip: 0, take: 50, type: 1 });
     loadTags({ level: 1 }); // load level 1 tags
     loadTags({ level: 10 }); // load subject tags
     loadTags({ level: 11 }); // load extra tags
@@ -122,7 +122,7 @@ function NewDataHub() {
   }
   const loadProjects = (data) => {
     axios.get('sanctum/csrf-cookie').then(response => {
-      axios.post('/api/get-projects', data).then(res => {
+      axios.post('/api/get-e-learing-data', data).then(res => {
         console.log(res)
         if (res.status == 200) {
           setProjectList(res.data.projects);
@@ -138,7 +138,7 @@ function NewDataHub() {
     setProjectLoad(true);
     setDataLoad(true);
     axios.get('sanctum/csrf-cookie').then(response => {
-      axios.post('/api/filter-topics', data).then(res => {
+      axios.post('/api/get-e-learing-data', { ...data, type: 1 }).then(res => {
         console.log(res)
         if (res.status == 200) {
           setProjectList(res.data.projects);
@@ -279,8 +279,8 @@ function NewDataHub() {
                 <div style={{ marginRight: '20px' }}><ProjectLink name="Projects" link={'/projects'} icon={<NaturePeopleIcon fontSize="small" className="iconActive" />} /></div>
                 <div style={{ marginRight: '20px' }}><ProjectLink visited name="Data" link={'/datahub'} icon={<TextSnippetIcon fontSize="small" className="iconVisited" />} /></div>
                 <div style={{ marginRight: '20px' }}><ProjectLink name="Resources" link={'/resource-exchange'} icon={<ArchitectureIcon fontSize="small" className="iconActive" />} /></div>
-                <div style={{ marginRight: '20px' }}><ProjectLink name="E-Learning" link={'/projects'} icon={<AutoStoriesIcon fontSize="small" className="iconActive" />} /></div>
-                <div style={{ marginRight: '20px' }}><ProjectLink name="Events" link={'/projects'} icon={<CalendarMonthIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="E-Learning" link={'/elearning-materials'} icon={<AutoStoriesIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Events" link={'/whatson/events'} icon={<CalendarMonthIcon fontSize="small" className="iconActive" />} /></div>
               </div>
             </Grid>
           </Grid>
@@ -526,10 +526,20 @@ function NewDataHub() {
             </Grid>
           </Grid>
           {projectLoad ? <ListSkeleton8 /> :
-            <Grid container spacing={2}>
+            <Grid container
+              columnSpacing={2}
+              rowSpacing={1}
+              direction="row"
+              justifyContent="center"
+              alignItems="stretch">
               {projectList.map((project, key) => (
                 <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={`/project/` + project.slug}>
+                  <Link style={{
+                    height: "100%",
+                    display: 'block',
+                    border: '1px solid #ececec',
+                    borderRadius: '10px'
+                  }} to={`/project/` + project.slug}>
                     {project.photos.length !== 0 ?
                       <CardMedia
                         component="img"
@@ -548,7 +558,7 @@ function NewDataHub() {
                     }
                     <CardContent className="card_content project-card">
                       {/* <Typography variant="span" className="main-tag">{project.tags[0].name}</Typography> */}
-                      <Typography variant="h6" className="card-title">{project.project_title}</Typography>
+                      <Typography variant="h6" className="card-title">{project.title}</Typography>
                       <Typography variant="subtitle" className="card-body">
                         {project.overview !== null ? project.overview.substring(0, 50) : ''}
                       </Typography>
@@ -570,7 +580,7 @@ function NewDataHub() {
             projectList.length == 0 ?
               !projectLoad ? <Grid container>
                 <Grid item sm={12} md={6}>
-                  <Typography sx={{ fontSize: '12px' }} mt={3}>No projects found for selected filters</Typography>
+                  <Typography sx={{ fontSize: '12px' }} mt={3}>No Data submissions found for selected filters</Typography>
                 </Grid>
               </Grid> : ''
               : ''

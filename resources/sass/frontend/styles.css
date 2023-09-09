@@ -206,6 +206,9 @@ a, a:hover {
   height: 500px;
   margin-bottom: 50px;
 }
+.front__site .organization_card {
+  /* margin-left: 16px !important; */
+}
 
 .front__site .organization_card img {
   border-radius: 10px 10px 0 0;
@@ -216,8 +219,8 @@ a, a:hover {
 .front__site .organization_card .card_content {
   padding: 0 15px;
   margin-bottom: 5px;
-  border-radius: 0 0 10px 10px;
-  border: 1px solid #ececec;
+  /* border-radius: 0 0 10px 10px;
+  border: 1px solid #ececec; */
 }
 .front__site .organization_card .card_content .org_title {
   color: #000000;

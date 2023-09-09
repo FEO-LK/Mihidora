@@ -28,6 +28,7 @@ import ProjectSingle from './Frontend/Projects/ProjectSingle';
 import ProjectMap from './Frontend/Projects/ProjectMap';
 
 import ElearningMaterials from './Frontend/Elearning/ElearningList';
+import ElearningListNew from './Frontend/Elearning/ElearningListNew';
 import ElearningSingle from './Frontend/Elearning/ElearningSingle';
 
 import DataHub from './Frontend/DataHub/DataHubList';
@@ -104,6 +105,7 @@ import ResourceExchange from "./Frontend/ResourceExchange/ResourceExchange";
 import ResourceExchangeJobs from "./Frontend/ResourceExchange/ResourceExchangeJobs";
 import JobProfile from "./Frontend/ResourceExchange/JobProfile";
 import WhatsonEvents from "./Frontend/Whatson/WhatsonEvents";
+import WhatsOnEventsNew from "./Frontend/Whatson/WhatsOnEventsNew";
 import ResourceExchangeSuppliers from "./Frontend/ResourceExchange/ResourceExchangeSuppliers";
 import ResourceExchangeGrantsAndProposals from "./Frontend/ResourceExchange/ResourceExchangeGrantsAndProposals";
 import ResourceExchangeResourceSharing from "./Frontend/ResourceExchange/ResourceExchangeResourceSharing";
@@ -192,7 +194,8 @@ function App() {
                     <Route path={"/project-map"} element={<ProjectMap />} />
                     <Route path={"/project/:slug"} element={<ProjectSingle />} />
 
-                    <Route path={"/elearning-materials"} element={<ElearningMaterials />} />
+                    <Route path={"/elearning-materials-old"} element={<ElearningMaterials />} />
+                    <Route path={"/elearning-materials"} element={<ElearningListNew />} />
                     <Route path={"elearning-material/:slug"} element={<ElearningSingle />} />
 
                     <Route path={"/datahub"} element={<NewDataHub />} />
@@ -201,7 +204,8 @@ function App() {
 
                     <Route path={"/whatson"} element={<Whatson />} />
                     <Route path={"/whatson/:slug"} element={<WhatsonSingle />} />
-                    <Route path={"/whatson/events"} element={<WhatsonEvents />} />
+                    <Route path={"/whatson/events-old"} element={<WhatsonEvents />} />
+                    <Route path={"/whatson/events"} element={<WhatsOnEventsNew />} />
                     <Route path={"/whatson/volunteer-opportunities"} element={<WhatsonVolunteerOpportunities />} />
                     <Route path={"/whatson/media-and-advocacy"} element={<WhatsonMediaAndAdvocacy />} />
 

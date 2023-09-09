@@ -279,8 +279,8 @@ function NewProjectList() {
                 <div style={{ marginRight: '20px' }}><ProjectLink visited name="Projects" link={'/projects'} icon={<NaturePeopleIcon fontSize="small" className="iconVisited" />} /></div>
                 <div style={{ marginRight: '20px' }}><ProjectLink name="Data" link={'/datahub'} icon={<TextSnippetIcon fontSize="small" className="iconActive" />} /></div>
                 <div style={{ marginRight: '20px' }}><ProjectLink name="Resources" link={'/resource-exchange'} icon={<ArchitectureIcon fontSize="small" className="iconActive" />} /></div>
-                <div style={{ marginRight: '20px' }}><ProjectLink name="E-Learning" link={'/projects'} icon={<AutoStoriesIcon fontSize="small" className="iconActive" />} /></div>
-                <div style={{ marginRight: '20px' }}><ProjectLink name="Events" link={'/projects'} icon={<CalendarMonthIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="E-Learning" link={'/elearning-materials'} icon={<AutoStoriesIcon fontSize="small" className="iconActive" />} /></div>
+                <div style={{ marginRight: '20px' }}><ProjectLink name="Events" link={'/whatson/events'} icon={<CalendarMonthIcon fontSize="small" className="iconActive" />} /></div>
               </div>
             </Grid>
           </Grid>
@@ -529,7 +529,12 @@ function NewProjectList() {
             <Grid container spacing={2}>
               {projectList.map((project, key) => (
                 <Grid item key={key} xs={3} className="organization_card" >
-                  <Link to={`/project/` + project.slug}>
+                  <Link style={{
+                    height:"100%",
+                    display: 'block',
+                    border: '1px solid #ececec',
+                    borderRadius: '10px'
+                  }} to={`/project/` + project.slug}>
                     {project.photos.length !== 0 ?
                       <CardMedia
                         component="img"
@@ -537,6 +542,7 @@ function NewProjectList() {
                         image={`/storage/` + JSON.parse(project.photos)[0]}
                         onError={handleImageError}
                         alt="green iguana"
+                        loading="lazy"
                       />
                       :
                       <CardMedia
@@ -544,6 +550,7 @@ function NewProjectList() {
                         height="140"
                         image="../../../images/project.jpg"
                         alt="green iguana"
+                        loading="lazy"
                       />
                     }
                     <CardContent className="card_content project-card">
