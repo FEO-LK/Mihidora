@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\NewJobAlerts;
+use App\Mail\NewVolunteerNotification;
 use App\Models\User;
 use App\Models\Classifieds;
 use Illuminate\Support\Facades\Validator;
@@ -45,6 +46,32 @@ class NotificationController extends Controller
             'message' => 'Alerts sent!',
             'users' => $users,
             'jobs' => $jobs
+        ]);
+    }
+
+    public function sendNewVolunteerNotification(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'message' => $validator->errors(),
+            ]);
+        }
+        $mailData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+        ];
+        $email = $request->has('notificationEmail') ? $request->input('notificationEmail') : 'admin@mihidora.lk';
+        Mail::to($email)->send(new NewVolunteerNotification($mailData));
+        return response()->json([
+            'status' => 200,
+            'message' => 'Volunteer notification sent!',
         ]);
     }
 }

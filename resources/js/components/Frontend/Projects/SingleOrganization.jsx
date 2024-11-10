@@ -47,6 +47,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import OrganizationContent from '../components/OrganizationContent';
+import VolunteerModalButton from '../components/VolunteerModalButton';
 
 function SingleOrganization(props) {
 
@@ -274,6 +275,9 @@ function SingleOrganization(props) {
                                 title="Do you work on environmental issues in Sri Lanka"
                                 link="/login"
                                 linkLabel="Join Mihidora" />
+                            <VolunteerModalButton
+                                linkLabel="I want to Help / Volunteer" notificationEmail={organization.email}/>
+                                
                         </Grid>
                     </Grid>
                     <Grid container>

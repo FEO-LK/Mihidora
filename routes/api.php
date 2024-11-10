@@ -153,6 +153,7 @@ Route::post('filter-whatson', [TagsController::class, 'filterWhatsOn']);
 
 // Notifications
 Route::get('send-job-alerts', [NotificationController::class, 'sendJobAlerts']);
+Route::post('send-new-volunteer-notification', [NotificationController::class, 'sendNewVolunteerNotification']);
 
 //Subscriptions
 Route::post('subscribe-to-email', [SubscriptionController::class, 'subscribeToEmail']);
